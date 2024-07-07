@@ -1,0 +1,52 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/fin/loan/loan_add.js"]}){
+
+<form id="loanForm" lay-filter="loanForm" class="layui-form model-form">
+    <input name="loanId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">手机号<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="phone" id="phone" placeholder="请输入手机号" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">币种<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="coin" id="coin" placeholder="请输入币种" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">收款钱包地址<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="address" id="address" placeholder="请输入收款钱包地址" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">身份证<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="idCard" id="idCard" placeholder="请输入身份证" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">护照<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="idCard2" id="idCard2" placeholder="请输入护照" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">金额<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="price" id="price" placeholder="请输入金额" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"><span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="img" id="img" placeholder="请输入" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

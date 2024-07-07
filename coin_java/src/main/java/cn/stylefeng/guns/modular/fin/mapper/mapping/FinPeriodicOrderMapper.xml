@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.fin.mapper.FinPeriodicOrderMapper">
+
+     <!-- 通用查询映射结果 -->
+   <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.fin.entity.PeriodicOrder">
+     <id column="id" property="id"/>
+     <result column="member_id" property="memberId"/>
+     <result column="order_no" property="orderNo"/>
+     <result column="periodic_id" property="periodicId"/>
+     <result column="amount" property="amount"/>
+     <result column="symbol" property="symbol"/>
+     <result column="rate" property="rate"/>
+     <result column="result" property="result"/>
+     <result column="win_n" property="winN"/>
+     <result column="is_delete" property="isDelete"/>
+     <result column="remark" property="remark"/>
+       <result column="end_time" property="endTime"/>
+     <result column="CREATE_TIME" property="createTime"/>
+     <result column="CREATE_USER" property="createUser"/>
+     <result column="UPDATE_TIME" property="updateTime"/>
+     <result column="UPDATE_USER" property="updateUser"/>
+     </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         tb.id as id,
+         tb.member_id as memberId,
+            tb.order_no as orderNo,
+         tb.periodic_id as periodicId ,
+         tb.amount  as amount,
+         tb.rate  as rate,
+         tb.end_time as endTime,
+         tb.symbol  as symbol,
+         tb.result  as result,
+         tb.win_n  as winN,
+         tb.is_delete as isDelete,
+         tb.remark as remark,
+         tb.CREATE_TIME as createTime,
+         tb.CREATE_USER as createUser,
+         tb.UPDATE_TIME as updateTime,
+        tb.UPDATE_USER as updateUser
+    </sql>
+    <sql id="Base_Column_List2">
+        tb.id as id,
+         tb.member_id as memberId,
+            tb.order_no as orderNo,
+         tb.periodic_id as periodicId ,
+         tb.amount  as amount,
+         tb.rate  as rate,
+         tb.symbol  as symbol,
+         tb.result  as result,
+         tb.win_n  as winN,
+         tb.is_delete as isDelete,
+         tb.remark as remark,
+         tb.CREATE_TIME as createTime,
+         tb.CREATE_USER as createUser,
+         tb.UPDATE_TIME as updateTime,
+        tb.UPDATE_USER as updateUser,
+        fp.name as periodicName,
+        fp.type as type,
+        tb.end_time as endTime
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List2"/>,am.account as acount
+       from fin_periodic_order tb
+       left join app_member am on tb.member_id=am.member_id
+       left join fin_periodic fp on periodic_id=fp.id
+       where tb.is_delete='N'
+        <if test="condition != null and condition != ''">
+             and  (tb.order_no like concat('%',#{condition}) or am.acount like concat('%',#{condition}))
+        </if>
+        order by tb.id desc
+    </select>
+
+    <select id="selectByList" resultType="map">
+        select
+        <include refid="Base_Column_List2"/>
+        from fin_periodic_order tb
+        left join fin_periodic fp on periodic_id=fp.id
+        where tb.is_delete='N' and tb.member_id = #{memberId}
+        order by tb.CREATE_TIME desc
+    </select>
+
+
+    <select id="selectWinTotal" resultType="map">
+        select
+            IFNULL(SUM(win_n),0) as winTotal ,
+            IFNULL(SUM(amount),0) as principal
+        from fin_periodic_order tb
+        where tb.is_delete='N' and member_id = #{memberId} and result = '2'
+
+    </select>
+    <select id="selectNoWinTotal" resultType="map">
+        select
+            IFNULL(SUM(win_n),0) as noWinTotal ,
+            IFNULL(SUM(amount),0) as principal
+        from fin_periodic_order tb
+        where tb.is_delete='N' and member_id = #{memberId} and result = '1'
+
+    </select>
+
+
+
+
+
+</mapper>

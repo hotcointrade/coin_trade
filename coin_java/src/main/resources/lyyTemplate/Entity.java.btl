@@ -1,0 +1,41 @@
+package ${entity.packageName};
+
+<% for(import in entity.entityImports!){ %>
+import ${import};
+<% } %>
+
+/**
+  * <p> ${context.bizChName} 实体类 </p>
+  *
+  * @author yaying.liu
+  * @since ${tool.currentTime()}
+ */
+
+@Data
+@TableName("${context.bizTableName}")
+@Accessors(chain = true)
+public class ${context.bizEnBigName} extends BaseEntity implements Serializable {
+
+     private static final long serialVersionUID = 1L;
+
+ <% for(field in entity.tableDtoList!){ %>
+   <% if(field.columnName!='CREATE_TIME' && field.columnName!='CREATE_USER' && field.columnName!='UPDATE_TIME' && field.columnName!='UPDATE_USER'){  %>
+     /**
+      * ${field.columnComment}
+      */
+     <%  if(field.columnKey=='PRI'){ %>
+     @TableId(value="${field.columnName}", type= IdType.AUTO)
+     <%  } else { %>
+     @TableField("${field.columnName}")
+     <% } %>
+    <%  if(field.columnName=='version'){ %>
+     @Version
+     <% } %>
+     private ${field.propertyType} ${field.propertyName};
+
+     <% } %>
+ <% } %>
+
+
+
+ }

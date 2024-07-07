@@ -1,0 +1,141 @@
+package ${controller.packageName};
+
+<% for(import in controller.imports!){ %>
+import ${import};
+<% } %>
+import cn.stylefeng.guns.modular.${context.tableNamePrefix}.service.${context.bizEnBigName}Service;
+import cn.stylefeng.guns.modular.${context.tableNamePrefix}.wrapper.${context.bizEnBigName}Wrapper;
+import cn.stylefeng.guns.modular.${context.tableNamePrefix}.entity.${context.bizEnBigName};
+import cn.stylefeng.guns.modular.${context.tableNamePrefix}.constant.${context.bizEnBigName}Map;
+
+/**
+ * ${context.bizChName}控制器
+ *
+ * @author yaying.liu
+ * @since ${tool.currentTime()}
+ */
+@Controller
+@RequestMapping("/${context.bizEnName}")
+public class ${context.bizEnBigName}Controller extends BaseController {
+
+    private String PREFIX = "/modular/${context.moduleName}/${context.bizEnName}/";
+
+     @Autowired
+     private ${context.bizEnBigName}Service ${context.bizEnName}Service;
+
+    /**
+     * 跳转到${context.bizChName}首页
+     */
+    @RequestMapping("")
+    public String index() {
+        return PREFIX + "${context.bizEnName}.html";
+    }
+
+    /**
+     * 跳转到添加${context.bizChName}
+     */
+    @RequestMapping("/${context.bizEnName}_add")
+    public String ${context.bizEnName}Add() {
+        return PREFIX + "${context.bizEnName}_add.html";
+    }
+
+    /**
+     * 跳转到修改${context.bizChName}
+     */
+    @RequestMapping("/${context.bizEnName}_edit")
+    public String ${context.bizEnName}Edit(Long ${context.bizEnName}Id, Model model) {
+        ${context.bizEnBigName} condition = this.${context.bizEnName}Service.getById(${context.bizEnName}Id);
+        model.addAllAttributes(BeanUtil.beanToMap(condition));
+        LogObjectHolder.me().set(condition);
+        return PREFIX + "${context.bizEnName}_edit.html";
+    }
+
+    /**
+     * ${context.bizChName}详情
+     */
+    @RequestMapping(value = "/detail/{${context.bizEnName}Id}")
+    @ResponseBody
+    public Object detail(@PathVariable("${context.bizEnName}Id") Long ${context.bizEnName}Id) {
+        ${context.bizEnBigName} entity = ${context.bizEnName}Service.getById(${context.bizEnName}Id);
+      //  ${context.bizEnBigName}Dto conditionDto = new ${context.bizEnBigName}Dto();
+      //  BeanUtil.copyProperties(entity, conditionDto);
+      //  return conditionDto;
+        return entity;
+    }
+
+
+    /**
+     * 查询${context.bizChName}列表
+     */
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    @RequestMapping("/list")
+    @ResponseBody
+    public Object list(@RequestParam(required = false) String condition, @RequestParam(required = false) String timeLimit) {
+        //根据条件查询
+        //拼接查询条件
+        String beginTime = "";
+        String endTime = "";
+
+        if (ToolUtil.isNotEmpty(timeLimit)) {
+            String[] split = timeLimit.split(" - ");
+            beginTime = split[0];
+            endTime = split[1];
+        }
+        Page<Map<String, Object>> result = ${context.bizEnName}Service.selectByCondition(condition,beginTime,endTime);
+        Page wrapped = new ${context.bizEnBigName}Wrapper(result).wrap();
+        return LayuiPageFactory.createPageInfo(wrapped);
+    }
+
+    /**
+     * 编辑${context.bizChName}
+     */
+    @RequestMapping("/edit")
+    //@BussinessLog(value = "编辑参数", key = "${context.bizEnName}Id", dict = ${context.bizEnBigName}Map.class)
+    @ResponseBody
+    public ResponseData edit(${context.bizEnBigName} ${context.bizEnName}) {
+        ${context.bizEnName}Service.updateById(${context.bizEnName});
+        return SUCCESS_TIP;
+    }
+
+    /**
+     * 添加${context.bizChName}
+     */
+    @RequestMapping("/add")
+  //  @BussinessLog(value = "添加${context.bizChName}", key = "name", dict = ${context.bizEnBigName}Map.class)
+    @ResponseBody
+    public ResponseData add(${context.bizEnBigName} ${context.bizEnName}, BindingResult result) {
+        if (result.hasErrors()) {
+            throw new ServiceException(BizExceptionEnum.REQUEST_NULL);
+        }
+        if (${context.bizEnName} == null) {
+            return ResponseData.error("参数不能为空");
+        }
+        this.${context.bizEnName}Service.add${context.bizEnBigName}(${context.bizEnName});
+        return SUCCESS_TIP;
+    }
+
+    /**
+     * 删除${context.bizChName}
+     */
+    @RequestMapping("/delete")
+   // @BussinessLog(value = "删除${context.bizChName}", key = "${context.bizEnName}Id", dict = ${context.bizEnBigName}Map.class)
+    @ResponseBody
+    public ResponseData delete(@RequestParam Long ${context.bizEnName}Id) {
+        if (ToolUtil.isEmpty(${context.bizEnName}Id)) {
+            throw new ServiceException(BizExceptionEnum.REQUEST_NULL);
+        }
+        this.${context.bizEnName}Service.delete${context.bizEnBigName}(${context.bizEnName}Id);
+        return SUCCESS_TIP;
+    }
+
+    /**
+     * 查询内容详情
+     */
+    @RequestMapping("/content/{${context.bizEnName}Id}")
+    @ResponseBody
+    public Object content(@PathVariable("${context.bizEnName}Id") Long id) {
+        ${context.bizEnBigName} ${context.bizEnName} = ${context.bizEnName}Service.getById(id);
+        Map<String, Object> stringObjectMap = BeanUtil.beanToMap(${context.bizEnName});
+        return super.warpObject(new ${context.bizEnBigName}Wrapper(stringObjectMap));
+    }
+}

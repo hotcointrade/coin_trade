@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.e.mapper.BoughtMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.e.entity.Bought">
+        <id column="bought_id" property="boughtId"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="member_id" property="memberId"/>
+        <result column="price" property="price"/>
+        <result column="actual_price" property="actualPrice"/>
+        <result column="numbers" property="numbers"/>
+        <result column="unit" property="unit"/>
+        <result column="recharge_address" property="rechargeAddress"/>
+        <result column="from_address" property="fromAddress"/>
+        <result column="tx_hash" property="txHash"/>
+        <result column="chain_type" property="chainType"/>
+        <result column="type" property="type"/>
+        <result column="status" property="status"/>
+        <result column="del" property="del"/>
+        <result column="remark" property="remark"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="UPDATE_USER" property="updateUser"/>
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         bought_id as boughtId,
+         order_no as orderNo,
+         member_id as memberId,
+         price as price,
+         actual_price as actualPrice,
+         numbers as numbers,
+         unit as unit,
+         recharge_address as rechargeAddress,
+         from_address as fromAddress,
+         tx_hash as txHash,
+         chain_type as chainType,
+         type as type,
+         status as status,
+         del as del,
+         remark as remark,
+         CREATE_TIME as createTime,
+         CREATE_USER as createUser,
+         UPDATE_TIME as updateTime,
+        UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from e_bought tb where del='N'
+        <if test="condition!=null and condition!=''">
+            and name like concat('%',#{condition},'%')
+        </if>
+        order by tb.create_time desc
+    </select>
+
+
+    <select id="getBought" resultType="cn.stylefeng.guns.modular.e.entity.Bought">
+        select
+        <include refid="Base_Column_List"/>
+        from e_bought tb where
+        del='N'
+        and order_no=#{orderNo}
+        and status='N'
+    </select>
+
+</mapper>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.mining.mapper.MiningOrderMapper">
+
+     <!-- 通用查询映射结果 -->
+   <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.mining.entity.MiningOrder">
+     <id column="mining_order_id" property="miningOrderId"/>
+       <result column="image" property="image"/>
+       <result column="image2" property="image2"/>
+     <result column="title" property="title"/>
+     <result column="member_id" property="memberId"/>
+     <result column="mining_id" property="miningId"/>
+     <result column="name" property="name"/>
+     <result column="cycle_number" property="cycleNumber"/>
+     <result column="cycle_type" property="cycleType"/>
+     <result column="mining_status" property="miningStatus"/>
+     <result column="mining_coin" property="miningCoin"/>
+     <result column="static_coin" property="staticCoin"/>
+     <result column="estimated_capacity" property="estimatedCapacity"/>
+     <result column="estimated_static_yield" property="estimatedStaticYield"/>
+     <result column="fuel_energy_coin" property="fuelEnergyCoin"/>
+     <result column="fuel_energy_number" property="fuelEnergyNumber"/>
+     <result column="energy_loss_coin" property="energyLossCoin"/>
+     <result column="energy_loss_number" property="energyLossNumber"/>
+       <result column="calculating_power_coin" property="calculatingPowerCoin"/>
+       <result column="calculating_power_number" property="calculatingPowerNumber"/>
+     <result column="price_coin" property="priceCoin"/>
+     <result column="price" property="price"/>
+     <result column="mining_days" property="miningDays"/>
+     <result column="mininged_days" property="miningedDays"/>
+     <result column="mining_daysprofit" property="miningDaysprofit"/>
+     <result column="current_daysprofit" property="currentDaysprofit"/>
+     <result column="total_profit" property="totalProfit"/>
+     <result column="received" property="received"/>
+     <result column="available" property="available"/>
+     <result column="mining_invite" property="miningInvite"/>
+     <result column="mining_invitelimit" property="miningInvitelimit"/>
+     <result column="end_time" property="endTime"/>
+     <result column="del" property="del"/>
+     <result column="remark" property="remark"/>
+     <result column="CREATE_TIME" property="createTime"/>
+     <result column="CREATE_USER" property="createUser"/>
+     <result column="UPDATE_TIME" property="updateTime"/>
+     <result column="UPDATE_USER" property="updateUser"/>
+     </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         tb.mining_order_id as miningOrderId,
+         tb.image as image,
+         tb.image2 as image2,
+         tb.title as title,
+         tb.member_id as memberId,
+         tb.mining_id as miningId,
+         tb.name as name,
+         tb.cycle_number as cycleNumber,
+         tb.cycle_type as cycleType,
+         tb.mining_status as miningStatus,
+         tb.mining_coin as miningCoin,
+         tb.static_coin as staticCoin,
+         tb.calculating_power_coin as calculatingPowerCoin,
+         tb.calculating_power_number as calculatingPowerNumber,
+         tb.estimated_capacity as estimatedCapacity,
+         tb.estimated_static_yield as estimatedStaticYield,
+         tb.fuel_energy_coin as fuelEnergyCoin,
+         tb.fuel_energy_number as fuelEnergyNumber,
+         tb.energy_loss_coin as energyLossCoin,
+         tb.energy_loss_number as energyLossNumber,
+         tb.price_coin as priceCoin,
+         tb.price as price,
+         tb.mining_days as miningDays,
+         tb.mininged_days as miningedDays,
+         tb.mining_daysprofit as miningDaysprofit,
+         tb.current_daysprofit as currentDaysprofit,
+         tb.total_profit as totalProfit,
+         tb.received as received,
+         tb.available as available,
+         tb.mining_invite as miningInvite,
+         tb.mining_invitelimit as miningInvitelimit,
+         tb.end_time as endTime,
+         tb.del as del,
+         tb.remark as remark,
+         tb.CREATE_TIME as createTime,
+         tb.CREATE_USER as createUser,
+         tb.UPDATE_TIME as updateTime,
+        tb.UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+
+       from mining_order tb inner  join  app_member am on  tb.member_id = am.member_id where tb.del='N'
+        <if test="condition!=null and condition!=''">
+          and tb.name like concat('%',#{condition},'%')
+        </if>
+        <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+            and (tb.CREATE_TIME between CONCAT(#{beginTime},' 00:00:00') and CONCAT(#{endTime},' 23:59:59'))
+        </if>
+        <if test="memberId != null and memberId != ''">
+            and (am.member_id = #{memberId}  or am.parent_referee_id like concat('%',#{recommendIds}))
+        </if>
+        order by tb.create_time desc
+    </select>
+
+</mapper>

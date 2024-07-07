@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.e.mapper.LiveRecordMapper">
+
+     <!-- 通用查询映射结果 -->
+   <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.e.entity.LiveRecord">
+     <id column="live_record_id" property="liveRecordId"/>
+     <result column="order_no" property="orderNo"/>
+     <result column="member_id" property="memberId"/>
+     <result column="account" property="account"/>
+     <result column="cny" property="cny"/>
+     <result column="md" property="md"/>
+     <result column="link" property="link"/>
+     <result column="link_code" property="linkCode"/>
+     <result column="content" property="content"/>
+     <result column="pay_time" property="payTime"/>
+     <result column="status" property="status"/>
+     <result column="del" property="del"/>
+     <result column="remark" property="remark"/>
+     <result column="CREATE_TIME" property="createTime"/>
+     <result column="CREATE_USER" property="createUser"/>
+     <result column="UPDATE_TIME" property="updateTime"/>
+     <result column="UPDATE_USER" property="updateUser"/>
+     </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         live_record_id as liveRecordId,
+         order_no as orderNo,
+         member_id as memberId,
+         account as account,
+         cny as cny,
+         md as md,
+         link as link,
+         link_code as linkCode,
+         content as content,
+         pay_time as payTime,
+         status as status,
+         del as del,
+         remark as remark,
+         CREATE_TIME as createTime,
+         CREATE_USER as createUser,
+         UPDATE_TIME as updateTime,
+        UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+        from e_live_record tb where del='N'
+        <if test="condition!=null and condition!=''">
+          and account like concat('%',#{condition},'%')
+        </if>
+         <if test="orderNo!=null and orderNo!=''">
+          and order_no like concat('%',#{orderNo},'%')
+        </if>
+         <if test="status!=null and status!=''">
+          and status like concat('%',#{status},'%')
+        </if>
+        order by tb.create_time desc
+    </select>
+
+</mapper>

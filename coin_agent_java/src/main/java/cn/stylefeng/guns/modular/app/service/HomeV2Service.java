@@ -1,0 +1,12 @@
+package cn.stylefeng.guns.modular.app.service;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+
+@Service
+@Slf4j
+public class HomeV2Service
+{
+
+}

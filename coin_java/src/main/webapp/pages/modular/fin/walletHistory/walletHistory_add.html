@@ -1,0 +1,46 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/fin/walletHistory/walletHistory_add.js"]}){
+
+<form id="walletHistoryForm" lay-filter="walletHistoryForm" class="layui-form model-form">
+    <input name="walletHistoryId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label"><span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="memberId" id="memberId" placeholder="请输入" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">钱包总额<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="totalPrice" id="totalPrice" placeholder="请输入钱包总额" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">平台返还总额<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="returnPrice" id="returnPrice" placeholder="请输入平台返还总额" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">消费券总额<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="ticketPrice" id="ticketPrice" placeholder="请输入消费券总额" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">类型：BTC 、CNY:人民币、 POINT：积分<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="type" id="type" placeholder="请输入类型：BTC 、CNY:人民币、 POINT：积分" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">版本<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="version" id="version" placeholder="请输入版本" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

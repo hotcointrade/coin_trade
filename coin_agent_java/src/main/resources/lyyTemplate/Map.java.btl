@@ -1,0 +1,23 @@
+package ${constant.packageName};
+<% for(import in constant.mapImports!){ %>
+import ${import};
+<% } %>
+
+/**
+ * ${context.bizChName}Map
+ *
+ * @author yaying.liu
+ * @since ${tool.currentTime()}
+ */
+public class ${context.bizEnBigName}Map extends AbstractDictMap {
+
+   @Override
+      public void init() {
+          put("${context.bizEnName}Id","${context.bizChName}id");
+      }
+
+      @Override
+      protected void initBeWrapped() {
+
+      }
+}

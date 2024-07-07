@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.fin.mapper.FinFuturesMapper">
+
+     <!-- 通用查询映射结果 -->
+   <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.fin.entity.FinFutures">
+     <id column="contract_id" property="contractId"/>
+     <result column="member_id" property="memberId"/>
+     <result column="worth_price" property="worthPrice"/>
+     <result column="no_pl" property="noPl"/>
+     <result column="position_price" property="positionPrice"/>
+     <result column="used_price" property="usedPrice"/>
+     <result column="entrust_price" property="entrustPrice"/>
+     <result column="give_price" property="givePrice"/>
+     <result column="rate" property="rate"/>
+     <result column="type" property="type"/>
+     <result column="version" property="version"/>
+     <result column="status" property="status"/>
+     <result column="del" property="del"/>
+     <result column="remark" property="remark"/>
+     <result column="CREATE_TIME" property="createTime"/>
+     <result column="CREATE_USER" property="createUser"/>
+     <result column="UPDATE_TIME" property="updateTime"/>
+     <result column="UPDATE_USER" property="updateUser"/>
+     </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         tb.contract_id as contractId,
+         tb.member_id as memberId,
+         tb.worth_price as worthPrice,
+         tb.no_pl as noPl,
+         tb.position_price as positionPrice,
+         tb.used_price as usedPrice,
+         tb.entrust_price as entrustPrice,
+        tb.give_price as givePrice,
+         tb.rate as rate,
+        tb.type as type,
+         tb.version as version,
+        tb.status as status,
+        tb.del as del,
+         tb.remark as remark,
+        tb.CREATE_TIME as createTime,
+         tb.CREATE_USER as createUser,
+         tb.UPDATE_TIME as updateTime,
+       tb.UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from fin_futures tb
+       inner  join  app_member am on  tb.member_id = am.member_id
+       where tb.del='N'
+        <if test="condition!=null and condition!=''">
+            and tb.member_id =(select member_id from app_member where account=#{condition})
+        </if>
+         <if test="memberId != null and memberId != ''">
+             and (am.member_id = #{memberId}  or am.parent_referee_id like concat('%',#{recommendIds},'%'))
+        </if>
+        order by tb.update_time desc
+    </select>
+
+    <update id="updateWallet" parameterType="cn.stylefeng.guns.modular.fin.entity.FinFutures">
+        update fin_futures
+        set version=#{version}+1,
+            used_price=#{usedPrice},
+            position_price=#{positionPrice},
+            entrust_price=#{entrustPrice},
+            give_price=#{givePrice},
+            no_pl=#{noPl},
+            worth_price=#{worthPrice},
+            UPDATE_USER=#{updateUser}
+        where
+            member_id=#{memberId} and version=#{version}
+    </update>
+
+
+    <select id="countN" resultType="int">
+        select count(1) from e_compact where member_id=#{memberId} and coin=#{coin} and status='N' and del='N'
+    </select>
+
+</mapper>

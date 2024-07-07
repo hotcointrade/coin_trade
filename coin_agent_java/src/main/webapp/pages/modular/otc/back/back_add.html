@@ -1,0 +1,34 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/otc/back/back_add.js"]}){
+
+<form id="backForm" lay-filter="backForm" class="layui-form model-form">
+    <input name="backId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="memberId" id="memberId" placeholder="请输入用户" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">昵称<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="nickName" id="nickName" placeholder="请输入昵称" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">币种<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="coin" id="coin" placeholder="请输入币种" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">数量<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="number" id="number" placeholder="请输入数量" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.chain.mapper.WithdrawMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.chain.entity.Withdraw">
+        <id column="withdraw_id" property="withdrawId"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="member_id" property="memberId"/>
+        <result column="price" property="price"/>
+        <result column="actual_price" property="actualPrice"/>
+        <result column="fee" property="fee"/>
+        <result column="type" property="type"/>
+        <result column="to_address" property="toAddress"/>
+        <result column="tx_hash" property="txHash"/>
+        <result column="response" property="response"/>
+        <result column="status" property="status"/>
+        <result column="del" property="del"/>
+        <result column="remark" property="remark"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="UPDATE_USER" property="updateUser"/>
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         tb.withdraw_id as withdrawId,
+         tb.order_no as orderNo,
+         tb.member_id as memberId,
+         tb.price as price,
+         tb.actual_price as actualPrice,
+         tb.fee as fee,
+         tb.type as type,
+         tb.to_address as toAddress,
+         tb.tx_hash as txHash,
+         tb.response as response,
+         tb.status as status,
+         tb.del as del,
+         tb.remark as remark,
+         tb.CREATE_TIME as createTime,
+         tb.CREATE_USER as createUser,
+         tb.UPDATE_TIME as updateTime,
+        tb.UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from chain_withdraw tb
+        inner  join  app_member am on  tb.member_id = am.member_id
+         where tb.del='N'
+        <if test="param.condition!=null and param.condition!=''">
+            and tb.member_id = (select member_id from app_member m where m.account=#{param.condition})
+        </if>
+        <if test="param.txHash != null and param.txHash !=''">
+            and tb.tx_hash = #{param.txHash}
+        </if>
+        <if test="param.type != null and param.type !=''">
+            and tb.type = #{param.type}
+        </if>
+
+        <if test="param.toAddress != null and param.toAddress !=''">
+            and tb.to_address = #{param.toAddress}
+        </if>
+
+        <if test="param.status != null and param.status !=''">
+            and tb.status = #{param.status}
+        </if>
+
+
+        <if test="param.beginTime != null and param.beginTime != '' and param.endTime != null and param.endTime != ''">
+            and (tb.CREATE_TIME between CONCAT(#{param.beginTime},' 00:00:00') and CONCAT(#{param.endTime},' 23:59:59'))
+        </if>
+ <if test="param.memberId != null and param.memberId != ''">
+             and (am.member_id = #{param.memberId}  or am.parent_referee_id like concat('%',#{param.recommendIds}))
+        </if>
+        order by tb.create_time desc
+    </select>
+
+
+    <select id="total" resultType="map">
+        select
+        IFNULL(sum(tb.price),0) totalWithdraw
+        ,IFNULL(sum(tb.actual_price),0) totalActual
+        ,IFNULL(sum(tb.remark),0) totalGas
+        ,IFNULL(sum(tb.fee),0) totalFee
+        ,(select IFNULL(sum(price),0) from chain_withdraw where type='USDT' ) usdt
+        ,(select IFNULL(sum(price),0) from chain_withdraw where type='ETH' ) eth
+        ,(select IFNULL(sum(price),0) from chain_withdraw where type='MGE' ) mge
+        ,(select IFNULL(sum(price),0) from chain_withdraw where type='MGM' ) mgm
+        from chain_withdraw tb
+         inner  join  app_member am on  tb.member_id = am.member_id
+         where tb.del='N'
+        <if test="param.condition!=null and param.condition!=''">
+            and tb.member_id = (select member_id from app_member m where m.account=#{param.condition})
+        </if>
+        <if test="param.txHash != null and param.txHash !=''">
+            and tb.tx_hash = #{param.txHash}
+        </if>
+        <if test="param.type != null and param.type !=''">
+            and tb.type = #{param.type}
+        </if>
+
+        <if test="param.toAddress != null and param.toAddress !=''">
+            and tb.to_address = #{param.toAddress}
+        </if>
+
+        <if test="param.status != null and param.status !=''">
+            and tb.status = #{param.status}
+        </if>
+
+
+        <if test="param.beginTime != null and param.beginTime != '' and param.endTime != null and param.endTime != ''">
+            and (tb.CREATE_TIME between CONCAT(#{param.beginTime},' 00:00:00') and CONCAT(#{param.endTime},' 23:59:59'))
+        </if>
+         <if test="param.memberId != null and param.memberId != ''">
+             and (am.member_id = #{param.memberId}  or am.parent_referee_id like concat('%',#{param.recommendIds}))
+        </if>
+    </select>
+
+
+    <select id="getSummary" resultType="java.math.BigDecimal">
+        select ifNULL(sum(price),0) from chain_withdraw where del='N'
+    </select>
+
+    <select id="getSummaryToday" resultType="java.math.BigDecimal">
+        select ifNULL(sum(price),0) from chain_withdraw where del='N' and TO_DAYS( NOW( ) ) - TO_DAYS( create_time) &lt;= 1
+    </select>
+
+
+    <select id="selectByMemberIds" resultType="cn.stylefeng.guns.modular.chain.entity.Withdraw">
+        select <include refid="Base_Column_List"/>
+        from  chain_withdraw tb where tb.del="N" and  tb.status='PASS' and
+        tb.member_id in
+        <foreach collection="memberIds" open="(" close=")" item="item" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+
+</mapper>

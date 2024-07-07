@@ -1,0 +1,64 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/e/liveRecord/liveRecord_add.js"]}){
+
+<form id="liveRecordForm" lay-filter="liveRecordForm" class="layui-form model-form">
+    <input name="liveRecordId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">订单号<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="orderNo" id="orderNo" placeholder="请输入订单号" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="memberId" id="memberId" placeholder="请输入用户" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="account" id="account" placeholder="请输入用户" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">付款金额（CNY）<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="cny" id="cny" placeholder="请输入付款金额（CNY）" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">支付数量（MGE）<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="md" id="md" placeholder="请输入支付数量（MGE）" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">链接<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="link" id="link" placeholder="请输入链接" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">二维码<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="linkCode" id="linkCode" placeholder="请输入二维码" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">打款备注<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="content" id="content" placeholder="请输入打款备注" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">付款时间<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="payTime" id="payTime" placeholder="请输入付款时间" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

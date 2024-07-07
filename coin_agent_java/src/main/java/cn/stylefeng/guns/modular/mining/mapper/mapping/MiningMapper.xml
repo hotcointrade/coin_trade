@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.mining.mapper.MiningMapper">
+
+     <!-- 通用查询映射结果 -->
+   <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.mining.entity.Mining">
+     <id column="id" property="id"/>
+     <result column="type" property="type"/>
+     <result column="image" property="image"/>
+       <result column="image2" property="image2"/>
+     <result column="title" property="title"/>
+     <result column="name" property="name"/>
+     <result column="introduction" property="introduction"/>
+     <result column="estimated_capacity" property="estimatedCapacity"/>
+     <result column="estimated_static_yield" property="estimatedStaticYield"/>
+     <result column="cycle_type" property="cycleType"/>
+     <result column="cycle_number" property="cycleNumber"/>
+     <result column="fuel_energy_coin" property="fuelEnergyCoin"/>
+     <result column="fuel_energy_number" property="fuelEnergyNumber"/>
+     <result column="energy_loss_coin" property="energyLossCoin"/>
+     <result column="energy_loss_number" property="energyLossNumber"/>
+     <result column="calculating_power_coin" property="calculatingPowerCoin"/>
+     <result column="calculating_power_number" property="calculatingPowerNumber"/>
+     <result column="price_coin" property="priceCoin"/>
+     <result column="price" property="price"/>
+     <result column="step" property="step"/>
+     <result column="start_time" property="startTime"/>
+     <result column="end_time" property="endTime"/>
+     <result column="mining_type" property="miningType"/>
+     <result column="progress" property="progress"/>
+     <result column="total_supply" property="totalSupply"/>
+     <result column="traded_amount" property="tradedAmount"/>
+     <result column="price_scale" property="priceScale"/>
+     <result column="number_scale" property="numberScale"/>
+     <result column="limit_times" property="limitTimes"/>
+     <result column="mining_coin" property="miningCoin"/>
+       <result column="static_coin" property="staticCoin"/>
+     <result column="release_type" property="releaseType"/>
+     <result column="mining_daysprofit" property="miningDaysprofit"/>
+     <result column="mining_invite" property="miningInvite"/>
+     <result column="mining_invitelimit" property="miningInvitelimit"/>
+     <result column="status" property="status"/>
+     <result column="del" property="del"/>
+     <result column="remark" property="remark"/>
+     <result column="CREATE_TIME" property="createTime"/>
+     <result column="CREATE_USER" property="createUser"/>
+     <result column="UPDATE_TIME" property="updateTime"/>
+     <result column="UPDATE_USER" property="updateUser"/>
+     </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         id as id,
+         type as type,
+         image as image,
+         image2 as image2,
+         title as title,
+         name as name,
+         introduction as introduction,
+         estimated_capacity as estimatedCapacity,
+         estimated_static_yield as estimatedStaticYield,
+         cycle_type as cycleType,
+         cycle_number as cycleNumber,
+         fuel_energy_coin as fuelEnergyCoin,
+         fuel_energy_number as fuelEnergyNumber,
+         energy_loss_coin as energyLossCoin,
+         energy_loss_number as energyLossNumber,
+         calculating_power_coin as calculatingPowerCoin,
+         calculating_power_number as calculatingPowerNumber,
+         price_coin as priceCoin,
+         price as price,
+         step as step,
+         start_time as startTime,
+         end_time as endTime,
+         mining_type as miningType,
+         progress as progress,
+         total_supply as totalSupply,
+         traded_amount as tradedAmount,
+         price_scale as priceScale,
+         number_scale as numberScale,
+         limit_times as limitTimes,
+         mining_coin as miningCoin,
+         static_coin as staticCoin,
+         release_type as releaseType,
+         mining_daysprofit as miningDaysprofit,
+         mining_invite as miningInvite,
+         mining_invitelimit as miningInvitelimit,
+         status as status,
+         del as del,
+         remark as remark,
+         CREATE_TIME as createTime,
+         CREATE_USER as createUser,
+         UPDATE_TIME as updateTime,
+        UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from mining tb where del='N'
+        <if test="condition!=null and condition!=''">
+          and name like concat('%',#{condition},'%')
+        </if>
+        <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+            and (CREATE_TIME between CONCAT(#{beginTime},' 00:00:00') and CONCAT(#{endTime},' 23:59:59'))
+        </if>
+        order by tb.create_time desc
+    </select>
+
+</mapper>

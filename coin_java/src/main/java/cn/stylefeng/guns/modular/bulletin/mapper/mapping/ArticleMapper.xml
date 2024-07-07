@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.bulletin.mapper.ArticleMapper">
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.bulletin.entity.Article">
+        <id column="article_id" jdbcType="BIGINT" property="articleId" />
+        <result column="article_type" jdbcType="VARCHAR" property="articleType" />
+        <result column="main_img" jdbcType="VARCHAR" property="mainImg" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+        <result column="language" property="language"/>
+        <result column="del" jdbcType="VARCHAR" property="del" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+        <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="CREATE_USER" jdbcType="BIGINT" property="createUser" />
+        <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="UPDATE_USER" jdbcType="BIGINT" property="updateUser" />
+        <result column="sub_img" jdbcType="LONGVARCHAR" property="subImg" />
+        <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    article_id articleId,language, article_type articleType, main_img mainImg, title, status, del, remark, CREATE_TIME createTime, CREATE_USER createUser,
+    UPDATE_TIME updateTime, UPDATE_USER  updateUser ,sub_img subImg, content
+   </sql>
+    <select id="selectByCondition" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from com_article where del='N'
+        <if test="condition!=null and condition!=''">
+            and name like concat('%',#{condition},'%')
+        </if>
+    </select>
+</mapper>

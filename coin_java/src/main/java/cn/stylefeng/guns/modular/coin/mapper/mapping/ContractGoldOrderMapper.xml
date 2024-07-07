@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.stylefeng.guns.modular.coin.mapper.ContractGoldOrderMapper">
+	<resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.coin.entity.ContractGoldOrder">
+            <result column="id" property="id" />
+	        <result column="gold_id" property="goldId" />
+	        <result column="gold_No" property="goldNo" />
+	        <result column="member_Id" property="memberId" />
+	        <result column="symbol" property="symbol" />
+	        <result column="coin_Symbol" property="coinSymbol" />
+	        <result column="base_Symbol" property="baseSymbol" />
+	        <result column="direction" property="direction" />
+	        <result column="result" property="result" />
+	        <result column="fee" property="fee" />
+	        <result column="win_Fee" property="winFee" />
+	        <result column="bet_Amount" property="betAmount" />
+	        <result column="reward_Amount" property="rewardAmount" />
+	        <result column="CREATE_TIME" property="createTime" />
+	        <result column="CREATE_USER" property="createUser" />
+	        <result column="UPDATE_TIME" property="updateTime" />
+	        <result column="UPDATE_USER" property="updateUser" />
+	        <result column="status" property="status" />
+		</resultMap>  
+    
+    <!-- 表字段 -->
+    <sql id="Base_Column_List">
+         t.id
+        , t.gold_id
+        , t.gold_No
+        , t.member_Id
+        , t.symbol
+        , t.coin_Symbol
+        , t.base_Symbol
+        , t.direction
+        , t.result
+        , t.fee
+        , t.win_Fee
+        , t.bet_Amount
+        , t.reward_Amount
+        , t.CREATE_TIME
+        , t.CREATE_USER
+        , t.UPDATE_TIME
+        , t.UPDATE_USER
+        , t.status
+        </sql> 
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from contract_gold_order t
+       <where>
+            <if test="condition!=null and condition!=''">
+              -- and title  like concat('%',#{condition},'%')
+            </if>
+        </where>
+        order by t.id desc
+    </select>
+
+
+</mapper>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.bulletin.mapper.MerchantMapper">
+  <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.bulletin.entity.Merchant">
+    <id column="merchant_id" jdbcType="BIGINT" property="merchantId" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="head" jdbcType="VARCHAR" property="head" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="merchant_name" jdbcType="VARCHAR" property="merchantName" />
+    <result column="total_price" jdbcType="DECIMAL" property="totalPrice" />
+    <result column="rate" jdbcType="DOUBLE" property="rate" />
+    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="level" jdbcType="VARCHAR" property="level" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="language" jdbcType="VARCHAR" property="language" />
+    <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
+    <result column="last_login" jdbcType="TIMESTAMP" property="lastLogin" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="promotion" jdbcType="VARCHAR" property="promotion" />
+    <result column="invite" jdbcType="VARCHAR" property="invite" />
+    <result column="msg" jdbcType="VARCHAR" property="msg" />
+    <result column="withdraw" jdbcType="VARCHAR" property="withdraw" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CREATE_USER" jdbcType="BIGINT" property="createUser" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="UPDATE_USER" jdbcType="BIGINT" property="updateUser" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    merchant_id merchantId, openid, head, account, password, salt, name, total_price totalPrice, rate, birthday,merchant_name merchantName,
+    sex, email, phone, level, country, province, city, language, register_time registerTime, last_login lastLogin,
+    status, del_flag delFlag, remark, promotion, invite, msg, withdraw,
+     CREATE_TIME createTime, CREATE_USER createUser, UPDATE_TIME updateTime, UPDATE_USER updateUser
+  </sql>
+  <select id="selectByCondition" resultType="map">
+    select
+    <include refid="Base_Column_List"/>
+    ,(select count(*) from merchant_grab g where g.merchant_id=m.merchant_id ) orderCount
+    ,(select count(*) from merchant_grab g2 where g2.merchant_id=m.merchant_id and g2.`status`='SUCCESS'	) orderOkCount
+    ,(select IFNULL(sum(g3.money),0) from merchant_grab g3 where g3.merchant_id=m.merchant_id) orderTotalPrice
+    ,(select IFNULL(sum(g3.money),0) from merchant_grab g3 where g3.merchant_id=m.merchant_id and g3.`status`='SUCCESS') orderOkTotalPrice
+
+    from app_merchant m where m.del_flag='N'
+    <if test="condition!=null and condition!=''">
+      and m.name like concat('%',#{condition},'%')
+    </if>
+    <if test="merchantId!=null and merchantId!=''">
+      and m.merchant_id=#{merchantId}
+    </if>
+  </select>
+
+<select id="selectRecordByCondition" resultType="map">
+    select
+  merchant_grab_id merchantGrabId,order_no orderNo, merchant_id merchantId, receipt_id receiptId, receipt_type receiptType, name, status, del, remark, img,
+  CREATE_TIME createTime, CREATE_USER createUser, UPDATE_TIME updateTime, UPDATE_USER updateUser,money,actual,finish_time finishTime
+    from merchant_grab   where del='N'
+    <if test="condition!=null and condition!=''">
+      and name like concat('%',#{condition},'%')
+    </if>
+    <if test="merchantId!=null and merchantId!=''">
+      and merchant_id=#{merchantId}
+    </if>
+  </select>
+
+
+
+
+
+</mapper>

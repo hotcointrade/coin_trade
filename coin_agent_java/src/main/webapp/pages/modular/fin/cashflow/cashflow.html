@@ -1,0 +1,48 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/fin/cashflow/cashflow.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">流水记录</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="condition" class="layui-input" type="text" placeholder="用户"/>
+                            </div>
+                            流水类型
+                            <div class="layui-inline">
+
+                                <select name="flowType" id="flowType" lay-verify="required">
+                                    <option value=""></option>
+                                </select>
+                            </div> 账户子项
+                               <div class="layui-inline">
+
+                                <select name="itemCode" id="itemCode" lay-verify="required">
+                                    <option value=""></option>
+                                    <option value="USED">可用</option>
+                                    <option value="LOCKED">冻结</option>
+                                </select>
+                            </div>
+
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+
+                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="cashflowTable" lay-filter="cashflowTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@}

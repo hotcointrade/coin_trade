@@ -1,0 +1,50 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/fin/periodic/option_edit.js"]}){
+<form id="currencyForm" lay-filter="currencyForm" class="layui-form model-form">
+    <input name="id" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">名称<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="name" id="name" placeholder="请输入名称" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">类型<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <select name="type" id="type" required >
+                <option value="1">周利率</option>
+                <option value="2">月利率</option>
+                <option value="3">季利率</option>
+                <option value="4">年利率</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">最小金额<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="minNum" id="minNum" placeholder="最小金额" type="number" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">最大金额<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="num" id="num" placeholder="最大金额" type="number" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">利率百分比<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="rate" id="rate" placeholder="1% 请输入1" type="number" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">描述<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="remark" id="remark" placeholder="" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

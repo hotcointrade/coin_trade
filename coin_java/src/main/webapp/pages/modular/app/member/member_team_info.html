@@ -1,0 +1,106 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/app/member/member_team_info.js"]}){
+
+<table class="layui-table" lay-even="" lay-skin="nob">
+    <colgroup>
+        <col width="150">
+        <col width="150">
+        <col width="150">
+        <col width="150">
+        <col width="150">
+        <col width="150">
+
+    </colgroup>
+    <thead>
+    <!--<tr>-->
+        <!--<th>人物</th>-->
+        <!--<th>民族</th>-->
+        <!--<th>出场时间</th>-->
+        <!--<th>格言</th>-->
+    <!--</tr>-->
+    </thead>
+    <tbody>
+    <tr>
+        <td>账号:<span id="account">1023</span></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+
+    </tr>
+    <tr>
+        <td>邀请人数:<span id="teamCount">1023</span></td>
+        <td>币币买入总额：<span id="buyMatch">1023</span></td>
+        <td>币币卖出总额：<span id="sellMatch">1023</span></td>
+        <td>合约买入总额：<span id="buyCompact">1023</span></td>
+        <td>合约卖出总额：<span id="sellCompact">1023</span></td>
+        <td>法币买入总额：<span id="otcBuy">1023</span></td>
+
+    </tr>
+    <tr>
+        <td>法币卖出总额：<span id="otcSell">1023</span></td>
+        <td>期权看涨总额：<span id="optionZ">1023</span></td>
+        <td>期权看跌总额：<span id="optionD">1023</span></td>
+        <td>总充币数量：<span id="rechargeTotal">1023</span></td>
+        <td>总提币数量：<span id="withdrawalTotal">1023</span></td>
+
+        <td></td>
+
+    </tr>
+
+    </tbody>
+</table>
+
+<!--<form id="memberForm" lay-filter="memberForm" class="layui-form model-form">-->
+    <!--<input name="memberId" type="hidden"/>-->
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">账号</label>-->
+        <!--<div class="layui-input-block">-->
+            <!--<input name="account" id="account" placeholder="请输入账号" type="text" class="layui-input" readonly/>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">团队人数</label>-->
+        <!--<div class="layui-input-block">-->
+            <!--<input name="teamCount" id="teamCount" placeholder="请输入账号" type="text" class="layui-input" readonly/>-->
+
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">团队总充值</label>-->
+        <!--<div class="layui-input-block">-->
+            <!--<input name="rechargeTotal" id="rechargeTotal" placeholder="请输入账号" type="text" class="layui-input" readonly/>-->
+
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">团队总提现</label>-->
+        <!--<div class="layui-input-block">-->
+            <!--<input name="withdrawalTotal" id="withdrawalTotal" placeholder="请输入账号" type="text" class="layui-input" readonly/>-->
+
+        <!--</div>-->
+    <!--</div>-->
+<!--</form>-->
+<div class="layui-tab" lay-filter="tab-dome">
+    <ul class="layui-tab-title">
+        <li class="layui-this" lay-id="11">一级</li>
+        <li lay-id="22">二级</li>
+        <li lay-id="33">三级</li>
+        <li lay-id="44">其他</li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <table class="layui-table" id="memberTable1" lay-filter="memberTable1"></table>
+        </div>
+        <div class="layui-tab-item">
+            <table class="layui-table" id="memberTable2" lay-filter="memberTable2"></table>
+        </div>
+        <div class="layui-tab-item">
+            <table class="layui-table" id="memberTable3" lay-filter="memberTable3"></table>
+        </div>
+        <div class="layui-tab-item">
+            <table class="layui-table" id="memberTable4" lay-filter="memberTable4"></table>
+        </div>
+    </div>
+</div>
+@}

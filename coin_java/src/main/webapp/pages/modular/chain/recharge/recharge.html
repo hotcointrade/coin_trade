@@ -1,0 +1,78 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/chain/recharge/recharge.js"]}){
+<style>
+    .layui-table-cell {
+        height: 100%;
+        max-width: 100%;
+    }
+</style>
+<div class="layui-body-header">
+    <span class="layui-body-header-title">充币请求</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+
+                            <div class="layui-inline">
+                                <input id="condition" class="layui-input" type="text" placeholder="用户 "/>
+                            </div>
+
+                            <div class="layui-inline">
+                                <input id="txHash" class="layui-input" type="text" placeholder="交易hash"/>
+                            </div>
+                            <!--币种
+                            <div class="layui-inline">
+                                <select name="type" id="type" lay-verify="required">
+                                    <option value=""></option>
+                                    <option value="ETH">ETH</option>
+                                    <option value="ETH_USDT">USDT</option>
+                                    <option value="MGE">MGE</option>
+                                    <option value="MGM">MGM</option>
+                                </select>
+                            </div>-->
+                            <div class="layui-inline">
+                                <input id="timeLimit" class="layui-input" type="text" autocomplete="off"
+                                       placeholder="时间范围" readonly/>
+                            </div>
+
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索
+                                </button>
+
+                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出
+                                </button>
+                            </div>
+                             <div class="layui-inline">
+                                  总充币数量:<a id="totalRecharge"></a>
+                                  总充币旷工费:<a id="totalGas"></a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <table class="layui-table" id="rechargeTable" lay-filter="rechargeTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="showScreenhost" type="text/html">
+    {{# var srr=d.remark.split(",");
+    for(var j in srr) { srr[j] }}
+    <div  onclick="show_img(this)" style="margin:0 20px; display:inline-block !important; display:inline;  max-width:70px; max-height:50px;">
+        <img style=" max-width:50px; max-height:50px;" src="{{srr[j]}}" />
+    </div>
+    {{# } }}
+</script>
+<script type="text/html" id="tableBar">
+        {{# if(d.status==='CHECK'){ }}
+        <a class="layui-btn layui-btn layui-btn-xs" lay-event="checkPass" >审核通过</a>
+        {{# } }}
+        {{# if(d.status==='CHECK'){ }}
+        <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="checkFail" >审核失败</a>
+        {{# } }}
+</script>
+@}

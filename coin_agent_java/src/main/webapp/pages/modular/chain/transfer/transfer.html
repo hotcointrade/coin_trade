@@ -1,0 +1,35 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/chain/transfer/transfer.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">转账信息</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="condition" class="layui-input" type="text" placeholder="用户/地址"/>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+
+                                @if(shiro.hasPermission("/transfer/export_bak")){
+                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出</button>
+                                 @}
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="transferTable" lay-filter="transferTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@}

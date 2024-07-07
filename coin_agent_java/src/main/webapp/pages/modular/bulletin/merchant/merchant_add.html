@@ -1,0 +1,46 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/bulletin/merchant/merchant_add.js"]}){
+
+<form id="merchantForm" lay-filter="merchantForm" class="layui-form model-form">
+    <input name="merchantId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商户名称<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="merchantName" placeholder="请输入商户名称" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">联系人<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="name" placeholder="请输入联系人" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">联系方式<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="phone" placeholder="请输入联系方式" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">账户余额<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="totalPrice" placeholder="请输入账户余额" type="number" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">手续费率(%)<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="rate" placeholder="请输入手续费率" type="number" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商户链接</label>
+        <div class="layui-input-block">
+            <input name="remark" placeholder="请输入商户链接" type="text" class="layui-input" />
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

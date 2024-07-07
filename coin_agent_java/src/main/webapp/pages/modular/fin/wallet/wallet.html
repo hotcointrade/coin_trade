@@ -1,0 +1,38 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/fin/wallet/wallet.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">账户信息</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="condition" class="layui-input" type="text" placeholder="用户"/>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+
+                                @if(shiro.hasPermission("/wallet/export_bak")){
+                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出</button>
+                                 @}
+                        </div>
+                    </div>
+                    <table class="layui-table" id="walletTable" lay-filter="walletTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("/wallet/edit")){
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
+    @}
+
+</script>
+    @}

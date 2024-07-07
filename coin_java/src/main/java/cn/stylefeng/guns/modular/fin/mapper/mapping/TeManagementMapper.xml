@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.stylefeng.guns.modular.fin.mapper.TeManagementMapper">
+	<resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.fin.entity.TeManagement">
+            <result column="id" property="id" />
+	        <result column="title" property="title" />
+	        <result column="describes" property="describes" />
+	        <result column="issuance_count" property="issuanceCount" />
+	        <result column="issuance_price" property="issuancePrice" />
+	        <result column="currency" property="currency" />
+	        <result column="img" property="img" />
+	        <result column="min_price" property="minPrice" />
+	        <result column="draws_total" property="drawsTotal" />
+	        <result column="odds_winning" property="oddsWinning" />
+	        <result column="start_time" property="startTime" />
+	        <result column="end_time" property="endTime" />
+	        <result column="com_link" property="comLink" />
+	        <result column="white_book_link" property="whiteBookLink" />
+	        <result column="status" property="status" />
+	        <result column="introduce" property="introduce" />
+	        <result column="conditions" property="conditions" />
+		</resultMap>  
+    
+    <!-- 表字段 -->
+    <sql id="Base_Column_List">
+         t.id
+        , t.title
+        , t.describes
+        , t.issuance_count as issuanceCount
+        , t.issuance_price as issuancePrice
+        , t.currency
+        , t.img
+        , t.min_price as minPrice
+        , t.draws_total as drawsTotal
+        , t.odds_winning as oddsWinning
+        , t.start_time as startTime
+        , t.end_time as endTime
+        , t.com_link as comLink
+        , t.white_book_link as whiteBookLink
+        , t.status
+        , t.introduce
+        , t.conditions
+        </sql> 
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from te_management t
+       <where>
+            <if test="condition!=null and condition!=''">
+              -- and title  like concat('%',#{condition},'%')
+            </if>
+        </where>
+        order by t.id desc
+    </select>
+
+
+</mapper>

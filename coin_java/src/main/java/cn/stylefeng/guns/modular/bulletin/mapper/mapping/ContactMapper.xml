@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.bulletin.mapper.ContactMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.bulletin.entity.Contact">
+        <id column="contact_id" property="contactId"/>
+        <result column="contact_name" property="contactName"/>
+        <result column="phone" property="phone"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="start" property="start"/>
+        <result column="end" property="end"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="UPDATE_USER" property="updateUser"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        contact_id as contactId,contact_name as contactName,phone as phone,status as status,
+        remark as remark,start,end,
+        CREATE_TIME AS createTime, UPDATE_TIME AS updateTime, CREATE_USER AS createUser, UPDATE_USER AS updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from pro_contact where 1=1
+        <if test="condition!=null and condition!=''">
+            and contact_name like concat('%',#{condition},'%')
+        </if>
+        order by contact_id asc
+    </select>
+
+</mapper>

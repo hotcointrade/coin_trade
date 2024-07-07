@@ -1,0 +1,27 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/com/exception/exception_edit.js"]}){
+<form id="exceptionForm" lay-filter="exceptionForm" class="layui-form model-form">
+    <input name="exceptionId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">异常方法<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="method" id="method" placeholder="请输入异常方法" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">异常信息<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="msg" id="msg" placeholder="请输入异常信息" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">详情内容<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="content" id="content" placeholder="请输入详情内容" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

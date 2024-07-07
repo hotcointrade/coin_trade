@@ -1,0 +1,53 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/otc/bill/toPass.js"]}){
+
+<form id="billForm" lay-filter="billForm" class="layui-form model-form">
+    <input name="billId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">买方<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="buyMid" id="buyMid" placeholder="请输入买方" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">买方昵称<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="buyName" id="buyName" placeholder="请输入买方昵称" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">卖方<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="sellMid" id="sellMid" placeholder="请输入卖方" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">卖方昵称<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="sellName" id="sellName" placeholder="请输入卖方昵称" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">订单号<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="orderNo" id="orderNo" placeholder="请输入订单号" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">参考号<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="markNo" id="markNo" placeholder="请输入参考号" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">凭证<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <img id="uploadImg" name="uploadImg"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>放币</button>
+    </div>
+</form>
+@}

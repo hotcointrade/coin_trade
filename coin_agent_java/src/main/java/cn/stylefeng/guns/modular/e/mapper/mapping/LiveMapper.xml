@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.e.mapper.LiveMapper">
+
+     <!-- 通用查询映射结果 -->
+   <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.e.entity.Live">
+     <id column="live_id" property="liveId"/>
+     <result column="member_id" property="memberId"/>
+     <result column="price" property="price"/>
+     <result column="status" property="status"/>
+     <result column="del" property="del"/>
+     <result column="remark" property="remark"/>
+     <result column="CREATE_TIME" property="createTime"/>
+     <result column="CREATE_USER" property="createUser"/>
+     <result column="UPDATE_TIME" property="updateTime"/>
+     <result column="UPDATE_USER" property="updateUser"/>
+     </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         live_id as liveId,
+         member_id as memberId,
+         price as price,
+         status as status,
+         del as del,
+         remark as remark,
+         CREATE_TIME as createTime,
+         CREATE_USER as createUser,
+         UPDATE_TIME as updateTime,
+        UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from e_live tb where del='N'
+        <if test="condition!=null and condition!=''">
+            and member_id=(select member_id from app_member where account=#{condition})
+        </if>
+        order by tb.create_time desc
+    </select>
+
+</mapper>

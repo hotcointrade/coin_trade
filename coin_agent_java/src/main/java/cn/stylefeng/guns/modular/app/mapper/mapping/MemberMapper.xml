@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.app.mapper.MemberMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.app.entity.Member">
+        <id column="member_id" property="memberId"/>
+        <result column="account" property="account"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="uid" property="uid"/>
+        <result column="type" property="type"/>
+        <result column="password" property="password"/>
+        <result column="area" property="area"/>
+        <result column="salt" property="salt"/>
+        <result column="pay_password" property="payPassword"/>
+        <result column="pay_salt" property="paySalt"/>
+        <result column="invite_code" property="inviteCode"/>
+        <result column="parent_referee_id" property="parentRefereeId"/>
+        <result column="referee_id" property="refereeId"/>
+        <result column="mnemonic" property="mnemonic"/>
+        <result column="login_equipment" property="loginEquipment"/>
+        <result column="mall_points" property="mallPoints"/>
+        <result column="rest_day" property="restDay"/>
+        <result column="state" property="state"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="real_status" property="realStatus"/>
+        <result column="area_code" property="areaCode"/>
+        <result column="failure_sign" property="failureSign"/>
+        <result column="head" property="head"/>
+        <result column="points" property="points"/>
+        <result column="real_name" property="realName"/>
+        <result column="last_login" property="lastLogin"/>
+        <result column="register_time" property="registerTime"/>
+        <result column="direct_rate" property="directRate"/>
+        <result column="team_rate" property="teamRate"/>
+        <result column="province_id" property="provinceId"/>
+        <result column="city_id" property="cityId"/>
+        <result column="area_id" property="areaId"/>
+
+        <result column="small" property="small"/>
+        <result column="big" property="big"/>
+
+        <result column="director" property="director"/>
+        <result column="cooperation" property="cooperation"/>
+
+
+        <result column="otc" property="otc"/>
+
+        <result column="withdraw" property="withdraw"/>
+        <result column="deposit" property="deposit"/>
+
+        <result column="btc" property="btc"/>
+        <result column="usdt" property="usdt"/>
+        <result column="eth" property="eth"/>
+        <result column="etc" property="etc"/>
+        <result column="xr" property="xr"/>
+        <result column="eos" property="eos"/>
+        <result column="bch" property="bch"/>
+        <result column="ltc" property="ltc"/>
+        <result column="md" property="md"/>
+
+        <result column="c1" property="c1"/>
+        <result column="c2" property="c2"/>
+        <result column="c3" property="c3"/>
+        <result column="c4" property="c4"/>
+        <result column="c5" property="c5"/>
+
+        <result column="live" property="live"/>
+        <result column="unlockc" property="unlockc"/>
+
+
+
+        <result column="version" property="version"/>
+        <result column="status" property="status"/>
+        <result column="del" property="del"/>
+        <result column="remark" property="remark"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="UPDATE_USER" property="updateUser"/>
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         tb.member_id as memberId,
+         tb.phone as phone,
+         tb.email as email,
+         tb.account as account,
+         tb.uid as uid,
+         tb.type as type,
+         tb.password as password,
+         tb.area as area,
+         tb.salt as salt,
+         tb.pay_password as payPassword,
+         tb.pay_salt as paySalt,
+         tb.invite_code as inviteCode,
+         tb.parent_referee_id as parentRefereeId,
+         tb.referee_id as refereeId,
+         tb.mnemonic as mnemonic,
+         tb.login_equipment as loginEquipment,
+         tb.mall_points as mallPoints,
+         tb.rest_day as restDay,
+         tb.state as state,
+         tb.nick_name as nickName,
+         tb.real_status as realStatus,
+         tb.area_code as areaCode,
+         tb.failure_sign as failureSign,
+         tb.head as head,
+         tb.points as points,
+         tb.real_name as realName,
+         tb.last_login as lastLogin,
+         tb.register_time as registerTime,
+         tb.direct_rate as directRate,
+         tb.team_rate as teamRate,
+         tb.province_id as provinceId,
+         tb.city_id as cityId,
+         tb.area_id as areaId,
+         tb.small as small,
+         tb.big as big,
+
+         tb.otc as otc,
+
+         tb.withdraw as withdraw,
+         tb.deposit as deposit,
+
+         tb.director as director,
+         tb.cooperation as cooperation,
+
+         tb.btc,usdt,eth,etc,xr,eos,bch,ltc,
+         tb. md,
+         tb. c1,
+         tb. c2,
+         tb. c3,
+         tb. c4,
+         tb. c5,
+         tb. live,
+         tb. unlockc,
+         tb. chat_status as chatStatus,
+         tb.version as version,
+         tb.status as status,
+         tb.del as del,
+         tb.remark as remark,
+         tb.CREATE_TIME as createTime,
+         tb.CREATE_USER as createUser,
+         tb.UPDATE_TIME as updateTime,
+        tb.UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from app_member tb where del='N'
+        <if test="condition!=null and condition!=''">
+            and (account like concat('%',#{condition},'%') or uid like concat('%',#{condition},'%') or invite_code like
+            concat('%',#{condition},'%') or email like concat('%',#{condition},'%'))
+        </if>
+        <if test="refereeId!=null and refereeId!=''">
+            and referee_id=#{refereeId}
+        </if>
+        <if test="memberId != null and memberId !=''">
+            and (tb.member_id = #{memberId}  or tb.parent_referee_id like concat('%',#{recommendIds}))
+        </if>
+        order by tb.create_time desc
+    </select>
+    <select id="selectByConditionForTeam" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from app_member tb where del='N'
+        <if test="condition!=null and condition!=''">
+            and (account like concat('%',#{condition},'%') or uid like concat('%',#{condition},'%') or invite_code like
+            concat('%',#{condition},'%') or email like concat('%',#{condition},'%'))
+        </if>
+        <if test="recommendIds!=null and recommendIds!=''">
+            and tb.parent_referee_id like concat('%',#{recommendIds})
+        </if>
+        order by tb.create_time asc
+    </select>
+    <select id="selectTeamForPRI" resultType="cn.stylefeng.guns.modular.app.entity.Member">
+        select
+        <include refid="Base_Column_List"/>
+        from app_member tb where del='N'
+        and (tb.parent_referee_id like concat('%',#{parentRefereeId},'%') or tb.referee_id=#{parentRefereeId} or tb.member_id=#{parentRefereeId})
+
+        order by tb.create_time asc
+    </select>
+
+    <select id="getDirectMembersByMemberId" resultType="cn.stylefeng.guns.modular.app.dto.ApiTeamMemberDto"
+            parameterType="cn.stylefeng.guns.modular.app.entity.Member">
+      select m.account as account,m.type ,m.register_time registerTime from app_member  m where m.referee_id=#{memberId}
+     order by m.register_time desc
+    </select>
+    <select id="getDirectMembersList" resultType="cn.stylefeng.guns.modular.app.entity.Member">
+        select
+        <include refid="Base_Column_List"/>
+        from app_member m where m.referee_id=#{memberId}
+
+    </select>
+
+    <select id="getConvertMember" resultType="cn.stylefeng.guns.modular.app.entity.Member">
+        select
+        <include refid="Base_Column_List"/>
+        from app_member tb where del='N'
+        <if test="address!=null and address!=''">
+            and (usdt=#{address} or rcc=#{address})
+        </if>
+    </select>
+
+    <!-- 获取后台未更改用户身份的用户列表 -->
+    <select id="getNotSystemUpdateMember" resultType="cn.stylefeng.guns.modular.app.entity.Member">
+        select
+        <include refid="Base_Column_List"/>
+        from app_member tb where del='N'
+        and tb.status='Y' and tb.state='0'
+    </select>
+
+    <select id="getNotSystemUpdateMemberByTypeAsc" resultType="cn.stylefeng.guns.modular.app.entity.Member">
+        select
+        <include refid="Base_Column_List"/>
+        from app_member tb where del='N'
+        and tb.status='Y' and tb.state='0'
+        order by type+0 asc, member_id desc
+    </select>
+
+    <update id="updateTypeByMember">
+        update app_member tb set tb.type=#{type},tb.version=#{version}+1 where tb.member_id=#{memberId} and tb.version=#{version}
+    </update>
+    <select id="tree" resultType="cn.stylefeng.guns.core.common.node.ZTreeNode">
+		select member_id AS id, referee_id as pId, account as name,
+		(
+		CASE
+		WHEN (referee_id = -1 OR referee_id IS NULL) THEN
+		'true'
+		ELSE
+		'false'
+		END
+		) as open from app_member
+        <where>
+        del = 'N'
+            <if test="memberId != null and memberId != ''">
+                 and (member_id = #{memberId}  or parent_referee_id like concat(#{recommendIds},'%'))
+</if>
+</where>
+	</select>
+
+    <select id="getUserForOtherType" resultType="cn.stylefeng.guns.modular.app.entity.Member">
+        select
+        <include refid="Base_Column_List"/>
+        from app_member tb where del='N'
+        and (phone=#{account} or email=#{account} or account=#{account})
+    </select>
+
+
+    <select id="getTeamNumbers" resultType="int">
+        select
+        count(1)
+        from app_member tb where del='N'
+        and  parent_referee_id like concat('%/',#{memberId},'/%')
+    </select>
+
+    <select id="getCountArrangeForDirect" resultType="long">
+        SELECT
+            count( 1 )
+        FROM
+            `rcc_arrange_record` ar
+            JOIN app_member m ON ar.member_id = m.member_id
+            AND m.referee_id = #{memberId}
+
+        where TO_DAYS( NOW( ) ) - TO_DAYS(ar.CREATE_TIME) &lt;1
+    </select>
+
+    <select id="teamSameNumber" resultType="long">
+       select
+        count(1)
+        from app_member tb where del='N'
+        and  parent_referee_id like concat('%/',#{memberId},'/%')
+				and tb.type=#{type}
+    </select>
+
+      <select id="teamHighNumber" resultType="long">
+       select
+        count(1)
+        from app_member tb where del='N'
+        and  parent_referee_id like concat('%/',#{memberId},'/%')
+		and tb.type+0 &gt;#{type}+0
+    </select>
+
+
+    <select id="getTeamHighLv" resultType="string">
+         select
+         max(type+0)
+        from app_member tb where del='N'
+        and  parent_referee_id like concat('%/',#{memberId},'/%')
+    </select>
+
+
+    <select id="getSmallOrBigMember" resultType="cn.stylefeng.guns.modular.app.entity.Member">
+        select
+        <include refid="Base_Column_List"/>
+        from app_member tb where del='N'
+        and (small ='1' or big='1')
+    </select>
+
+    <select id="getSmallMember" resultType="cn.stylefeng.guns.modular.app.entity.Member">
+        select
+        <include refid="Base_Column_List"/>
+        from app_member tb where del='N'
+        and small ='1'
+    </select>
+     <select id="getBigMember" resultType="cn.stylefeng.guns.modular.app.entity.Member">
+        select
+        <include refid="Base_Column_List"/>
+        from app_member tb where del='N'
+        and big ='1'
+    </select>
+<select id="downBigBossList" resultType="cn.stylefeng.guns.modular.app.entity.Member">
+        select
+        <include refid="Base_Column_List"/>
+        from app_member tb where del='N'
+        and big ='1'and  parent_referee_id like concat('%/',#{memberId},'/%')
+    </select>
+    <select id="memberIdList" resultType="java.lang.Long">
+        select member_id from app_member tb where del='N'
+    </select>
+
+    <select id="getAllByLockedPrice" resultType="java.math.BigDecimal">
+      select SUM(fcu.locked_price)+SUM(fle.locked_price)+SUM(fmi.locked_price)+SUM(fo.locked_price) +SUM(fw.locked_price)
+      from app_member tb
+      left join fin_currency fcu on fcu.member_id=tb.member_id
+      left join fin_legal fle on fle.member_id=tb.member_id
+      left join fin_mining fmi on fmi.member_id=tb.member_id
+      left join fin_option fo on fo.member_id=tb.member_id
+      left join fin_wallet fw on fw.member_id=tb.member_id
+      where tb.del='N' and tb.member_id=#{memberId}
+
+    </select>
+    <select id="selectByLevel3" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from app_member tb where del='N'
+
+
+        and tb.referee_id in(select tt.member_id from  app_member tt where tt.del='N' and tt.referee_id=#{refereeId}  )
+
+
+        order by tb.create_time desc
+    </select>
+    <select id="getById" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from app_member tb where del='N'
+        and tb.member_id =#{refereeId}
+
+    </select>
+
+    <select id="selectByLevel4" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from app_member tb where del='N'
+        <!--<if test="refereeId!=null and refereeId!=''">-->
+        and tb.referee_id not in(select tt.member_id from  app_member tt where tt.del='N'
+        and tt.referee_id=#{refereeId} or tt.member_id=#{refereeId}  )
+        and tb.parent_referee_id like concat('%',#{recommendIds},'%')
+
+        <!--</if>-->
+
+        order by tb.create_time desc
+    </select>
+
+
+</mapper>

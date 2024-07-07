@@ -1,0 +1,58 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/chain/recharge/recharge_add.js"]}){
+
+<form id="rechargeForm" lay-filter="rechargeForm" class="layui-form model-form">
+    <input name="rechargeId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">单号<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="orderNo" id="orderNo" placeholder="请输入单号" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户ID<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="memberId" id="memberId" placeholder="请输入用户ID" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">金额<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="price" id="price" placeholder="请输入金额" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">实际金额<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="actualPrice" id="actualPrice" placeholder="请输入实际金额" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"><span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="rechargeAddress" id="rechargeAddress" placeholder="请输入" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"><span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="fromAddress" id="fromAddress" placeholder="请输入" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">唯一标识<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="txHash" id="txHash" placeholder="请输入唯一标识" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">币种<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="type" id="type" placeholder="请输入币种" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

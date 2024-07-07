@@ -1,0 +1,114 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/app/coinApply/coinApply_edit.js"]}){
+<form id="coinApplyForm" lay-filter="coinApplyForm" class="layui-form model-form">
+    <input name="coinApplyId" type="hidden"/>
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">用户id<span style="color: red;">*</span></label>-->
+        <!--<div class="layui-input-block">-->
+            <!--<input name="memberId" id="memberId" placeholder="请输入用户id" type="text" class="layui-input" lay-verify="required" required/>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">账户<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="account" id="account" placeholder="请输入账户" disabled="true" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">币种全称<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="currencyZhName" id="currencyZhName" placeholder="请输入币种全称" disabled type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">英文全称<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="currencyEnName" id="currencyEnName" placeholder="请输入英文全称" disabled type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">货币英文缩写<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="currencyAbbrName" id="currencyAbbrName" placeholder="请输入货币英文缩写" disabled type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">市场流通量<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="marketFloat" id="marketFloat" placeholder="请输入市场流通量" disabled type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">官方持有量<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="officialHoldings" id="officialHoldings" placeholder="请输入官方持有量" disabled type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">官方地址<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="officialAddress" id="officialAddress" placeholder="请输入官方地址" disabled type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">区块浏览器<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="blockBrowser" id="blockBrowser" placeholder="请输入区块浏览器" type="text" disabled class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">活动区域<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="movementArea" id="movementArea" placeholder="请输入活动区域" type="text" disabled class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">白皮书地址<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="whitePaperAddress" id="whitePaperAddress" placeholder="请输入白皮书地址" disabled type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">已上线交易所<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="listedExchange" id="listedExchange" placeholder="请输入已上线交易所" type="text" disabled class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">项目领域<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="projectAreas" id="projectAreas" placeholder="请输入项目领域" disabled type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">功能解释<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="functionalInterpretation" id="functionalInterpretation" disabled placeholder="请输入功能解释" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">程序地址<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="projectAddress" id="projectAddress" placeholder="请输入程序地址" disabled type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">地址方式<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="addressWay" id="addressWay" placeholder="请输入地址方式" disabled type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">状态<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <select name="status" id="stastus" lay-verify="required">
+                <option value="N">未处理</option>
+                <option value="Y">已处理</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

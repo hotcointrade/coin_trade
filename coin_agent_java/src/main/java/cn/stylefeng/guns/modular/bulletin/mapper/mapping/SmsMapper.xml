@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.bulletin.mapper.SmsMapper">
+  <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.bulletin.entity.Sms">
+    <id column="sms_id" jdbcType="BIGINT" property="smsId" />
+    <result column="member_id" jdbcType="BIGINT" property="memberId" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="del" jdbcType="VARCHAR" property="del" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CREATE_USER" jdbcType="BIGINT" property="createUser" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="UPDATE_USER" jdbcType="BIGINT" property="updateUser" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sms_id smsId, member_id memberId, content, type, status, del, remark,CREATE_TIME createTime,CREATE_USER createUser, UPDATE_TIME updateTime, UPDATE_USER updateUser
+  </sql>
+
+</mapper>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>用户注册页<!--{tc}用戶註冊頁--><!--{en}User registration page--><!--{jp}ユーザー登録ページ--><!--{ko}사용자 등록 페이지--></title>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="${ctxPath}/assets/common/css/weui.css" />
+	<link rel="stylesheet" href="${ctxPath}/assets/common/css/weui-jquery.css" />
+	<link rel="stylesheet" href="${ctxPath}/assets/common/css/xmex.css" />
+</head>
+<body>
+<div class="weui-cells weui-cells_form">
+	<div class="LoginName">
+		<img src="${ctxPath}/assets/common/images/aot.jpg" alt="" />
+	</div>
+	<div class="formInput">
+		<div class="weui-tab">
+			<div class="weui-navbar" id="showTel">
+				<a class="weui-navbar__item weui-bar__item--on" data-type="TEL" href="#tab1">手机注册<!--{tc}手機註冊--><!--{en}Mobile phone--><!--{jp}携帯電話--><!--{ko}휴대폰 등록--></a>
+				<a class="weui-navbar__item" data-type="EMAIL" href="#tab2">邮箱注册<!--{tc}郵箱註冊--><!--{en}Email--><!--{jp}メールボックス--><!--{ko}메 일주 소--></a>
+			</div>
+			<div class="weui-tab__bd">
+				<div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+					<div class="weui-cell">
+						<div class="weui-cell__hd" id="showPicker">
+							<span class="addTxt">+<b></b></span><img class="trantImg" src="${ctxPath}/assets/common/images/xiala.png" />
+						</div>
+						<div class="weui-cell__bd">
+							<input class="weui-input" id="registerTel" type="number"  placeholder="请输入手机号码" placeholder-tc="請輸入手機號碼"  placeholder-en="Please enter your mobile phone number" placeholder-jp="携帯電話の番号を入力してください。" placeholder-ko="핸드폰 번 호 를 입력 하 세 요." />
+						</div>
+					</div>
+				</div>
+				<div id="tab2" class="weui-tab__bd-item">
+					<div class="weui-cell">
+						<div class="weui-cell__bd">
+							<input class="weui-input" id="registerEmail" type="text"  placeholder="请输入邮箱" placeholder-tc="請輸入郵箱"  placeholder-en="Please enter email address" placeholder-jp="メールボックスを入力してください" placeholder-ko="메 일 박스 를 입력 하 세 요." />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__bd">
+				<input class="weui-input" autocomplete="off" id="registerPwd" type="password"  placeholder="请输入登录密码" placeholder-tc="請輸入登入密碼"  placeholder-en="Please enter the login password" placeholder-jp="ログインパスワードを入力してください。" placeholder-ko="로그 인 비밀번호 입력" />
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__bd">
+				<input class="weui-input" id="registerCode" type="text"
+					   value="${invite}" url="${url}" agreeApi="${agreeApi}"
+					   zhengceApi="${zhengCeApi}"
+					   linkApi="${linkApi}" placeholder="请输入邀请码（必填）"
+					   placeholder-tc="請輸入邀請碼（必填）"  placeholder-en="Please enter the invitation code (required)" placeholder-jp="招待コードを入力してください。必要です。" placeholder-ko="초청장 을 입력 하 세 요 (필수)"/>
+			</div>
+		</div>
+		<div class="weui-cell weui-cell_vcode">
+			<div class="weui-cell__bd">
+				<input class="weui-input" id="getCode" placeholder="请输入验证码" placeholder-tc="請輸入驗證碼"  placeholder-en="Please enter the verification code" placeholder-jp="認証コードを入力してください" placeholder-ko="인증번호 입력" />
+			</div>
+			<div class="weui-cell__ft">
+				<input id="getBtn" type="button" value="获取验证码" value-tc="獲取驗證碼" value-en="Send" value-jp="送信" value-ko="발송 하 다" />
+			</div>
+		</div>
+		<p class="registerB">
+			<input id="checklist" type="checkbox"  />
+			<span>注册即阅读并同意<!--{tc}注册即閱讀並同意--><!--{en}Sign up to read and agree--><!--{jp}登録は読んで同意します。--><!--{ko}등록 하면 읽 고 동의 한다.--></span>
+			<a id="agree">《服务条款》<!--{tc}《服務條款》--><!--{en}Terms of service--><!--{jp}《サービス条項》-><!--{ko}《 서비스 조항 》--></a>
+			<a id="zhengce">《隐私政策》<!--{tc}《隱私政策》--><!--{en}Privacy policy--><!--{jp}『プライバシーポリシー』-><!--{ko}《 프라이버시 정책 》--></a>
+		</p>
+		<button class="weui-btn mybgBtn" id="registerBtn">注册<!--{tc}注册--><!--{en}Register--><!--{jp}登録する--><!--{ko}등록 하 다.--></button>
+	</div>
+</div>
+<div class="languageDiv">
+	<select id="selectBtn">
+		<option selected="selected" value="default">中文简体</option>
+		<option value="tc">中文繁體</option>
+		<option value="en">English</option>
+		<option value="jp">日本語</option>
+		<option value="ko">한국어</option>
+	</select>
+</div>
+<script type="text/javascript" src="${ctxPath}/assets/common/js/translater.js" ></script>
+<script type="text/javascript" src="${ctxPath}/assets/common/js/jquery.min.js" ></script>
+<script type="text/javascript" src="${ctxPath}/assets/common/js/jquery-weui.js" ></script>
+<script type="text/javascript" src="${ctxPath}/assets/common/js/weui.min.js" ></script>
+<script type="text/javascript" src="${ctxPath}/assets/common/js/xmex.js" ></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/e/lockAuto/lockAuto_edit.js"]}){
+<form id="lockAutoForm" lay-filter="lockAutoForm" class="layui-form model-form">
+    <input name="lockAutoId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">编码<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="code" id="code" placeholder="请输入编码" type="text" class="layui-input" lay-verify="required" readonly/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">描述<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="detail" id="detail" placeholder="请输入描述" type="text" class="layui-input" lay-verify="required" readonly/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">最低要求(USDT)<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="price" id="price" placeholder="请输入最低要求(USDT)" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">动态收益率(%)<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="rate" id="rate" placeholder="请输入动态收益率(%)" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

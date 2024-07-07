@@ -1,0 +1,54 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/coin/spot/spot.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">现货交易对</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="condition" class="layui-input" type="text" placeholder="币种"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="timeLimit" class="layui-input" type="text" placeholder="时间范围" readonly/>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                 @if(shiro.hasPermission("/spot/add")){
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加</button>
+                                @}
+                                @if(shiro.hasPermission("/spot/export_bak")){
+                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出</button>
+                                 @}
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="spotTable" lay-filter="spotTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="statusTpl">
+    <input type="checkbox" lay-filter="status" value="{{d.spotId}}" lay-skin="switch" lay-text="启用|禁用" {{d.status=='Y'?'checked':''}} />
+</script>
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("/spot/edit")){
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
+    @}
+    @if(shiro.hasPermission("/spot/delete")){
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    @}
+</script>
+<script type="text/html" id="imgs">
+    <div>
+        <img style="height:24px;width:24px;border-radius:50%;line-height:50px!important;" src="{{d.img}}">
+    </div>
+</script>
+
+@}

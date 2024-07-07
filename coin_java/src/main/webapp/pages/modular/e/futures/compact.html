@@ -1,0 +1,92 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/e/futures/compact.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">合约订单</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="condition" class="layui-input" type="text" placeholder="用户"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="phone" class="layui-input" type="text" placeholder="手机号码"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="email" class="layui-input" type="text" placeholder="邮箱"/>
+                            </div>
+                            <div class="layui-inline">
+                                <select name="dealWay" id="dealWay" lay-verify="required">
+                                    <option value="">交易方式</option>
+                                    <option value="MARKET">市价</option>
+                                    <option value="LIMIT">限价</option>
+                                </select>
+                            </div>
+                            <div class="layui-inline">
+                                <select name="compactType" id="compactType" lay-verify="required">
+                                    <option value="">交易类型</option>
+                                    <option value="BUY">买入</option>
+                                    <option value="SELL">卖出</option>
+                                </select>
+                            </div>
+                            <div class="layui-inline">
+                                <select name="symbols" id="symbols" lay-verify="required">
+                                </select>
+                            </div>
+                            <div class="layui-inline">
+                                <select name="status" id="status" lay-verify="required">
+                                    <option value="">交易状态</option>
+                                    <option value="N">持仓中</option>
+                                    <option value="Y">已平仓</option>
+                                    <option value="IN">委托中</option>
+                                    <option value="CANCEL">撤单</option>
+                                </select>
+                            </div>
+                            <div class="layui-inline">
+                                <select name="exitType" id="exitType" lay-verify="required">
+                                    <option value="">平仓类型</option>
+                                    <option value="HANDLE">手动平仓</option>
+                                    <option value="FIXED">强制平仓</option>
+                                    <option value="PROFIT">止盈平仓</option>
+                                    <option value="LOSS">止损平仓</option>
+                                </select>
+                            </div>
+                           <!-- <div class="layui-inline">
+                                <input id="exitTime" class="layui-input" type="text" autocomplete="off"
+                                       placeholder="平仓时间范围" readonly/>
+                            </div>-->
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                @if(shiro.hasPermission("/compact/export_bak")){
+                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出</button>
+                                 @}
+                            </div>
+                            <div class="layui-inline">
+                                <label >总开仓手续费：<span style="color: red;" id="fee">${fee}</span></label>
+                            </div>
+                            <div class="layui-inline">
+                                <label >总平仓手续费：<span style="color: red;" id="closeFeePrice">${closeFeePrice}</span></label>
+                            </div>
+                            <div class="layui-inline">
+                                <label >总平仓盈亏额：<span style="color: red;" id="tpl">${tpl}</span></label>
+                            </div>
+                            <div class="layui-inline">
+                                <label >总仓位保证金：<span style="color: red;" id="positionPrice">${positionPrice}</span></label>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="compactTable" lay-filter="compactTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@}

@@ -1,0 +1,95 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/com/region/region_edit.js"]}){
+
+<form id="regionForm" lay-filter="regionForm" class="layui-form model-form">
+    <input name="regionId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">名称<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="name" id="name" placeholder="请输入名称" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <!--<div class="layui-form-item">-->
+    <!--<label class="layui-form-label">父级<span style="color: red;">*</span></label>-->
+    <!--<div class="layui-input-block">-->
+    <!--<input name="parentId" id="parentId" placeholder="请输入父级" type="text" class="layui-input" lay-verify="required" required/>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">父级</label>
+        <div class="layui-input-block">
+            <select name="parentId" id="parentId" lay-filter="tableSchema" lay-verify="required">
+                <option value="-1">中国</option>
+            </select>
+        </div>
+    </div>
+
+
+    <!--<div class="layui-form-item">-->
+    <!--<label class="layui-form-label">缩写<span style="color: red;">*</span></label>-->
+    <!--<div class="layui-input-block">-->
+    <!--<input name="shortName" id="shortName" placeholder="请输入缩写" type="text" class="layui-input" lay-verify="required" required/>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--PROVINCE(1L, "省"), CITY(2L, "市"), AREA(3L, "县");-->
+    <!--<div class="layui-form-item">-->
+    <!--<label class="layui-form-label">层级<span style="color: red;">*</span></label>-->
+    <!--<div class="layui-input-block">-->
+    <!--<input name="levelType" id="levelType" placeholder="请输入层级" type="text" class="layui-input" lay-verify="required" required/>-->
+    <!--</div>-->
+    <!--</div>-->
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">层级</label>
+        <div class="layui-input-block">
+            <select name="levelType" id="levelType"  lay-verify="required">
+                <option value="1">省</option>
+                <option value="2">市</option>
+                <option value="3">县/区</option>
+            </select>
+        </div>
+    </div>
+
+    <!--<div class="layui-form-item">-->
+    <!--<label class="layui-form-label">编码<span style="color: red;">*</span></label>-->
+    <!--<div class="layui-input-block">-->
+    <!--<input name="cityCode" id="cityCode" placeholder="请输入编码" type="text" class="layui-input" lay-verify="required" required/>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="layui-form-item">-->
+    <!--<label class="layui-form-label">邮编<span style="color: red;">*</span></label>-->
+    <!--<div class="layui-input-block">-->
+    <!--<input name="zipCode" id="zipCode" placeholder="请输入邮编" type="text" class="layui-input" lay-verify="required" required/>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="layui-form-item">-->
+    <!--<label class="layui-form-label">合称<span style="color: red;">*</span></label>-->
+    <!--<div class="layui-input-block">-->
+    <!--<input name="mergerName" id="mergerName" placeholder="请输入合称" type="text" class="layui-input" lay-verify="required" required/>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="layui-form-item">-->
+    <!--<label class="layui-form-label">经度<span style="color: red;">*</span></label>-->
+    <!--<div class="layui-input-block">-->
+    <!--<input name="lng" id="lng" placeholder="请输入经度" type="text" class="layui-input" lay-verify="required" required/>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="layui-form-item">-->
+    <!--<label class="layui-form-label">纬度<span style="color: red;">*</span></label>-->
+    <!--<div class="layui-input-block">-->
+    <!--<input name="lat" id="lat" placeholder="请输入纬度" type="text" class="layui-input" lay-verify="required" required/>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="layui-form-item">-->
+    <!--<label class="layui-form-label">拼音<span style="color: red;">*</span></label>-->
+    <!--<div class="layui-input-block">-->
+    <!--<input name="pinyin" id="pinyin" placeholder="请输入拼音" type="text" class="layui-input" lay-verify="required" required/>-->
+    <!--</div>-->
+    <!--</div>-->
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

@@ -1,0 +1,136 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/e/futures/compact_add.js"]}){
+
+<form id="compactForm" lay-filter="compactForm" class="layui-form model-form">
+    <input name="futuresCompactId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">订单号<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="orderNo" id="orderNo" placeholder="请输入订单号" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="memberId" id="memberId" placeholder="请输入用户" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">交易方式<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="dealWay" id="dealWay" placeholder="请输入交易方式" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">交易类型(买入开多、卖出开多)<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="compactType" id="compactType" placeholder="请输入交易类型(买入开多、卖出开多)" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">交易对<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="symbols" id="symbols" placeholder="请输入交易对" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">单价<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="unit" id="unit" placeholder="请输入单价" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">数量<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="numbers" id="numbers" placeholder="请输入数量" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">平仓价<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="exitPrice" id="exitPrice" placeholder="请输入平仓价" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">止损价<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="stopLoss" id="stopLoss" placeholder="请输入止损价" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">止盈价<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="stopProfit" id="stopProfit" placeholder="请输入止盈价" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">盈亏<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="pl" id="pl" placeholder="请输入盈亏" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">平仓类型(手动平仓、止盈平仓、止损平仓、爆仓）<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="exitType" id="exitType" placeholder="请输入平仓类型(手动平仓、止盈平仓、止损平仓、爆仓）" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">平仓时间<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="exitTime" id="exitTime" placeholder="请输入平仓时间" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">开仓价<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="tradePrice" id="tradePrice" placeholder="请输入开仓价" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">杠杆倍率名称<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="leverName" id="leverName" placeholder="请输入杠杆倍率名称" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">杠杆倍率<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="leverRate" id="leverRate" placeholder="请输入杠杆倍率" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">手续费<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="fee" id="fee" placeholder="请输入手续费" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">总额<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="totalPrice" id="totalPrice" placeholder="请输入总额" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">保证金<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="positionPrice" id="positionPrice" placeholder="请输入保证金" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">配资<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="givePrice" id="givePrice" placeholder="请输入配资" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">版本号<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="version" id="version" placeholder="请输入版本号" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

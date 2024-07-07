@@ -1,0 +1,95 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/coin/spot/spot_add.js"]}){
+
+<form id="spotForm" lay-filter="spotForm" class="layui-form model-form">
+    <input name="spotId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">交易对<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="symbol" id="symbol" placeholder="请输入交易对" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-inline" style="padding: 14px 110px 24px;">
+        <button type="button" class="layui-btn" id="test1">上传图标币种 LOGO</button>
+    </div>
+    <div class="layui-inline">
+        <div class="layui-upload-list">
+            <img class="layui-upload-img" name="mainImg" id="demo1" style="width: 40px;height: 40px;" >
+            <p id="demoText"></p>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">币种类型<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <select name="type" id="type" required >
+                <option value="0">代币</option>
+                <option value="1">火币</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">最小提币量<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="minWithdraw" id="minWithdraw" placeholder="请输入最小提币量" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">提币最小区间值<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="minWithdrawValue" id="minWithdrawValue" placeholder="请输入提币最小区间值" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">提币最大区间值<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="maxWithdrawValue" id="maxWithdrawValue" placeholder="请输入提币最大区间值" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">保留小数点位<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="number" id="number" placeholder="请输入保留小数点位" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">提币手续费率(%)<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="withdrawFee" id="withdrawFee" placeholder="请输入提币手续费" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">币币买入手续费比例（%）<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="spotFee" id="spotFee" placeholder="请输入币币交易手续费比例" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">币币卖出USDT手续费比例（%）<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="usdtSpotFee" id="usdtSpotFee" placeholder="请输入币币交易卖出USDT手续费比例" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">币币最小委托量<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="minBuyNumber" placeholder="请输入币币最小委托量" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+<!--    <div class="layui-form-item">-->
+<!--        <label class="layui-form-label">主编号(查看钱包币种编号)<span style="color: red;">*</span></label>-->
+<!--        <div class="layui-input-block">-->
+<!--            <input name="code" id="code" placeholder="请输入主编号" type="text" class="layui-input" autocomplete="off"/>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="layui-form-item">-->
+<!--        <label class="layui-form-label">子编号(查看钱包币种编号)<span style="color: red;">*</span></label>-->
+<!--        <div class="layui-input-block">-->
+<!--            <input name="subCode" id="subCode" placeholder="请输入子编号" type="text" class="layui-input" autocomplete="off"/>-->
+<!--        </div>-->
+<!--    </div>-->
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

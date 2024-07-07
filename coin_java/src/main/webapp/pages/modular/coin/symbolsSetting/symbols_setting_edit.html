@@ -1,0 +1,90 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/coin/symbolsSetting/symbols_setting_edit.js"]}){
+<form id="spotForm" lay-filter="spotForm" class="layui-form model-form">
+    <input name="id" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">交易对<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="symbol" id="symbol" placeholder="请输入交易对" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">交易模式<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <select name="p8LossRatio" id="p8LossRatio" required>
+                <option value="1">永续合约</option>
+                <option value="0">币币交易</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">行情模式<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <select name="p1LossRatio" id="p1LossRatio" required>
+                <option value="1">自由浮动</option>
+                <option value="2">控制涨</option>
+                <option value="3">控制跌</option>
+
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">初始价格<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="fistOpenPrice" id="fistOpenPrice" placeholder="初始价格" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">高<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="p2LossRatio" id="p2LossRatio" placeholder="跌300 控制跌 生效 根据初始价格1000  一直跌 慢慢跌到 300 为止" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">开<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="p3LossRatio" id="p3LossRatio" placeholder="跌300 控制跌 生效 根据初始价格1000  一直跌 慢慢跌到 300 为止" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">低<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="p4LossRatio" id="p4LossRatio" placeholder="跌300 控制跌 生效 根据初始价格1000  一直跌 慢慢跌到 300 为止" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">收<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="p5LossRatio" id="p5LossRatio" placeholder="跌300 控制跌 生效 根据初始价格1000  一直跌 慢慢跌到 300 为止" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">跌<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="minValue" id="minValue" placeholder="跌300 控制跌 生效 根据初始价格1000  一直跌 慢慢跌到 300 为止" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">涨<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="maxValue" id="maxValue" placeholder="涨1500 控制涨 生效 根据初始价格 1000 一直涨，慢慢涨到1500 为止" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">涨跌浮动(%)<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="p6LossRatio" id="p6LossRatio" placeholder="涨跌浮动 控制涨跌速度 数值越大，速度越快1-100" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">自由浮动(%)<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="lossRatio" id="lossRatio" placeholder="自由浮动" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

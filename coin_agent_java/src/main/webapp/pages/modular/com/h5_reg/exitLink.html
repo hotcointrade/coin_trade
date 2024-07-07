@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>FOTcoin</title>
+		<link rel="stylesheet" href="../../../../assets/common/css/weui.css" />
+		<style>
+			.logoBox{
+				width: 100%;
+				margin-top: 40%;
+			}
+			.logo{
+				width: 120px;
+				height: 120px;
+				margin: 0 auto;
+				display: block;
+			}
+			h2{
+				color: #505556;
+				text-align: center;
+				font-size: 24px;
+				font-weight: 400;
+				margin: 30px 0;
+			}
+			.line{
+				width: 250px;
+				border: 0.6px solid #DAE2E3;
+				margin: 0 auto;
+			}
+			.weui-btn{
+				margin-top: 50px;
+				background-color: #4161FF;
+				font-size: 14px;
+				height: 40px;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="logoBox">
+				<img src="${ctxPath}/assets/common/images/fotLogo.png" class="logo"  />
+			</div>
+			<h2>FOTcoin</h2>
+			<p class="line"></p>
+			<button class="weui-btn" type="button" id="download" >Android下载安装</button>
+			<button class="weui-btn" type="button" id="iosLoad">IOS下载安装</button>
+		</div>
+		<input id="url" value="${url}" type="hidden"/>
+		<script>
+			window.onload = function(){
+				document.getElementById('download').addEventListener('click',function(){
+                   	 var url=document.getElementById('url').value;
+					location.href =url+ "/uploads/android.apk"
+				})
+				document.getElementById('iosLoad').addEventListener('click',function(){
+					location.href = "itms-services://?action=download-manifest&url=https://financecrocodile.com/uploads/apk/ios/manifest.plist"
+				})
+			}
+		</script>
+	</body>
+</html>

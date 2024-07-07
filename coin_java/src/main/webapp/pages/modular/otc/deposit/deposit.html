@@ -1,0 +1,86 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/otc/deposit/deposit.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">用户押金</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="condition" class="layui-input" type="text" placeholder="账号"/>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">押金币种</label>
+                                <div class="layui-input-block">
+                                    <select name="coin" id="coin"  lay-verify="required">
+                                        <option value=""></option>
+                                        <option value="USDT">USDT</option>
+<!--                                        <option value="MGE">MGE</option>-->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+
+                                <label class="layui-form-label">押金状态</label>
+                                <div class="layui-input-block">
+                                <select id="status">
+                                    <option value=""></option>
+                                    <option value="1">全额缴纳</option>
+                                    <option value="0">待补缴</option>
+                                </select>
+                                </div>
+                            </div>
+                              <div class="layui-inline">
+
+                                <label class="layui-form-label">审批状态</label>
+                                <div class="layui-input-block">
+                                <select id="remark">
+                                    <option value=""></option>
+                                    <option value="CHECK">审核中</option>
+                                    <option value="PASS">审核通过</option>
+                                    <option value="REJECT">审核不通过</option>
+                                </select>
+                                </div>
+                            </div>
+
+                            <div class="layui-inline">
+                            <input id="timeLimit" class="layui-input" type="text" placeholder="时间范围" readonly/>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索
+                                </button>
+                                @if(shiro.hasPermission("/deposit/export_bak")){
+                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出
+                                </button>
+                                @}
+                            </div>
+                            <div class="layui-inline">
+                                <a id="p0"></a>
+                                <a id="p1"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="depositTable" lay-filter="depositTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("/deposit/check")){
+    {{# if(d.remark==='CHECK'){ }}
+    <a class="layui-btn layui-btn layui-btn-xs" lay-event="checkPass">审核通过</a>
+    {{# } }}
+    {{# if(d.remark==='CHECK'){ }}
+    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="checkFail">审核失败</a>
+    {{# } }}
+    @}
+</script>
+
+@}

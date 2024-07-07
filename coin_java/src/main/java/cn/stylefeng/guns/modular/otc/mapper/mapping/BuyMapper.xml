@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.otc.mapper.BuyMapper">
+
+     <!-- 通用查询映射结果 -->
+   <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.otc.entity.Buy">
+     <id column="buy_id" property="buyId"/>
+     <result column="member_id" property="memberId"/>
+     <result column="account" property="account"/>
+     <result column="nick_name" property="nickName"/>
+     <result column="order_no" property="orderNo"/>
+     <result column="coin" property="coin"/>
+     <result column="unit_price" property="unitPrice"/>
+     <result column="number" property="number"/>
+     <result column="total_price" property="totalPrice"/>
+     <result column="low_number" property="lowNumber"/>
+     <result column="low_price" property="lowPrice"/>
+     <result column="pay_method" property="payMethod"/>
+     <result column="rest_number" property="restNumber"/>
+     <result column="finish_number" property="finishNumber"/>
+     <result column="version" property="version"/>
+     <result column="status" property="status"/>
+     <result column="del" property="del"/>
+     <result column="remark" property="remark"/>
+     <result column="CREATE_TIME" property="createTime"/>
+     <result column="CREATE_USER" property="createUser"/>
+     <result column="UPDATE_TIME" property="updateTime"/>
+     <result column="UPDATE_USER" property="updateUser"/>
+     </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         tb.buy_id as buyId,
+         tb.member_id as memberId,
+         tb.account as account,
+         tb.nick_name as nickName,
+         tb.order_no as orderNo,
+         tb.coin as coin,
+         tb.unit_price as unitPrice,
+         tb.number as number,
+         tb.total_price as totalPrice,
+         tb.low_number as lowNumber,
+         tb.low_price as lowPrice,
+         tb.pay_method as payMethod,
+         concat('\t',tb.rest_number) as restNumber,
+         tb.finish_number as finishNumber,
+         tb.version as version,
+         tb.status as status,
+         tb.del as del,
+         tb.remark as remark,
+         tb.CREATE_TIME as createTime,
+         tb.CREATE_USER as createUser,
+         tb.UPDATE_TIME as updateTime,
+        tb.UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from otc_buy tb
+        inner  join  app_member am on  tb.member_id = am.member_id
+       where tb.del='N' and am.del = 'N'
+        <if test="condition!=null and condition!=''">
+            and tb.member_id=(select member_id from app_member m where m.account=#{condition})
+        </if>
+        <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+            and (tb.CREATE_TIME between CONCAT(#{beginTime},' 00:00:00') and CONCAT(#{endTime},' 23:59:59'))
+        </if>
+        <if test="nickName!=null and nickName!=''">
+            and tb.nick_name=#{nickName}
+        </if>
+        <if test="orderNo!=null and orderNo!=''">
+            and tb.order_no=#{orderNo}
+        </if>
+        <if test="coin!=null and coin!=''">
+            and tb.coin=#{coin}
+        </if>
+        <if test="status!=null and status!=''">
+            and tb.status=#{status}
+        </if>
+        <if test="payMethod!=null and payMethod!=''">
+            and tb.pay_method=#{payMethod}
+        </if>
+        <if test="memberId != null and memberId != ''">
+             and (am.member_id = #{memberId}  or am.parent_referee_id like concat('%',#{recommendIds}))
+        </if>
+        order by tb.create_time desc
+    </select>
+
+
+
+</mapper>

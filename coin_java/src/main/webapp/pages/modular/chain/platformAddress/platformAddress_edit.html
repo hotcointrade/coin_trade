@@ -1,0 +1,28 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/chain/platformAddress/platformAddress_edit.js"]}){
+<form id="platformAddressForm" lay-filter="platformAddressForm" class="layui-form model-form">
+    <input name="platformAddressId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">地址<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="address" id="address" placeholder="请输入地址" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">币种<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="type" id="type" placeholder="请输入币种" type="text" class="layui-input" readonly/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 179px">Memo<span style="color: red;">(类型为EOS需要填写)</span></label>
+        <div class="layui-input-block" >
+            <input name="remark" id="remark" placeholder="Memo值" type="text" class="layui-input" style="width: 85%"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

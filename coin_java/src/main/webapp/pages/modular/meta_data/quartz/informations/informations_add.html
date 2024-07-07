@@ -1,0 +1,46 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/meta_data/quartz/informations/informations_add.js"]}){
+<form id="informationsForm" lay-filter="informationsForm" class="layui-form model-form">
+    <input name="id" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">任务编号<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="taskno" placeholder="请输入任务编号" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">任务名称<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="taskname" placeholder="请输入任务名称" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">定时配置cron<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input id="schedulerrule" name="schedulerrule" placeholder="定时配置cron" type="text" class="layui-input" lay-verify="required" required autocomplete="off"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">发送方式<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input id="sendtype" name="sendtype" placeholder="例如：http" type="text" class="layui-input" lay-verify="required" required autocomplete="off"/>
+
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">URL<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input id="url" name="url" placeholder="接口请求地址(开放接口：/quartz/**)" type="text" class="layui-input" lay-verify="required" required autocomplete="off"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">执行参数[JSON]</label>
+        <div class="layui-input-block">
+            <input id="executeparamter" name="executeparamter" placeholder="" type="text" class="layui-input"  autocomplete="off"/>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

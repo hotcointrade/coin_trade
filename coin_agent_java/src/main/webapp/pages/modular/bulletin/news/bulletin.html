@@ -1,0 +1,45 @@
+@layout("/common/_container.html",{js:["/assets/modular/bulletin/news/bulletin.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">公告管理</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <!--<input id="title" class="layui-input" type="text" placeholder="标题"/>-->
+                            </div>
+                            <div class="layui-inline">
+                                <!--<button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>-->
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加公告</button>
+                                <!--<button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出</button>-->
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="newsTable" lay-filter="newsTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="statusTpl">
+    <input type="checkbox" lay-filter="status" value="{{d.carouselId}}" lay-skin="switch" lay-text="是|否" {{d.status=='Y'?'checked':''}} />
+</script>
+
+<script type="text/html" id="tableBar">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">内容</a>
+
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
+    @if(shiro.hasPermission("/article/edit")){
+    @}
+    @if(shiro.hasPermission("/news/delete")){
+     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    @}
+</script>
+@}

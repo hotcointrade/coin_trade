@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.coin.mapper.ContractOptionOrderMapper">
+
+     <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.coin.entity.ContractOptionOrder">
+        <id     column="id" property="id"/>
+        <result column="option_id" property="optionId"/>
+        <result column="option_no" property="optionNo"/>
+        <result column="member_id" property="memberId"/>
+        <result column="symbol" property="symbol"/>
+        <result column="coin_symbol" property="coinSymbol"/>
+        <result column="base_symbol" property="baseSymbol"/>
+        <result column="direction" property="direction"/>
+        <result column="result" property="result"/>
+        <result column="fee" property="fee"/>
+        <result column="win_fee" property="winFee"/>
+        <result column="bet_amount" property="betAmount"/>
+        <result column="reward_amount" property="rewardAmount"/>
+
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="UPDATE_USER" property="updateUser"/>
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        tb.id 				as id,
+        tb.option_id 		as optionId,
+        tb.option_no 		as optionNo,
+        tb.member_id 		as memberId,
+        tb.symbol 			as symbol,
+        tb.coin_symbol		as coinSymbol,
+        tb.base_symbol		as baseSymbol,
+        tb.direction		as direction,
+        tb.result			as result,
+        tb.fee				as fee,
+        tb.win_fee			as winFee,
+        tb.bet_amount		as betAmount,
+        tb.reward_amount	as rewardAmount,
+         tb.CREATE_TIME as createTime,
+         tb.CREATE_USER as createUser,
+         tb.UPDATE_TIME as updateTime,
+        tb.UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+    select
+    <include refid="Base_Column_List"/>
+    from contract_option_order tb
+    <where>
+        <if test="symbol!=null and symbol!=''">
+            and symbol =#{symbol}
+        </if>
+
+        <if test="memberId!=null">
+            and member_id =#{memberId}
+        </if>
+        <if test="betAmount!=null ">
+            and bet_Amount &gt;=#{betAmount}
+        </if>
+        <if test="rewardAmount!=null">
+            and reward_Amount =#{rewardAmount}
+        </if>
+
+    </where>
+
+    order by tb.create_time asc
+</select>
+
+
+    <select id="selectByCondition2" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from contract_option_order tb inner  join  app_member am on  tb.member_id = am.member_id
+        <where>
+            <if test="symbol!=null and symbol!=''">
+                and tb.symbol =#{symbol}
+            </if>
+
+            <if test="memberId != null and memberId != ''">
+                and (am.member_id = #{memberId}  or am.parent_referee_id like concat('%',#{recommendIds},'%'))
+            </if>
+            <if test="betAmount!=null ">
+                and tb.bet_Amount &gt;=#{betAmount}
+            </if>
+            <if test="rewardAmount!=null">
+                and tb.reward_Amount =#{rewardAmount}
+            </if>
+
+        </where>
+
+        order by tb.create_time asc
+    </select>
+
+</mapper>

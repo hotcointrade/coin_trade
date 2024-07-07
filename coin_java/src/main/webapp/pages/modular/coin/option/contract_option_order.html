@@ -1,0 +1,64 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/coin/option/contract_option_order.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">订单管理</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="symbol" class="layui-input" type="text" placeholder="币种"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="account" class="layui-input" type="text" placeholder="用户"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="betAmount" class="layui-input" type="text" placeholder="投注额"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="rewardAmount" class="layui-input" type="text" placeholder="获奖额"/>
+                            </div>
+
+
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="spotTable" lay-filter="spotTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="statusTpl">
+    <input type="checkbox" lay-filter="status" value="{{d.spotId}}" lay-skin="switch" lay-text="启用|禁用" {{d.status=='Y'?'checked':''}} />
+</script>
+<script type="text/html" id="tableBar">
+    {{d.result=='0'?
+    ''
+    :
+        d.result!='2'?'':
+            d.back!=1?
+            '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="back">一键赔付</a>' :'<a class="layui-btn layui-btn-primary layui-btn-xs">已赔付</a>'
+    }}
+    <!--<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">{{d.status=='0'?'待结算':d.status=='0'?'待结算':'已赔付'}}</a>-->
+
+    <!---->
+    <!--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>-->
+    <!---->
+
+    {{d.result=='0'?
+    '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="optionCtrlY">结算赢</a>
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="optionCtrlN">结算输</a>'
+    :''
+    }}
+
+</script>
+
+@}

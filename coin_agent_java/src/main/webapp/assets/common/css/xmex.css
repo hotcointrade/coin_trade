@@ -1,0 +1,197 @@
+body,html{
+	font-size: 12px;
+	max-width: 768px;
+	margin: 0 auto;
+	color: #8E8E8E;
+	background: #2C2C3A;
+}
+.weui-toast{
+	background-color: #95959C;
+}
+.weui-toast_content{
+	font-size: 14px;
+}
+.LoginName{
+	padding: 52px 0 52px 0;
+	width: 100%;
+}
+.LoginName img{
+	width: 75px;
+	height: 75px;
+	margin: 0 auto;
+	display: block;
+	border-radius: 50%;
+}
+.weui-tab{
+	justify-content: flex-start;
+	flex-direction: column;
+	display: block;
+}
+.weui-navbar{
+	background-color: transparent;
+	flex-direction: row;
+	align-self: center;
+	justify-content: flex-start;
+}
+.weui-navbar__item {
+	width: auto;
+	height: 45px;
+	line-height: 45px;
+	padding: 0;
+	text-align: left;
+	display: inline-block;
+	-webkit-flex:initial
+}
+.weui-navbar__item:nth-child(1){
+	margin-right: 20px;
+}
+.weui-navbar__item.weui-bar__item--on{
+	background-color: transparent;
+	font-weight: 600;
+	font-size: 24px;
+	color: #FFFFFF;
+}
+.weui-navbar + .weui-tab__bd{
+	padding-top: 30px;
+}
+.weui-cells{
+	background: transparent;
+}
+.weui-cells:before,.weui-cells:after{
+	border: none;
+}
+.weui-cells_form{
+	padding: 0 43px;
+}
+.weui-cell{
+	padding: 0px;
+	height: 45px;
+	line-height: 45px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #3B3B3B;
+}
+.weui-cell:before{
+	left: 0;
+	border: none;
+}
+.weui-label{
+	font-size: 16px;
+	color: #333333;
+	width: 66px;
+}
+.weui-input{
+	color: #FFFFFF;
+}
+.weui-input::-webkit-input-placeholder{
+	font-size: 14px;
+	color: #999999;
+}
+.weui-input::-moz-placeholder {
+	font-size: 14px;
+	color: #999999;
+}
+.weui-input:-ms-input-placeholder{
+	font-size: 14px;
+	color: #999999;
+}
+.weui-cell__hd{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.addTxt{
+	color: #FFFFFF;
+	margin-right: 6px;
+}
+#getBtn{
+	outline: none;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	color: #87D8EA;
+}
+.weui-cell__ft{
+	height: 45px;
+	line-height: 55px;
+}
+.registerB{
+	font-size: 12px;
+	color: #FFFFFF;
+	padding: 0px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.registerB a{
+	color: #87D8EA;
+	cursor: pointer;
+}
+.mybgBtn{
+	width: 100%;
+	height: 45px;
+	background:#87D8EA;
+	outline: none;
+	cursor: pointer;
+	margin-top: 86px;
+	font-weight: inherit;
+}
+/*自定样式*/
+#checklist{
+	margin-right: 6px;
+}
+/*协议内容*/
+.title{
+	height: 45px;
+	line-height: 45px;
+	text-align: center;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 99;
+	border-bottom: 1px solid #3B3B3B;
+	color: #FFFFFF;
+	background-color: #2C2C3A;
+}
+.title h3{
+	margin: 0;
+}
+.content{
+	padding: 0 1.3rem;
+	text-indent: 2rem;
+	line-height: 30px;
+	color: #333333;
+	position: relative;
+	top: 50px;
+	word-wrap:break-word;
+	overflow: hidden;
+	color: #FFFFFF;
+}
+.title a{
+	position: absolute;
+	left: 0px;
+	top: 2px;
+	cursor: pointer;
+	width: 60px;
+	height: 45px;
+}
+.languageDiv{
+	position: absolute;
+	top: 3%;
+	right: 6%;
+}
+.languageDiv img{
+	width: 14px;
+	height: 14px;
+}
+.languageDiv .weui-btn_mini {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 4px 6px;
+	background-color: transparent;
+	border: 1px solid #CCCCCC;
+}
+.languageDiv .weui-btn_mini span{
+	font-size: 12px;
+	margin-left: 6px;
+}

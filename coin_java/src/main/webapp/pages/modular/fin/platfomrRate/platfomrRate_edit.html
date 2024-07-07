@@ -1,0 +1,39 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/fin/platfomrRate/platfomrRate_edit.js"]}){
+<form id="platfomrRateForm" lay-filter="platfomrRateForm" class="layui-form model-form">
+    <input name="platformRateId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">名称<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="rateName" id="rateName" placeholder="请输入名称" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">语言代码<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="rateCode" id="rateCode" placeholder="请输入语言代码" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">汇率<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="number" id="number" placeholder="请输入汇率" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">符号<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="sign" id="sign" placeholder="请输入符号" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">排序<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="sort" id="sort" placeholder="请输入排序" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

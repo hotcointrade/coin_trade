@@ -1,0 +1,47 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/promotion/declares/declares.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">用户协议</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <!--<div class="layui-inline">-->
+                                <!--<input id="condition" class="layui-input" type="text" placeholder="名称"/>-->
+                            <!--</div>-->
+                            <div class="layui-inline">
+                                <!--<button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>-->
+                                 @if(shiro.hasPermission("/declares/add")){
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添 加</button>
+                                @}
+                                @if(shiro.hasPermission("/declares/export_bak")){
+                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导 出</button>
+                                 @}
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="declaresTable" lay-filter="declaresTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="tableBarDetail">
+    <a class="layui-btn layui-btn layui-btn-xs layui-icon layui-icon-water" lay-event="contentDetail"> 查看内容</a>
+</script>
+<script type="text/html" id="tableBar">
+
+    @if(shiro.hasPermission("/declares/edit")){
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修 改</a>
+    @}
+    @if(shiro.hasPermission("/declares/delete_bak")){
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删 除</a>
+    @}
+</script>
+
+@}

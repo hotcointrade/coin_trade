@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.system.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.system.entity.User">
+        <id column="USER_ID" property="userId"/>
+        <result column="AVATAR" property="avatar"/>
+        <result column="ACCOUNT" property="account"/>
+        <result column="PASSWORD" property="password"/>
+        <result column="SALT" property="salt"/>
+        <result column="NAME" property="name"/>
+        <result column="BIRTHDAY" property="birthday"/>
+        <result column="SEX" property="sex"/>
+        <result column="EMAIL" property="email"/>
+        <result column="PHONE" property="phone"/>
+        <result column="ROLE_ID" property="roleId"/>
+        <result column="DEPT_ID" property="deptId"/>
+        <result column="STATUS" property="status"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="UPDATE_USER" property="updateUser"/>
+        <result column="VERSION" property="version"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        su.USER_ID AS userId, su.AVATAR AS avatar, su.ACCOUNT AS account,
+        su.NAME AS name, su.BIRTHDAY AS birthday, su.SEX AS sex, su.EMAIL AS email, su.PHONE AS phone,
+         su.ROLE_ID AS roleId, su.DEPT_ID AS deptId, su.STATUS AS status, su.CREATE_TIME AS createTime, su.CREATE_USER AS createUser,
+          su.UPDATE_TIME AS updateTime, su.UPDATE_USER AS updateUser, su.VERSION AS version
+    </sql>
+
+    <sql id="Base_Column_List_With_Pwd">
+		 su.USER_ID AS userId,
+		 su.AVATAR AS avatar,
+		 su.ACCOUNT AS account,
+		 su.PASSWORD AS password,
+        su.SALT AS salt, su.NAME AS name,
+        su.BIRTHDAY AS birthday,
+        su.SEX AS sex, su.EMAIL AS email,
+        su.PHONE AS phone,
+         su.ROLE_ID AS roleId,
+         su.DEPT_ID AS deptId, su.STATUS AS status, su.CREATE_TIME AS createTime, su.CREATE_USER AS createUser,
+          su.UPDATE_TIME AS updateTime, su.UPDATE_USER AS updateUser, su.VERSION AS version
+	</sql>
+
+    <select id="selectUsers" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user su
+        left  join  app_member am on am.member_id = su.member_id
+        where su.STATUS != 'DELETED'
+        <if test="name != null and name != ''">
+            and (su.PHONE like CONCAT('%',#{name},'%')
+            or su.ACCOUNT like CONCAT('%',#{name},'%')
+            or su.NAME like CONCAT('%',#{name},'%'))
+        </if>
+        <if test="deptId != null and deptId != 0">
+            and (su.DEPT_ID = #{deptId} or DEPT_ID in ( select DEPT_ID from sys_dept where PIDS like CONCAT('%[', #{deptId}, ']%') ))
+        </if>
+        <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+            and (su.CREATE_TIME between CONCAT(#{beginTime},' 00:00:00') and CONCAT(#{endTime},' 23:59:59'))
+        </if>
+         <if test="memberId != null and memberId !=''">
+            and  am.parent_referee_id like concat('%',#{recommendIds})
+        </if>
+    </select>
+
+    <update id="setStatus">
+		update sys_user set STATUS = #{status} where USER_ID = #{userId}
+	</update>
+
+    <update id="changePwd">
+		update sys_user set PASSWORD = #{pwd} where USER_ID = #{userId}
+	</update>
+
+    <update id="setRoles">
+		update sys_user set ROLE_ID = #{roleIds} where USER_ID =
+		#{userId}
+	</update>
+
+    <select id="getByAccount" resultType="cn.stylefeng.guns.modular.system.entity.User">
+        select
+        <include refid="Base_Column_List_With_Pwd"/>
+        from sys_user su where su.ACCOUNT = #{account} and su.STATUS != 'DELETED'
+    </select>
+
+</mapper>

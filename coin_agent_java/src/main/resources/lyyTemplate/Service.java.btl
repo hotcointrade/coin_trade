@@ -1,0 +1,41 @@
+package ${service.packageName};
+
+<% for(import in service.serviceImplImports!){ %>
+import ${import};
+<% } %>
+import cn.stylefeng.guns.modular.${context.tableNamePrefix}.entity.${context.bizEnBigName};
+import cn.stylefeng.guns.modular.${context.tableNamePrefix}.mapper.${context.bizEnBigName}Mapper;
+/**
+ * ${context.bizChName}Service
+ *
+ * @author yaying.liu
+ * @since ${tool.currentTime()}
+ */
+@Service
+public  class ${context.bizEnBigName}Service extends ServiceImpl<${context.bizEnBigName}Mapper,${context.bizEnBigName}>{
+
+    /**
+    * 查询${context.bizChName}
+    */
+    public Page<Map<String,Object>> selectByCondition(String condition, String beginTime, String endTime) {
+        Page page = LayuiPageFactory.defaultPage();
+        return this.baseMapper.selectByCondition(page,condition,beginTime,endTime);
+    }
+
+    /**
+    * 删除${context.bizChName}
+    */
+    public void delete${context.bizEnBigName}(Long ${context.bizEnName}Id) {
+        ${context.bizEnBigName} entity=this.baseMapper.selectById(${context.bizEnName}Id);
+        //将删除标志设置为Y，表示删除
+        entity.setDel("Y");
+        this.baseMapper.updateById(entity);
+    }
+
+    /**
+    * 添加${context.bizChName}
+    */
+    public void add${context.bizEnBigName}(${context.bizEnBigName} ${context.bizEnName}) {
+        this.baseMapper.insert(${context.bizEnName});
+    }
+}

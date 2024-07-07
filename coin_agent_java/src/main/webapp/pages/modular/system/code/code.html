@@ -1,0 +1,73 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/system/code/code.js"]}){
+<form id="deptForm" lay-filter="deptForm" class="layui-form model-form">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>代码生成</legend>
+    </fieldset>
+    <div class="layui-form-item">
+        <label class="layui-form-label">模块英文名称(使用表前缀)</label>
+        <div class="layui-input-block">
+            <input type="text"  name="moduleName" id="moduleName" lay-verify="title"  autocomplete="off" placeholder="模块英文名称" class="layui-input"><span class="help-block m-b-none">例如:system</span>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">业务名称</label>
+        <div class="layui-input-block">
+            <input type="text"  name="bizChName" id="bizChName" lay-verify="title" autocomplete="off" placeholder="业务名称" class="layui-input"><span class="help-block m-b-none">例如:测试</span>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">业务英文名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="bizEnName" id="bizEnName" lay-verify="title" autocomplete="off" placeholder="业务英文名称"
+                   class="layui-input"><span class="help-block m-b-none">例如:test</span>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">所属菜单<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <select name="topMenuName" id="OpSelect" lay-verify="required">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">排序</label>
+        <div class="layui-input-block">
+            <input type="text" name="sort" id="sort" lay-verify="title" autocomplete="off" placeholder="排序"
+                   class="layui-input"><span class="help-block m-b-none">例如:1500</span>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">数据源</label>
+        <div class="layui-input-block">
+            <select name="tableSchema" id="tableSchema" lay-filter="tableSchema" lay-verify="required">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">映射表名称</label>
+        <div class="layui-input-block">
+            <select name="bizTableName" id="bizTableName"  lay-verify="required">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">输出路径</label>
+        <div class="layui-input-block">
+            <input type="text" name="path" id="path" lay-verify="title" autocomplete="off" placeholder="输出路径"
+                   class="layui-input"><span class="help-block m-b-none">默认路径为D:\ideaSpace\lyy,可修改为您的项目的路径</span>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>代码生成</button>
+    </div>
+</form>
+@}
+

@@ -1,0 +1,120 @@
+body,html{
+	margin: 0;
+	padding: 0;
+	height: 100% !important;
+	font-size: 16px;
+	font-family: "微软雅黑";
+	color: #333333;
+	background-color: #F8F8F8;
+}
+input,button{
+	outline: none !important;
+}
+input::-webkit-input-placeholder {
+    color:#C8C8C8;
+}
+input:-moz-placeholder {
+   color:#C8C8C8;
+}
+input::-moz-placeholder {
+   color:#C8C8C8;
+}
+input:-ms-input-placeholder {
+   color:#C8C8C8;
+}
+.weui-cells{
+	margin: 0 1rem;
+	padding: 0 1rem;
+	border-radius: 0.9rem;
+	position: relative;
+	top: 10%;
+	background-color: transparent;
+}
+.weui-cells:before,.weui-cells:after{
+	border: none;
+}
+.weui-cells .weui-cell{
+	border-bottom: 1px solid #E6E6E6;
+	margin: 0;
+	padding: 0;
+	margin-bottom: 20px;
+	height: 45px;
+}
+.weui-cells .weui-cell:nth-last-child(2){
+	margin-bottom: 0px;
+}
+.weui-cells .weui-cell>.weui-input{
+	border: none;
+}
+.weui-cell:before{
+	border: none !important;
+}
+.formInput{
+	margin: 5rem 0 3rem 0;
+}
+.addTxt{
+	color: #333333;
+}
+.registerB{
+	color: #999999;
+	font-size: 12px;
+	margin-top: 0.6rem;
+}
+.registerB>a{
+	color: #4C80FF;
+}
+.mybgBtn{
+	width: 90%;
+	background-color: #4161FF;
+	margin: 0.83rem auto;
+	letter-spacing: 2px;
+	border-radius: 6px;
+	margin-bottom: 2rem;
+	height: 45px;
+}
+.trantImg{
+	margin:0 8px;
+}
+.weui-cell__ft>input{
+	height: 100%;
+	display: inline-block;
+	width: 100%;
+	padding: 0 2px;
+	font-size: 12px;
+	background-color: transparent !important;
+	border: none;
+	color: #ED6D58;
+}
+@media (max-width: 320px) { 
+	.weui-cells{
+		top: 4%;
+	}
+}
+#showPicker{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+}
+.languageDiv{
+	position: absolute;
+	top: 3%;
+	right: 6%;
+}
+.languageDiv select{
+	/*background-color: transparent;
+    border: none;
+    color: #fff;*/
+}
+.weui-input::-webkit-input-placeholder{
+	font-size: 14px;
+	color: #999999;
+}
+.weui-input::-moz-placeholder {
+	font-size: 14px;
+	color: #999999;
+}
+.weui-input:-ms-input-placeholder{
+	font-size: 14px;
+	color: #999999;
+}

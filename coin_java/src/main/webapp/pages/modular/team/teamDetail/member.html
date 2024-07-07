@@ -1,0 +1,81 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/team/teamDetail/member.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">用户信息</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12 layui-col-md9 layui-col-lg10" style="width: 40%">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="condition2" class="layui-input" type="text" placeholder="手机号/邮箱/邀请码"/>
+                            </div>
+
+                            <div class="layui-inline">
+                                <select name="tableSchema" id="tableSchema" lay-filter="tableSchema" lay-verify="required">
+                                    <option value="">清空</option>
+                                    <option value="1">一级</option>
+                                    <option value="2">二级</option>
+                                    <option value="3">三级</option>
+                                    <option value="4">四级</option>
+                                    <option value="5">五级</option>
+                                    <option value="6">六级</option>
+                                    <option value="7">七级</option>
+                                    <option value="8">八级</option>
+                                    <option value="9">九级</option>
+                                    <option value="10">十级</option>
+                                </select>
+                            </div>
+
+                            <div class="layui-inline">
+                                <button id="btnSearch2" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                            </div>
+                            <div class="layui-inline">
+                                <div> 双击查看用户下级帐号</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <table class="layui-table" id="teamDetailTable2" lay-filter="teamDetailTable2"></table>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-xs12 layui-col-md9 layui-col-lg10" style="width: 60%">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="condition" class="layui-input" type="text" placeholder="手机号/邮箱/邀请码"/>
+                            </div>
+
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                            </div>
+                            <div class="layui-inline">
+                                <div id="account"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="teamDetailTable" lay-filter="teamDetailTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/html" id="statusTpl1">
+    <input type="checkbox" lay-filter="status" value="{{d.memberId}}" lay-skin="switch" lay-text="启用|禁用" {{d.status=='Y'?'checked':''}} />
+</script>
+
+<script type="text/html" id="statusTpl2">
+    <input type="checkbox" lay-filter="status" value="{{d.memberId}}" lay-skin="switch" lay-text="启用|禁用" {{d.status=='Y'?'checked':''}} />
+</script>
+
+
+@}

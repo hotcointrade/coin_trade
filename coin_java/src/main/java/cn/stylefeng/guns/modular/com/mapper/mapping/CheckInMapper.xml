@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.com.mapper.CheckInMapper">
+
+     <!-- 通用查询映射结果 -->
+   <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.com.entity.CheckIn">
+     <id column="check_in_id" property="checkInId"/>
+     <result column="member_id" property="memberId"/>
+       <result column="status" property="status"/>
+       <result column="coin" property="coin"/>
+       <result column="num" property="num"/>
+       <result column="price" property="price"/>
+     <result column="del" property="del"/>
+     <result column="remark" property="remark"/>
+     <result column="CREATE_TIME" property="createTime"/>
+     <result column="CREATE_USER" property="createUser"/>
+     <result column="UPDATE_TIME" property="updateTime"/>
+     <result column="UPDATE_USER" property="updateUser"/>
+     </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         check_in_id as checkInId,
+         member_id as memberId,
+         status as status,
+         coin,price,num,
+         del as del,
+         remark as remark,
+         CREATE_TIME as createTime,
+         CREATE_USER as createUser,
+         UPDATE_TIME as updateTime,
+        UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from com_check_in tb where del='N'
+        <if test="condition!=null and condition!=''">
+          and name like concat('%',#{condition},'%')
+        </if>
+        order by tb.create_time desc
+    </select>
+    <select id="getCheckListByMemberId" resultType="cn.stylefeng.guns.modular.com.entity.CheckIn">
+        <!--一个月内-->
+        <!--select-->
+        <!--<include refid="Base_Column_List"/>-->
+        <!--from com_check_in tb where del='N'-->
+        <!--and tb.member_id=#{memberId}-->
+        <!--and DATE_FORMAT( tb.CREATE_TIME, '%Y%m' ) = DATE_FORMAT(CURDATE() , '%Y%m' )-->
+        <!--order by tb.create_time asc-->
+<!--一周内-->
+        select
+        <include refid="Base_Column_List"/>, DATE(tb.create_time) AS dateDDD
+        from com_check_in tb where del='N'
+        and tb.member_id=#{memberId} and date_sub(curdate(), interval 7 day) &lt;= date(tb.create_time)
+        GROUP BY dateDDD
+        ORDER BY dateDDD desc
+
+
+
+    </select>
+
+    <select id="getCountByMemberId" resultType="int">
+        select
+        count(1)
+        from com_check_in tb where del='N'
+        and tb.member_id=#{memberId}
+    </select>
+
+    <select id="isTodayCheck" resultType="int">
+        select
+        count(1)
+        from com_check_in tb where del='N'
+        and tb.member_id=#{memberId}
+        and to_days( tb.CREATE_TIME) = to_days(now())
+    </select>
+
+</mapper>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.coin.mapper.SymbolsSettingMapper">
+
+     <!-- 通用查询映射结果 -->
+   <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.coin.entity.SymbolsSetting">
+     <id column="id" property="id"/>
+     <result column="symbol" property="symbol"/>
+     <result column="min_value" property="minValue"/>
+     <result column="max_value" property="maxValue"/>
+       <result column="day" property="day"/>
+       <result column="loss_ratio" property="lossRatio"/>
+       <result column="p1_loss_ratio" property="p1LossRatio"/>
+       <result column="p2_loss_ratio" property="p2LossRatio"/>
+       <result column="p3_loss_ratio" property="p3LossRatio"/>
+       <result column="p4_loss_ratio" property="p4LossRatio"/>
+       <result column="p5_loss_ratio" property="p5LossRatio"/>
+       <result column="p6_loss_ratio" property="p6LossRatio"/>
+       <result column="p7_loss_ratio" property="p7LossRatio"/>
+       <result column="p8_loss_ratio" property="p8LossRatio"/>
+       <result column="fist_open_price" property="fistOpenPrice"/>
+     <result column="CREATE_TIME" property="createTime"/>
+     <result column="CREATE_USER" property="createUser"/>
+     <result column="UPDATE_TIME" property="updateTime"/>
+     <result column="UPDATE_USER" property="updateUser"/>
+     </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         id as id,
+         symbol as symbol,
+         min_value as `minValue`,
+         max_value as `maxValue`,
+         day as `day`,
+         loss_ratio lossRatio,
+         p1_loss_ratio as p1LossRatio,
+         p2_loss_ratio as p2LossRatio,
+         p3_loss_ratio as p3LossRatio,
+         p4_loss_ratio as p4LossRatio,
+         p5_loss_ratio as p5LossRatio,
+         p6_loss_ratio as p6LossRatio,
+         p7_loss_ratio as p7LossRatio,
+         p8_loss_ratio as p8LossRatio,
+         fist_open_price as fistOpenPrice,
+         CREATE_TIME as createTime,
+         CREATE_USER as createUser,
+         UPDATE_TIME as updateTime,
+        UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from coin_symbols_setting tb
+        <where>
+            <if test="condition!=null and condition!=''">
+                and tb.symbol like concat('%',#{condition},'%')
+            </if>
+            <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+                and (tb.CREATE_TIME between CONCAT(#{beginTime},' 00:00:00') and CONCAT(#{endTime},' 23:59:59'))
+            </if>
+        </where>
+        order by tb.CREATE_TIME asc
+    </select>
+
+</mapper>

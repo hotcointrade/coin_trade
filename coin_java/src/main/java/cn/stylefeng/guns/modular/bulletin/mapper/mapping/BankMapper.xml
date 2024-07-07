@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.bulletin.mapper.BankMapper">
+  <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.bulletin.entity.Bank">
+    <id column="bank_id" jdbcType="BIGINT" property="bankId" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="short_name" jdbcType="VARCHAR" property="shortName" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="del" jdbcType="VARCHAR" property="del" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CREATE_USER" jdbcType="BIGINT" property="createUser" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="UPDATE_USER" jdbcType="BIGINT" property="updateUser" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    bank_id bankId, code, name, short_name shortName, status, del, remark, CREATE_TIME createTime, CREATE_USER createUser, UPDATE_TIME updateTime,
+    UPDATE_USER updateUser
+  </sql>
+  <select id="selectByCondition" resultType="map">
+    select
+    <include refid="Base_Column_List"/>
+    from com_bank where del='N'
+    <if test="condition!=null and condition!=''">
+      and name like concat('%',#{condition},'%')
+    </if>
+  </select>
+</mapper>

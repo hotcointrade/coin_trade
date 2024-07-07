@@ -1,0 +1,130 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/coin/gold/contractGold_add.js"]}){
+<form id="contractGoldForm" lay-filter="contractGoldForm" class="layui-form model-form">
+    <input name="id" type="hidden"/>
+
+		<div class="layui-form-item">
+        <label class="layui-form-label">合约序号（如第1期，第2期，第3期 中的 1，2，3）<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="goldNo" placeholder="请输入合约序号（如第1期，第2期，第3期 中的 1，2，3）" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">交易币种名称，格式：BTC/USDT<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="symbol" placeholder="请输入交易币种名称，格式：BTC/USDT" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">开盘价格<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="openPrice" placeholder="请输入开盘价格" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">开盘时间<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="openTime" placeholder="请输入开盘时间" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">收盘价格<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="closePrice" placeholder="请输入收盘价格" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">收盘时间<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="closeTime" placeholder="请输入收盘时间" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">买涨奖池总金额<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="totalBuy" placeholder="请输入买涨奖池总金额" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">初始化买金额<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="initBuy" placeholder="请输入初始化买金额" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">买涨人数<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="totalBuyCount" placeholder="请输入买涨人数" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">买跌奖池总金额<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="totalSell" placeholder="请输入买跌奖池总金额" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">初始化卖金额<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="initSell" placeholder="请输入初始化卖金额" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">买跌人数<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="totalSellCount" placeholder="请输入买跌人数" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">0投注中 1开奖中  2开奖结束 3撤销<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="status" placeholder="请输入0投注中 1开奖中  2开奖结束 3撤销" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">0待开奖 1涨  2跌  3平 4撤销<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="result" placeholder="请输入0待开奖 1涨  2跌  3平 4撤销" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">平台盈利平台盈利（如平局、手续费等）<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="totalPl" placeholder="请输入平台盈利平台盈利（如平局、手续费等）" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">预设收盘价格<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="presetPrice" placeholder="请输入预设收盘价格" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">创建时间<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="createTime" placeholder="请输入创建时间" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">创建人<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="createUser" placeholder="请输入创建人" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">更新时间<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="updateTime" placeholder="请输入更新时间" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">更新人<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="updateUser" placeholder="请输入更新人" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+	    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

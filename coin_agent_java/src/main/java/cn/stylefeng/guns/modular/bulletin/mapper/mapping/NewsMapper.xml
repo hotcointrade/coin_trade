@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.bulletin.mapper.NewsMapper">
+  <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.bulletin.entity.News">
+    <id column="carousel_id" jdbcType="BIGINT" property="carouselId" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="link" jdbcType="VARCHAR" property="link" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="language" jdbcType="VARCHAR" property="language" />
+    <result column="sort" jdbcType="BIGINT" property="sort" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="del" jdbcType="VARCHAR" property="del" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CREATE_USER" jdbcType="BIGINT" property="createUser" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="UPDATE_USER" jdbcType="BIGINT" property="updateUser" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    carousel_id carouselId, img, link,language,title, sort, status, del, remark,content, CREATE_TIME createTime, CREATE_USER createUser, UPDATE_TIME updateTime,
+    UPDATE_USER updateUser
+  </sql>
+  <select id="selectByCondition" resultType="map">
+    select
+    <include refid="Base_Column_List"/>
+    from com_news where del='N'
+    order by CREATE_TIME desc
+  </select>
+</mapper>

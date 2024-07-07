@@ -1,0 +1,43 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/system/robot/robot_config_edit.js"]}){
+<form id="configForm" lay-filter="configForm" class="layui-form model-form">
+    <input name="robotId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">机器人账号<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="robotAccount" placeholder="机器人账号" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">交易对<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input id="symbol" name="symbol" placeholder="交易对" type="text" class="layui-input" lay-verify="required" required autocomplete="off"/>
+
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">最大值<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input id="maxValuee" name="maxValuee" placeholder="最大值" type="text" class="layui-input" lay-verify="required" required autocomplete="off"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">撮合对象<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input id="account" name="account" placeholder="撮合对象" type="text" class="layui-input" lay-verify="required" required autocomplete="off"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">撮合模式<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <select name="tradeMode" lay-verType="tips" lay-verify="required" required>
+                <option value="0">永续合约</option>
+                <option value="1">币币交易</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.coin.mapper.ContractOptionOrderMapper">
+
+     <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.coin.entity.ContractOptionOrder">
+        <id     column="id" property="id"/>
+        <result column="option_id" property="optionId"/>
+        <result column="option_no" property="optionNo"/>
+        <result column="member_id" property="memberId"/>
+        <result column="symbol" property="symbol"/>
+        <result column="coin_symbol" property="coinSymbol"/>
+        <result column="base_symbol" property="baseSymbol"/>
+        <result column="direction" property="direction"/>
+        <result column="result" property="result"/>
+        <result column="back" property="back"/>
+        <result column="fee" property="fee"/>
+        <result column="win_fee" property="winFee"/>
+        <result column="bet_amount" property="betAmount"/>
+        <result column="reward_amount" property="rewardAmount"/>
+        <result column="seconds_yield" property="secondsYield"/>
+        <result column="or_record" property="orRecord"/>
+        <result column="record_num" property="recordNum"/>
+        <result column="or_tow_record" property="orTowRecord"/>
+        <result column="record_tow_num" property="recordTowNum"/>
+        <result column="status" property="status"/>
+
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="UPDATE_USER" property="updateUser"/>
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id 				as id,
+        option_id 		as optionId,
+        option_no 		as optionNo,
+        member_id 		as memberId,
+        symbol 			as symbol,
+        status as status,
+        coin_symbol		as coinSymbol,
+        base_symbol		as baseSymbol,
+        direction		as direction,
+        result			as result,
+        back as back,
+        fee				as fee,
+        win_fee			as winFee,
+        bet_amount		as betAmount,
+        reward_amount	as rewardAmount,
+        seconds_yield as secondsYield,
+        or_record	as orRecord,
+        record_num	as recordNum,
+        or_tow_record	as orTowRecord,
+        record_tow_num	as recordTowNum,
+         CREATE_TIME as createTime,
+         CREATE_USER as createUser,
+         UPDATE_TIME as updateTime,
+        UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from contract_option_order tb
+       <where>
+           <if test="symbol!=null and symbol!=''">
+               and symbol =#{symbol}
+           </if>
+
+           <if test="memberId!=null">
+               and member_id =#{memberId}
+           </if>
+           <if test="betAmount!=null ">
+               and bet_Amount &gt;=#{betAmount}
+           </if>
+           <if test="rewardAmount!=null">
+               and reward_Amount =#{rewardAmount}
+           </if>
+
+        </where>
+
+        order by tb.create_time desc
+    </select>
+
+</mapper>

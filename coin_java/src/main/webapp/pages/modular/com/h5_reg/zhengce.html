@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>隐私政策</title>
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="${ctxPath}/assets/common/css/xmex.css" />
+	</head>
+	<body>
+		<header class="title">
+			<a><img src="${ctxPath}/assets/common/images/fanhui.png" /></a>
+			<h3>隐私政策</h3>
+		</header>
+		<div class="content">
+			
+		</div>
+		<input id="url" value="${url}" type="hidden">
+		<script type="text/javascript" src="${ctxPath}/assets/common/js/jquery.min.js" ></script>
+		<script type="text/javascript">
+			var url=$("#url").val();
+			$(function(){
+				$.ajax({
+					type:"post",
+					url:url+"/api/common/article",
+					async:true,
+					data:{
+						type:"PRIMARY"
+					},
+					success:function(data){
+						if(data.code == 200){
+							console.log(JSON.stringify(data));
+							var x = document.getElementsByClassName("content");
+							x[0].innerHTML = data.data.content;
+						}else{
+							$.toast(data.msg,'text');
+						}
+					},
+					error:function(xhr,type,errorThrown){
+						$.toast("错误提示了："+ xhr.statusText +" ",'text');
+					}
+				});
+				$('.title a').click(function(){
+					window.history.back(-1);
+				})
+			})
+		</script>
+	</body>
+</html>

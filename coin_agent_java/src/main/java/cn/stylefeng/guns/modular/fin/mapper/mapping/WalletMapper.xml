@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.fin.mapper.WalletMapper">
+
+     <!-- 通用查询映射结果 -->
+   <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.fin.entity.Wallet">
+     <id column="wallet_id" property="walletId"/>
+     <result column="member_id" property="memberId"/>
+     <result column="used_price" property="usedPrice"/>
+     <result column="locked_price" property="lockedPrice"/>
+     <result column="mortgage_price" property="mortgagePrice"/>
+     <result column="finances_price" property="financesPrice"/>
+     <result column="gaslock" property="gaslock"/>
+     <result column="type" property="type"/>
+     <result column="version" property="version"/>
+     <result column="status" property="status"/>
+     <result column="del" property="del"/>
+     <result column="remark" property="remark"/>
+     <result column="CREATE_TIME" property="createTime"/>
+     <result column="CREATE_USER" property="createUser"/>
+     <result column="UPDATE_TIME" property="updateTime"/>
+     <result column="UPDATE_USER" property="updateUser"/>
+     </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         tb.wallet_id as walletId,
+         tb.member_id as memberId,
+         tb.used_price as usedPrice,
+         tb.locked_price as lockedPrice,
+         tb.mortgage_price as mortgagePrice,
+         tb.finances_price as financesPrice,
+         tb.gaslock as gaslock,
+        tb.type as type,
+        tb.version as version,
+         tb.status as status,
+         tb.del as del,
+         tb.remark as remark,
+         tb.CREATE_TIME as createTime,
+         tb.CREATE_USER as createUser,
+         tb.UPDATE_TIME as updateTime,
+        tb.UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from fin_wallet tb
+       inner  join  app_member am on  tb.member_id = am.member_id
+       where tb.del='N'
+        <if test="condition!=null and condition!=''">
+          and tb.member_id =(select member_id from app_member where account=#{condition})
+        </if>
+        <if test="memberId != null and memberId != ''">
+             and (am.member_id = #{memberId}  or am.parent_referee_id like concat('%',#{recommendIds},'%'))
+        </if>
+
+        order by tb.update_time desc
+    </select>
+
+    <select id="zeroList" resultType="cn.stylefeng.guns.modular.fin.entity.Wallet">
+        select
+        <include refid="Base_Column_List"/>
+        from fin_wallet tb where del='N'
+        and (used_price &lt;0 or locked_price &lt;0)
+    </select>
+
+</mapper>

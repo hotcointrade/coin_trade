@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.app.mapper.WalletTransferMapper">
+
+     <!-- 通用查询映射结果 -->
+   <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.app.entity.WalletTransfer">
+     <id column="wallet_transfer_id" property="walletTransferId"/>
+     <result column="member_id" property="memberId"/>
+     <result column="account" property="account"/>
+     <result column="price" property="price"/>
+     <result column="wallet_type" property="walletType"/>
+     <result column="coin" property="coin"/>
+     <result column="del" property="del"/>
+     <result column="CREATE_TIME" property="createTime"/>
+     <result column="CREATE_USER" property="createUser"/>
+     <result column="UPDATE_TIME" property="updateTime"/>
+     <result column="UPDATE_USER" property="updateUser"/>
+     </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         wallet_transfer_id as walletTransferId,
+         member_id as memberId,
+         account as account,
+         price as price,
+         wallet_type as walletType,
+         coin as coin,
+         del as del,
+         CREATE_TIME as createTime,
+         CREATE_USER as createUser,
+         UPDATE_TIME as updateTime,
+        UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from app_wallet_transfer tb where del='N'
+        <if test="condition!=null and condition!=''">
+          and account like concat('%',#{condition},'%')
+        </if>
+        <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+            and (CREATE_TIME between CONCAT(#{beginTime},' 00:00:00') and CONCAT(#{endTime},' 23:59:59'))
+        </if>
+        and tb.member_id in
+        <foreach collection="members" open="(" close=")" item="member" separator=",">
+            #{member.memberId}
+        </foreach>
+        order by tb.create_time desc
+    </select>
+
+</mapper>

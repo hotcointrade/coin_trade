@@ -1,0 +1,1122 @@
+@charset 'utf-8';
+
+@font-face {
+  font-family: 'PingFangSCRegular';
+  src: url('../fonts/PingFangSCRegular/PingFangSCRegular.eot');
+  src: url('../fonts/PingFangSCRegular/PingFangSCRegular.eot') format('embedded-opentype'),
+  url('../fonts/PingFangSCRegular/PingFangSCRegular.woff2') format('woff2'),
+  url('../fonts/PingFangSCRegular/PingFangSCRegular.woff') format('woff'),
+  url('../fonts/PingFangSCRegular/PingFangSCRegular.ttf') format('truetype'),
+  url('../fonts/PingFangSCRegular/PingFangSCRegular.svg#PingFangSCRegular') format('svg');
+}
+@font-face {
+  font-family: 'HelveticaNeue';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('../fonts/HelveticaNeue-Light.ttf');
+}
+@font-face {
+  font-family: 'HelveticaNeue';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../fonts/HelveticaNeue-Medium.ttf');
+}
+@font-face {
+  font-family: 'HelveticaNeue';
+  font-style: normal;
+  font-weight: blod;
+  font-display: swap;
+  src: url('../fonts/HelveticaNeue-Bold.ttf');
+}
+@font-face {
+  font-family: 'DINPro';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../fonts/DINPro-Medium.otf');
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  color: #333;
+  font-size: .25rem;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+  font-family: 'PingFangSCRegular', "Microsoft Yahei", Helvetica, arial, sans-serif;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+input,
+select,
+textarea {
+  font-size: 100%;
+  font-family: inherit;
+  color: inherit;
+  border: 0;
+  outline: none;
+  background: none;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+textarea,
+input,
+button,
+a {
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+textarea {
+  resize: none;
+}
+
+fieldset,
+img {
+  border: 0;
+}
+
+address,
+cite,
+code,
+dfn,
+em,
+i,
+th,
+var {
+  font-style: normal;
+  font-weight: normal;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+caption,
+th {
+  text-align: left;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: .3s ease-out;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+html {
+  font-size: 100px;
+}
+
+@media(min-width: 750px) {
+  html {
+    font-size: 100px !important;
+  }
+}
+
+@media(max-width: 425px) {
+  html {
+    font-size: 56.6667px;
+  }
+}
+
+@media(max-width: 414px) {
+  html {
+    font-size: 55.2px;
+  }
+}
+
+@media(max-width: 375px) {
+  html {
+    font-size: 50px;
+  }
+}
+
+@media(max-width: 360px) {
+  html {
+    font-size: 48px;
+  }
+}
+
+@media(max-width: 320px) {
+  html {
+    font-size: 42.6667px;
+  }
+}
+
+.appdown-bottom.android .adb-btn {
+  width: 100%;
+}
+.appdown-bottom.android .appstrore-btn {
+  width: 2.8rem;
+  height: 0.82rem;
+}
+
+.appdown-top {
+  background: url(../images/appd-topbg.png) no-repeat bottom center;
+  background-size: 100% 100%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+  padding: 1.15rem .8rem;
+}
+
+.appdown-top .adt-logo {
+    display: flex;
+    align-items: center;
+    width: 1.28rem;
+    height: 1.28rem;
+    background-size: 100% 100%;
+    margin: 0 auto;
+    margin-top: 0.6rem;
+}
+
+.appdown-top .adt-logo img {
+  width: 1.23rem;
+  height: 1.23rem;
+  flex-shrink: 0;
+  margin-right: .3rem;
+}
+
+.appdown-top .adt-logo .adt-text {
+  display: flex;
+  flex-direction: column;
+  font-size: .28rem;
+  line-height: 2;
+  font-weight: bold;
+  color: #A8ABCF;
+  letter-spacing: .02rem;
+}
+
+.appdown-top .adt-tit {
+    line-height: 1.2;
+    color: #fff;
+    letter-spacing: .063rem;
+    margin-bottom: .2rem;
+    font-size: 0.6rem;
+    font-weight: bold;
+    margin-top: 0.2rem;
+    text-align: center;
+}
+
+.appdown-top .adt-tit2 {
+    line-height: 1.2;
+    color: #fff;
+    letter-spacing: .063rem;
+    margin-bottom: .2rem;
+    font-size: 0.2rem;
+    font-weight: bold;
+    margin-top: 0.3rem;
+    text-align: center;
+}
+
+.appdown-top .adt-txt {
+  font-size: .27rem;
+  color: rgba(255, 255, 255, .8);
+  letter-spacing: .013rem;
+}
+
+.appdown-info {
+  position: relative;
+  z-index: 3;
+  background-color: #fff;
+  padding: 0.6rem .6rem .1rem .6rem;
+}
+
+.appdown-info .adi-imgbg {
+  width: 2.76rem;
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  bottom: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.appdown-info .adi-list {
+  display: flex;
+  align-items: center;
+}
+
+.appdown-info .adi-list img {
+  width: 1.02rem;
+  height: 1.02rem;
+  flex-shrink: 0;
+  margin-right: .24rem;
+}
+
+.appdown-info .adi-list:first-child {
+  margin-bottom: .72rem;
+}
+
+.appdown-info .adi-list:nth-child(2) {
+  margin-bottom: .68rem;
+}
+
+.appdown-info .adi-list:nth-child(3) {
+  margin-bottom: .65rem;
+}
+
+.appdown-info .adi-list .adi-tit {
+  font-size: .29rem;
+  font-weight: 800;
+  letter-spacing: .013rem;
+  padding-bottom: .1rem;
+}
+
+.appdown-info .adi-list .adi-txt {
+  font-size: .21rem;
+  letter-spacing: .013rem;
+}
+
+.appdown-int {
+  background-color: #F5F6FD;
+}
+
+.appdown-cont .adc-cont {
+  padding: .8rem .8rem .2rem;
+}
+
+.appdown-cont .adc-tit {
+  font-size: .5rem;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: .02rem;
+  margin-bottom: .28rem;
+}
+
+.appdown-cont .adc-txt {
+  display: flex;
+  justify-content: center;
+  color: #666;
+  line-height: 1.3;
+  letter-spacing: .015rem;
+  padding-bottom: .12rem;
+  padding-top: .12rem;
+  font-size: .3rem;
+}
+
+.appdown-c2c {
+  background-color: #fff;
+  margin-top: -.1rem;
+  padding-bottom: 1.4rem;
+}
+
+.appdown-bottom {
+  position: fixed;
+  z-index: 8;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  transform: translate3d(0, 0, 0);
+  transition: .3s ease-in-out;
+  box-shadow: 0px 2px .43rem 0px rgba(0, 0, 0, 0.08);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.appdown-bottom.android {
+  min-height: 1.5rem;
+  display: flex;
+  align-items: center;
+  padding-left: .3rem;
+  padding-right: .3rem;
+}
+
+.appdown-box {
+  display: flex;
+  align-items: center;
+  min-height: 1.5rem;
+  justify-content: space-between;
+  padding: 0 .3rem;
+  width: 100%;
+}
+.appdown-bottom.android .appdown-box {
+  padding: 0;
+}
+.appdown-bottom .adb-ver {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: .85rem;
+  height: .21rem;
+  line-height: .21rem;
+  right: .3rem;
+  top: .34rem;
+  font-size: .13rem;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: .02rem;
+  border-radius: 0 .1rem 0 .1rem;
+  background-color: #767ab3;
+}
+
+.appdown-bottom .adb-btn {
+  height: .82rem;
+  width: 1.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .25rem;
+  letter-spacing: .015rem;
+  border-radius: .1rem;
+  color: #fff;
+  background-color: #2e315e;
+  transition: .3s ease-in-out;
+  cursor: pointer;
+}
+
+.appdown-bottom .adb-btn img {
+  width: .32rem;
+  margin-right: .2rem;
+  flex-shrink: 0;
+}
+.appdown-bottom .test-btn {
+  width: 3.8rem;
+  flex-direction: column;
+  font-size: .25rem;
+  background-color: #524980;
+}
+.appdown-bottom .test-btn .t2{
+  font-size: .19rem;
+  color: #bfb7e5;
+}
+
+.appdown-bottom .adb-btn:hover {
+  background-color: #2d2a48;
+}
+
+
+.browserOpenBox {
+  position: fixed;
+  display: none;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(61, 61, 108, .5);
+}
+
+.browserOpen {
+  position: absolute;
+  z-index: 9;
+  right: 2px;
+  top: 13px;
+  letter-spacing: 1px;
+  color: #fff;
+  background-color: #4b4a7c;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 22px;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.browserOpen::before {
+  position: absolute;
+  content: '';
+  border-bottom: 9px solid #4b4a7c;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  top: -9px;
+  right: 18px;
+}
+
+
+/* ios教程 */
+.ios-testflight,
+.ios-course {
+  position: relative;
+}
+
+.iosc-back {
+  position: absolute;
+  height: .45rem;
+  letter-spacing: .015rem;
+  top: .3rem;
+  left: .3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, .5);
+  border-radius: 1rem;
+  color: #fff;
+  padding: 0 .2rem;
+  cursor: pointer;
+  transition: .3s ease-in-out;
+}
+
+.iosc-back:hover {
+  background-color: rgba(255, 255, 255, .1);
+}
+
+.iost-top,
+.iosc-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+.iost-top{
+  min-height: 4.6rem;
+  background: url(../images/iost-bg.jpg) no-repeat bottom center;
+  background-size: 100% 100%;
+  padding: 1.4rem 1.07rem .9rem;
+}
+.iosc-top {
+  min-height: 7.7rem;
+  background: url(../images/ios-topbg.jpg) no-repeat bottom center;
+  background-size: 100% 100%;
+  padding: 1.7rem 1.07rem .85rem;
+}
+
+.iost-top .iost-logo {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+.iosc-top .iost-logo {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.iost-top .iost-tit,
+.iosc-top .iost-tit{
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+  letter-spacing: .06rem;
+}
+.iost-top .iost-tit{
+  font-size: .38rem;
+  margin-top: .3rem;
+}
+.iosc-top .iost-tit {
+  font-size: .5rem;
+  margin-top: .4rem;
+}
+
+.iosc-top .iost-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: .95rem;
+  border: 1px solid #fff;
+  box-shadow: 0px 5px .35rem 0px rgba(36, 38, 75, 0.23);
+  border-radius: .15rem;
+  font-size: .33rem;
+  letter-spacing: .015rem;
+  color: #fff;
+  margin-top: .9rem;
+  margin-bottom: .45rem;
+  cursor: pointer;
+  transition: .3s ease-in-out;
+  -webkit-user-select: initial;
+  -moz-user-select: initial;
+  -ms-user-select: initial;
+  user-select: initial;
+  pointer-events: initial;
+}
+
+.iosc-top .iost-btn.active {
+  display: flex;
+}
+
+.iosc-top .iost-btn:hover {
+  background-color: rgba(255, 255, 255, .1);
+}
+
+.iosc-top .iost-btn .iost-ios-icon {
+  width: .43rem;
+  margin-right: .2rem;
+}
+
+.iosc-top .iost-btn .wifi-icon,
+.iosc-top .iost-btn .loading-icon {
+  width: .43rem;
+}
+
+.iosc-top .iost-btn.nowifi .loading-icon,
+.iosc-top .iost-btn .wifi-icon {
+  display: none;
+}
+
+.iosc-top .iost-btn.nowifi .wifi-icon {
+  display: block;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.iosc-top .iost-btn.loading {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.iosc-top .iost-btn.loading .loading-icon {
+  animation: loading 1s linear infinite;
+}
+
+.iosc-top .iost-text {
+  color: #fff;
+  font-size: .21rem;
+  text-align: center;
+  line-height: 1.3;
+  letter-spacing: .025rem;
+}
+
+.iosc-info {
+  background-color: #fff;
+  padding: .3rem .4rem 0 .28rem;
+}
+
+.iosc-info .iosi-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: .36rem;
+  margin-top: .15rem;
+}
+
+.iosc-info .iosi-num {
+  width: .48rem;
+  height: .48rem;
+  line-height: .48rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: #7175a7;
+  border-radius: 50%;
+  font-size: .32rem;
+  font-weight: 800;
+  color: #fff;
+  margin-right: .3rem;
+}
+
+.iosc-info .iosi-tit {
+  font-size: .28rem;
+  line-height: 1.5;
+  letter-spacing: .005rem;
+}
+
+.iosc-info .iosi-tit span {
+  color: #6B72C1;
+  font-weight: bold;
+}
+
+.iosc-info .iosi-text {
+  padding-left: .81rem;
+  padding-bottom: .6rem;
+}
+
+.iosc-info .iosi-cont {
+  display: flex;
+  align-items: center;
+  min-height: 1.6rem;
+  border: 1px solid #d6d5da;
+  border-radius: .15rem;
+  padding-left: .34rem;
+}
+
+.iosc-info .iosi-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: .21rem;
+  font-weight: bold;
+}
+
+.iosc-info .iosi-icon img {
+  width: .88rem;
+}
+
+.iosc-info .iosi-arrow {
+  font-size: .33rem;
+  font-weight: bold;
+  padding-bottom: .3rem;
+}
+
+.iosc-info .iosi-arrow img {
+  width: .2rem;
+  margin-left: .3rem;
+  margin-right: .3rem;
+}
+
+.enstyle .appdown-top .adt-tit,
+.iosc-top .iost-tit {
+  font-size: .36rem;
+}
+
+.enstyle .appdown-cont .adc-txt,
+.enstyle .appdown-top .adt-txt {
+  font-size: .23rem;
+}
+
+.enstyle .appdown-cont .adc-tit {
+  font-size: .38rem;
+}
+
+.kostyle .iosc-info .iosi-tit,
+.enstyle .iosc-info .iosi-tit {
+  font-size: .25rem;
+}
+
+
+/* 2020-0103 daisy 新增 */
+.appdown-bottom .appstrore-btn {
+  width: 2.8rem;
+  height: .82rem;
+  background: none;
+}
+
+.appdown-bottom .appstrore-btn img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  margin-right: 0;
+}
+
+.appstore-box {
+  width: 100%;
+  background: #2A2A45;
+  padding-top: 1.09rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1.3rem;
+}
+
+.appstore-box h1 {
+  font-size: .59rem;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+}
+
+.appstore-box .tips {
+  font-size: .28rem;
+  color: #B3B1D6;
+  margin-top: .2rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.appstore-box .tips a {
+  color: #2075F5;
+}
+
+.appstore-box .change {
+  color: #fff;
+  font-size: .39rem;
+  text-align: center;
+  margin-top: .5rem;
+  font-weight: bold;
+}
+
+.step-box {
+  width: 91%;
+  margin: .2rem auto 0;
+  background: #fff;
+  padding: .35rem;
+  border-radius: .14rem;
+}
+
+.step .title {
+  color: #2A2A45;
+  font-size: .28rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: .28rem;
+  font-weight: bold;
+}
+
+.step .step-icon {
+  width: .48rem;
+  height: .31rem;
+  margin-right: .1rem;
+}
+
+.step2,
+.step3 {
+  margin-top: .9rem;
+}
+
+.id-tips {
+  font-size: .25rem;
+  color: #2A2A45;
+}
+
+.id-tips span {
+  color: #B3B1D6;
+}
+
+.account-list {
+  width: 100%;
+  border: 1px solid #C6E1F4;
+  border-radius: .07rem;
+  background: #F1F8FC;
+  margin-top: .2rem;
+  margin-bottom: .15rem;
+}
+
+.account-list li {
+  height: .63rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: #2075F5;
+  border-bottom: 1px solid #C6E1F4;
+}
+
+.account-list li span {
+  padding-left: .23rem;
+  display: block;
+  height: 100%;
+  line-height: .63rem;
+}
+
+.account-list li span:first-child {
+  flex: 2;
+  border-right: 1px solid #C6E1F4;
+}
+
+.account-list li span:last-child {
+  flex: 1;
+}
+
+.msg-tips {
+  color: #B3B1D6;
+  font-size: .19rem;
+  line-height: .28rem;
+}
+
+.appstore-foot {
+  position: fixed;
+  z-index: 8;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  transform: translate3d(0, 0, 0);
+  transition: .3s ease-in-out;
+  box-shadow: 0px 2px 0.43rem 0px rgba(0, 0, 0, 0.08);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.appstore-foot a {
+  display: block;
+  width: 100%;
+  min-height: 1.39rem;
+  padding: 0 .35rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.appstore-foot img {
+  display: inline-block;
+  width: 6.81rem;
+  height: .83rem;
+}
+
+.none {
+  display: none;
+}
+
+.mask-con {
+  margin: 0 auto;
+  padding: .25rem;
+  min-width: 4rem;
+  text-align: center;
+  font-size: .3rem;
+  color: #fff;
+  background: #292929;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 4px;
+  transition: all .3s;
+}
+
+
+/* testflight */
+.iosc-info,
+.iost-info{
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.iost-item{
+  text-align: center;
+  background-color: #f5f6fd;
+  padding-top: .7rem;
+}
+.iost-item:nth-child(even){
+  background-color: #fff;
+}
+.iost-item:nth-child(2){
+  padding-bottom: .82rem;
+}
+.iost-item:nth-child(4){
+  padding-top: .1rem;
+  padding-bottom: .4rem;
+}
+.iost-item .item-step {
+  font-size: .38rem;
+  font-weight: bold;
+  color: #1d1d1d;
+}
+.iost-item .item-subtit {
+  font-size: .28rem;
+  color: #7c7e96;
+  margin-top: .32rem;
+  margin-bottom: .18rem;
+}
+.iost-item .item-bold {
+  font-weight: bold;
+  line-height: 1;
+}
+.iost-item .item-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 6.25rem;
+  height: .97rem;
+  font-size: .33rem;
+  color: #fff;
+  background-color: #2e315e;
+  border-radius: .07rem;
+  cursor: pointer;
+  margin: 0 auto;
+}
+.iost-item .item-txt {
+  font-size: .28rem;
+  color: #7c7e96;
+  margin-top: .24rem;
+}
+.iost-item .item-txt2 {
+  font-size: .18rem;
+  color: #7c7e96;
+}
+.iost-item .item-img1 {
+  width: 4.76rem;
+}
+
+/*单独添加英文版的样式*/
+.en-download {
+    background: #1B1E28;
+}
+.en-download .adt-logo .text{
+    color: #fff;
+    font-size: 0.4rem;
+    font-weight: bold;
+    font-family: HelveticaNeue-Bold, HelveticaNeue;
+    color: #FEFEFC;
+}
+.en-download .header-bg {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 2.92rem
+}
+.en-download .appdown-top {
+    background: none;
+    padding-bottom: 0;
+}
+.en-download .adt-tit {
+    font-size: 0.52rem;
+    font-family: HelveticaNeue-Bold, HelveticaNeue;
+    font-weight: bold;
+    color: #FEFEFC;
+    line-height: 0.72rem;
+    letter-spacing: normal;
+    margin-top: 1rem;
+    margin-bottom: 1.24rem;
+}
+.en-download .adt-img {
+    display: flex;
+    justify-content: center
+}
+.en-download .adt-img .p1 {
+    width: 4.04rem;
+    display: block;
+}
+.en-download .appdown-info {
+    padding-bottom: 1rem;
+}
+.en-download .appdown-info .adi-list .adi-r {
+    font-size: 0.28rem;
+    font-family: HelveticaNeue-Light, HelveticaNeue;
+    font-weight: 300;
+    color: #1B1E28;
+    line-height: 0.34rem;
+}
+.en-download .appdown-info .adi-imgbg {
+    width: 2.24rem;
+    bottom: 0.28rem;
+}
+.en-download .appdown-cont {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-top: 1rem;
+}
+.en-download .appdown-cont .adc-cont {
+    width: 4.2rem;
+    padding: 0;
+    text-align: center;
+}
+.en-download .appdown-cont .adc-cont .adc-tit {
+    font-size: 0.48rem;
+    font-family: HelveticaNeue-Medium, HelveticaNeue;
+    color: #1B1E28;
+    line-height: 0.58rem;
+    letter-spacing: 0;
+    margin-bottom: 0px;
+}
+.en-download .appdown-cont .adc-cont .adc-txt {
+    font-size: 0.28rem;
+    font-family: HelveticaNeue-Light, HelveticaNeue;
+    font-weight: 300;
+    color: #85889C;
+    line-height: 0.48rem;
+    letter-spacing: 0;
+    padding-bottom: 0.12rem;
+    padding-top: 0px;
+}
+
+.en-download .appdown-cont .adc-cont .first-child {
+    margin-top: 0.16rem;
+    margin-bottom: 0.28rem;
+    padding-bottom: 0px;
+}
+.en-download .appdown-int {
+    height: 11.1rem;
+    background: #F2F3F5;
+}
+.en-download .appdown-int .adt-img {
+    display: flex;
+    text-align: center;
+    margin-top: 0.4rem;
+}
+.en-download .appdown-int .adt-img img {
+    width: 4rem;
+}
+/*第三块*/
+.en-download .appdown-c2c {
+    padding-top: 3.6rem;
+}
+.en-download .appdown-c2c .adc-cont {
+    font-size: 0.48rem;
+    font-family: HelveticaNeue-Medium, HelveticaNeue;
+    font-weight: 500;
+    color: #1B1E28;
+    line-height: 0.58rem;
+    width: auto;
+}
+.en-download .appdown-c2c .adc-cont .adc-tit {
+    width: 5rem;
+    margin-bottom: 0.96rem;
+}
+.en-download .appdown-c2c  .adi-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+.en-download .appdown-c2c  .adi-list img{
+    width: 0.72rem;
+    height: 0.72rem;
+    margin-bottom: 0.34rem;
+    display: block;
+}
+.en-download .appdown-c2c .adi-list .adi-r {
+    font-size: 0.28rem;
+    font-family: HelveticaNeue-Light, HelveticaNeue;
+    font-weight: 300;
+    color: #1B1E28;
+    line-height: 0.34rem;
+    margin-bottom: 1.2rem;
+}

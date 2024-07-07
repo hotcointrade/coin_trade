@@ -1,0 +1,345 @@
+ <!DOCTYPE html>
+ <html>
+ <head>
+     <meta charset="utf-8" />
+     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+     <title>注册页</title>
+     <!--<link rel="stylesheet" href="css/Haderegister.css" />-->
+ </head>
+ <body>
+ <div class="registerBox">
+     <h3>
+         <!--<img src="img/logo.png" alt="" />-->
+         <span>注册</span>
+     </h3>
+     <div class="formBox">
+         <form class="reForm">
+             <div class="formitem">
+                 <input class="formPut" type="text" id="account" placeholder="用户名" />
+             </div>
+             <div class="formitem">
+                 <input class="formPut" type="text" id="name" placeholder="真实姓名" />
+             </div>
+             <div class="formitem">
+                 <input class="formPut" type="number" id="phone" placeholder="手机号码" />
+             </div>
+             <div class="formitem">
+                 <input class="formPut" type="password" id="password" placeholder="登录密码" />
+             </div>
+             <div class="formitem">
+                 <input class="formPut" type="password" id="confirmPwd" placeholder="重复密码" />
+             </div>
+             <div class="formitem">
+                 <input class="formPut" type="text" id="withdraw" placeholder="设置提现密码" />
+             </div>
+             <div class="formitem">
+                 <input class="formPut" type="text" id="invite"  value="${invite}" placeholder="邀请码" />
+             </div>
+
+             <div class="formitem" id="codeBox">
+                 <input class="formPut" type="text" id="msg" placeholder="手机验证码" />
+                 <span></span>
+                 <input class="getCode" type="button" value="验证码" id="getCode" />
+             </div>
+             <div class="formb">
+                 <button type="button" class="reBtn" id="resFun">注册</button>
+             </div>
+         </form>
+     </div>
+ </div>
+ <script src="/assets/common/plugins/jquery/jquery-3.2.1.min.js"></script>
+
+ <script >
+     //prod
+     var host = '';
+     //dev
+     // var host = '';
+     var linkBtn = '';
+     //发送验证码 /app/v1/getInvite
+     //发送验证码
+     $('#getCode').click(function(){
+         console.log("ss")
+         if(!$('#phone').val()){
+             alert('请输入手机号码！');
+             return;
+         }
+         var isPhone = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
+         if(!(isPhone.test($('#phone').val()))){
+             alert('手机格式错误!');
+             return;
+         }
+         sendFun();
+     })
+
+     function sendFun(){
+         $('#getCode').attr('disabled',true);
+         $.ajax({
+             type:"post",
+             url:host+'/app/v1/getInvite',
+             async:true,
+             data:{"phone":$('#phone').val()},
+             dataType: 'json',
+             success:function(data){
+                 if(data.code == '200'){
+                     alert(data.msg);
+                     var timerY = null, tn = 120;
+                     $('#getCode').attr('disabled',true);
+                     timerY = setInterval(function(){
+                         $('#getCode').val('重发验证码('+ tn +'s)');
+                         tn--;
+                         if(tn<0){
+                             $('#getCode').val('重发验证码');
+                             $('#getCode').attr('disabled',false);
+                             clearInterval(timerY);
+                         }
+                     },1000);
+                 }else{
+                     alert(data.msg);
+                     $('#getCode').attr('disabled',false);
+                 }
+             },
+             error:function(xhr,type,errorThrown){
+                 alert(xhr.statusText);
+                 $('#getCode').attr('disabled',false);
+                 alert("错误提示了："+ xhr.status +" ");
+             }
+         });
+     }
+     //注册 /app/v1/register
+     //发送注册请求
+     $('#resFun').click(function(){
+
+
+         if(!$('#account').val()){
+             alert('请输入账号！');
+             return;
+         }
+         //账号必须是字母和数字
+         var isAccount=/^[A-Za-z0-9]+$/;
+         if(!isAccount.test($('#account').val()))
+         {
+             alert("用户名必须是字母和数字")
+             return;
+         }
+
+
+         if(!$('#name').val()){
+             alert('请输入姓名！');
+             return;
+         }
+
+         var isName=/^[\u4e00-\u9fa5]{2,4}$/;
+         if(!isName.test($('#name').val()))
+         {
+             alert("姓名输入不合法")
+             return;
+         }
+
+         if(!$('#phone').val()){
+             alert('请输入电话号码！');
+             return;
+         }
+         var isPhone = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
+         if(!(isPhone.test($('#phone').val()))){
+             alert('手机格式错误!');
+             return;
+         }
+         if(!$('#password').val()){
+             alert('请设置登录密码！');
+             return;
+         }
+         var isPsd = /[a-zA-Z0-9]{6,16}$$/;
+         if(!(isPsd.test($('#password').val()))){
+             alert('请输入6-16位密码!');
+             return;
+         }
+         if($('#password').val() != $('#confirmPwd').val()){
+             alert('两次输入的密码不一致！');
+             return;
+         }
+         if(!$('#withdraw').val()){
+             alert('请输入提现密码！');
+             return;
+         }
+         if(!$('#msg').val()){
+             alert('请输入手机验证码！');
+             return;
+         }
+         registerFun();
+     })
+
+
+     function registerFun(){
+         var data = {
+             account:$('#account').val(),
+             name:$('#name').val(),
+             phone:$('#phone').val(),
+             password:$('#password').val(),
+             confirmPwd:$('#confirmPwd').val(),
+             invite:$('#invite').val(),
+             withdraw:$('#withdraw').val(),
+             msg:$('#msg').val()
+         };
+         $.ajax({
+             type:"post",
+             url:host+"/app/v1/register",
+             async:true,
+             data:data,
+             success:function(data){
+                 if(data.code == '200'){
+                     alert(data.msg);
+                     location.href = linkBtn;
+                 }else{
+                     alert(data.msg);
+                 }
+             }
+         });
+     }
+
+ </script>
+ <style type="text/css">
+     html,body{
+         background-color: #ff6948;
+         font-size: 16px;
+         padding: 0;
+         margin: 0;
+     }
+     a{
+         text-decoration: none;
+         color: #2093F7;
+     }
+     .registerBox{
+         padding: 0 0.9rem;
+     }
+     .registerBox h3{
+         display: flex;
+         flex-direction: row;
+         justify-content: center;
+         align-items: center;
+         margin-top: 1.9rem;
+     }
+     .registerBox h3 span{
+         margin-left: 0.6rem;
+         color: #ffffff;
+         letter-spacing: 3px;
+         font-size: 1.2rem;
+     }
+     .formitem{
+         padding: 0;
+         margin: 0;
+         margin-bottom: 0.9rem;
+     }
+     .formitem input:focus{
+         border: none;
+     }
+     .formitem input{
+         height: 2.5rem;
+         padding-left: 0.9rem;
+         width: 96%;
+         border-radius: 6px;
+         border: none;
+     }
+     .formitem input:disabled{
+         background-color: #FFFFFF !important;
+     }
+     input[type="text"]:disabled{
+         background-color: #FFFFFF !important;
+     }
+     input:disabled, input[disabled]{ -webkit-opacity:1; opacity: 1; }
+     .formitem input:-ms-input-placeholder{
+         color: #BBBBBB;
+     }
+     .formitem input::-moz-placeholder{
+         color: #BBBBBB;
+     }
+     .formitem input:-moz-placeholder{
+         color: #BBBBBB;
+     }
+     .formitem input::-webkit-input-placeholder{
+         color: #BBBBBB;
+     }
+     #codeBox{
+         display: flex;
+         flex-direction: row;
+         justify-content: space-between;
+         border-radius: 6px;
+         background-color: #FFFFFF;
+     }
+     #codeBox span{
+         height: 20px;
+         border: 1px solid #2093F7;
+         margin-top: 10px;
+         display: inline-block;
+     }
+     #code{
+         width: 65% !important;
+     }
+     .getCode{
+         background-color: transparent;
+         color: #2093F7;
+         width: 35% !important;
+         border-radius: 0 !important;
+         padding-left: 0 !important;
+         cursor:pointer;
+         outline: none;
+     }
+     .agree{
+         color: #999999;
+     }
+     .formb{
+         margin-top: 6rem;
+     }
+     .formb button{
+         width: 100%;
+         height: 2.9rem;
+         border-radius: 6px;
+         background-color: #2093F7;
+         border: none;
+         color: #FFFFFF;
+         letter-spacing: 1px;
+     }
+     .topBox{
+         display: flex;
+         flex-direction: row;
+         justify-content: flex-start;
+         align-items: center;
+         margin-top: 1.9rem;
+     }
+     #qrcode{
+         width: 7.7rem;
+         height: 7.7rem;
+         border: 4px solid #FFFFFF;
+     }
+     .qeBox{
+         width: 7.7rem;
+         margin-right: 20px;
+     }
+     .topBox p{
+         color: #FFFFFF;
+     }
+     .qeBox p{
+         margin-top: 5px !important;
+         font-size: 0.6rem;
+         text-align: center;
+     }
+     #uplink{
+         margin-top: -40px;
+     }
+     #uplink p{
+         margin-bottom: 5px;
+     }
+     .link,#uplink{
+         margin-left: 20px;
+     }
+     #uplink{
+         width: 10rem;
+     }
+     #uplink a{
+         overflow: hidden;
+         word-wrap:break-word;
+         white-space：normal;
+     }
+ </style>
+
+ </body>
+ </html>

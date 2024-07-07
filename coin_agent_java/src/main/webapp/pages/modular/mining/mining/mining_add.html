@@ -1,0 +1,244 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/mining/mining/mining_add.js"]}){
+
+<form id="miningForm" lay-filter="miningForm" class="layui-form model-form">
+    <input name="id" type="hidden"/>
+    <input name="type" value="0" type="hidden"/>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">矿机标题<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="title" id="title" placeholder="请输入矿机标题，举例：ETH Intel Xeon E5 至强型" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">矿机名称<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="name" id="name" placeholder="请输入矿机名称" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-inline" style="padding: 14px 110px 24px;">
+        <button type="button" class="layui-btn" id="test1">上传矿机图片 LOGO</button>
+    </div>
+    <div class="layui-inline">
+        <div class="layui-upload-list">
+            <img class="layui-upload-img" name="image" id="image" style="width: 40px;height: 40px;" >
+            <p id="demoText"></p>
+        </div>
+    </div>
+
+    <div class="layui-inline" style="padding: 14px 110px 24px;">
+        <button type="button" class="layui-btn" id="test2">上传币种图片 LOGO</button>
+    </div>
+    <div class="layui-inline">
+        <div class="layui-upload-list">
+            <img class="layui-upload-img" name="image2" id="image2" style="width: 40px;height: 40px;" >
+            <p id="demoText2"></p>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">简介<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="introduction" id="introduction" placeholder="请输入简介" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">产能币种<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="miningCoin" id="miningCoin" placeholder="请输入产能币种" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">预计产能 <span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="estimatedCapacity" id="estimatedCapacity" placeholder="请输入预计产能 150 就是150%" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">静态化收益币种<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="staticCoin" id="staticCoin" placeholder="请输入静态化收益币种" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">预计静态化收益率<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="estimatedStaticYield" id="estimatedStaticYield" placeholder="请输入预计静态化收益率 35 就是35%" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">周期类型 <span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+
+            <select name="cycleType" id="cycleType" required >
+                <!--不可开启后台没年月相关程序-->
+                <!--<option value="1001">年</option>-->
+                <!--<option value="1002">月</option>-->
+                <option value="1003">日</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">周期量<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="cycleNumber" id="cycleNumber" placeholder="请输入周期量" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">燃料能源数量<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="fuelEnergyNumber" id="fuelEnergyNumber" placeholder="请输入燃料能源数量" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">燃料能源币种<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="fuelEnergyCoin" id="fuelEnergyCoin" placeholder="请输入燃料能源币种" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">能源损耗数量<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="energyLossNumber" id="energyLossNumber" placeholder="请输入能源损耗数量" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">能源损耗币种<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="energyLossCoin" id="energyLossCoin" placeholder="请输入能源损耗币种" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">算力数量<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="calculatingPowerNumber" id="calculatingPowerNumber" placeholder="请输入算力数量" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">算力币种<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="calculatingPowerCoin" id="calculatingPowerCoin" placeholder="请输入算力币种" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">合约价格数量<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="price" id="price" placeholder="请输入合约价格数量" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">合约价格币种<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="priceCoin" id="priceCoin" placeholder="请输入合约价格币种" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">进度<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <select name="step" id="step" required >
+                <option value="0">未开始</option>
+                <option value="1">进行中</option>
+                <!--<option value="2">派发中</option>-->
+                <option value="3">已结束</option>
+            </select>
+        </div>
+    </div>
+
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">开始时间<span style="color: red;">*</span></label>-->
+        <!--<div class="layui-input-block">-->
+            <!--<input name="startTime" id="startTime" placeholder="请输入开始时间" type="text" class="layui-input" lay-verify="required" required/>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">结束时间<span style="color: red;">*</span></label>-->
+        <!--<div class="layui-input-block">-->
+            <!--<input name="endTime" id="endTime" placeholder="请输入结束时间" type="text" class="layui-input" lay-verify="required" required/>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <input name="miningType" value="4" type="hidden"/>
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">活动类型(0:未知，1：首发抢购，2：首发分摊，3：持仓瓜分，4：自由认购，5：云矿机， 6：锁仓释放）<span style="color: red;">*</span></label>-->
+        <!--<div class="layui-input-block">-->
+            <!--<input name="miningType" id="miningType" placeholder="请输入活动类型(0:未知，1：首发抢购，2：首发分摊，3：持仓瓜分，4：自由认购，5：云矿机， 6：锁仓释放）" type="text" class="layui-input" lay-verify="required" required/>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">进度值（例98 = 98%）,type=4（认购活动）时有效<span style="color: red;">*</span></label>-->
+        <!--<div class="layui-input-block">-->
+            <!--<input name="progress" id="progress" placeholder="请输入进度值（例98 = 98%）,type=4（认购活动）时有效" type="text" class="layui-input" lay-verify="required" required/>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">发行总量<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="totalSupply" id="totalSupply" placeholder="请输入发行总量 多少个矿机" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">已售总量<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="tradedAmount" id="tradedAmount" placeholder="请输入已售总量" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">价格精度<span style="color: red;">*</span></label>-->
+        <!--<div class="layui-input-block">-->
+            <!--<input name="priceScale" id="priceScale" placeholder="请输入价格精度 多少位小数" type="text" class="layui-input" lay-verify="required" required/>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">数量精度<span style="color: red;">*</span></label>-->
+        <!--<div class="layui-input-block">-->
+            <!--<input name="numberScale" id="numberScale" placeholder="请输入数量精度 多少位小数" type="text" class="layui-input" lay-verify="required" required/>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">限购次数<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="limitTimes" id="limitTimes" placeholder="用户的限购次数" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">邀请好友（且购买矿机/锁仓）产能增加百分比（为0则不增加）<span style="color: red;">*</span></label>-->
+        <!--<div class="layui-input-block">-->
+            <!--<input name="miningInvite" id="miningInvite" placeholder="请输入邀请好友（且购买矿机/锁仓）产能增加百分比（为0则不增加）" type="text" class="layui-input" lay-verify="required" required/>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">产能增加上限百分比（为0则无上限）<span style="color: red;">*</span></label>-->
+        <!--<div class="layui-input-block">-->
+            <!--<input name="miningInvitelimit" id="miningInvitelimit" placeholder="请输入产能增加上限百分比（为0则无上限）" type="text" class="layui-input" lay-verify="required" required/>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取 消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保 存</button>
+    </div>
+</form>
+@}

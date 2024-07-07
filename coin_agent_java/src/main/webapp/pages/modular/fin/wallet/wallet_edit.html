@@ -1,0 +1,17 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/fin/wallet/wallet_edit.js"]}){
+<form id="walletForm" lay-filter="walletForm" class="layui-form model-form">
+    <input name="walletId" type="hidden"/>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">可用额度<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="usedPrice" id="usedPrice" placeholder="请输入可用额度" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

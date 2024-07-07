@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.app.mapper.CoinApplyMapper">
+
+     <!-- 通用查询映射结果 -->
+   <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.app.entity.CoinApply">
+     <id column="coin_apply_id" property="coinApplyId"/>
+     <result column="member_id" property="memberId"/>
+     <result column="account" property="account"/>
+     <result column="currency_zh_name" property="currencyZhName"/>
+     <result column="currency_en_name" property="currencyEnName"/>
+     <result column="currency_abbr_name" property="currencyAbbrName"/>
+     <result column="market_float" property="marketFloat"/>
+     <result column="official_holdings" property="officialHoldings"/>
+     <result column="official_address" property="officialAddress"/>
+     <result column="block_browser" property="blockBrowser"/>
+     <result column="movement_area" property="movementArea"/>
+     <result column="White_paper_address" property="whitePaperAddress"/>
+     <result column="listed_exchange" property="listedExchange"/>
+     <result column="project_areas" property="projectAreas"/>
+     <result column="functional_interpretation" property="functionalInterpretation"/>
+     <result column="project_address" property="projectAddress"/>
+     <result column="address_way" property="addressWay"/>
+     <result column="status" property="status"/>
+     <result column="del" property="del"/>
+     <result column="remark" property="remark"/>
+     <result column="CREATE_TIME" property="createTime"/>
+     <result column="CREATE_USER" property="createUser"/>
+     <result column="UPDATE_TIME" property="updateTime"/>
+     <result column="UPDATE_USER" property="updateUser"/>
+     </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         coin_apply_id as coinApplyId,
+         member_id as memberId,
+         account as account,
+         currency_zh_name as currencyZhName,
+         currency_en_name as currencyEnName,
+         currency_abbr_name as currencyAbbrName,
+         market_float as marketFloat,
+         official_holdings as officialHoldings,
+         official_address as officialAddress,
+         block_browser as blockBrowser,
+         movement_area as movementArea,
+         White_paper_address as whitePaperAddress,
+         listed_exchange as listedExchange,
+         project_areas as projectAreas,
+         functional_interpretation as functionalInterpretation,
+         project_address as projectAddress,
+         address_way as addressWay,
+         status as status,
+         del as del,
+         remark as remark,
+         CREATE_TIME as createTime,
+         CREATE_USER as createUser,
+         UPDATE_TIME as updateTime,
+        UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from app_coin_apply tb where del='N'
+        <if test="condition!=null and condition!=''">
+          and (account like concat('%',#{condition},'%') or currency_zh_name like concat('%',#{condition},'%'))
+        </if>
+        <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+            and (CREATE_TIME between CONCAT(#{beginTime},' 00:00:00') and CONCAT(#{endTime},' 23:59:59'))
+        </if>
+        order by tb.create_time desc
+    </select>
+
+</mapper>

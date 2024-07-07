@@ -1,0 +1,28 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/e/quotes/quotes_edit.js"]}){
+<form id="quotesForm" lay-filter="quotesForm" class="layui-form model-form">
+    <input name="quotesId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">币种<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="symbols" id="symbols" placeholder="请输入币种" type="text" class="layui-input" lay-verify="required" readonly/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">拉升比例<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="value" id="value" placeholder="请输入行情幅度" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">持续时间<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="keepTimes" id="keepTimes" placeholder="请输入行情幅度" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

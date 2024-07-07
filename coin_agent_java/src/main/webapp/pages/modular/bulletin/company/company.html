@@ -1,0 +1,26 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/bulletin/company/company.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">平台账户</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <table class="layui-table" id="companyTable" lay-filter="companyTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("/company/edit")){
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
+    @}
+
+</script>
+
+@}

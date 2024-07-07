@@ -1,0 +1,33 @@
+package ${wrapper.packageName};
+<% for(import in wrapper.wrapperImports!){ %>
+import ${import};
+<% } %>
+/**
+ * ${context.bizChName}Wrapper
+ *
+ * @author yaying.liu
+ * @since ${tool.currentTime()}
+ */
+public class ${context.bizEnBigName}Wrapper extends BaseControllerWrapper{
+
+    public ${context.bizEnBigName}Wrapper(Map<String, Object> single) {
+            super(single);
+        }
+
+        public ${context.bizEnBigName}Wrapper(List<Map<String, Object>> multi) {
+            super(multi);
+        }
+
+        public ${context.bizEnBigName}Wrapper(Page<Map<String, Object>> page) {
+            super(page);
+        }
+
+        public ${context.bizEnBigName}Wrapper(PageResult<Map<String, Object>> pageResult) {
+            super(pageResult);
+        }
+
+        @Override
+        protected void wrapTheMap(Map<String, Object> map) {
+
+        }
+}

@@ -1,0 +1,56 @@
+@/* 框架顶部 */
+<div class="layui-header">
+    <div class="layui-logo">
+        <!--span><span style="color: #f9f9f9;font-size: 28px;">B</span><span style="color: #00e2ff;">I</span><span style="color: #f7f7f7;">G</span><span style="color: #FFC107;">K</span><span style="color: #fbfbfb;font-size: 18px;"> O</span><span style="color: #f9f9f9;">n</span><span style="color: #f9f9f9;">e</span><span style="color: #f9f9f9;">X</span><span style="color: #f1f1f1;"> 后台管理</span-->
+        <!--<img src="${ctxPath}/assets/common/images/logo.png"/>-->
+        <!--i class="layui-icon layui-icon-component"></i-->
+        <!-- <cite>&nbsp;${systemName}&emsp;</cite> -->
+        <span>AGENT 代理管理中心</span>
+    </div>
+    <ul class="layui-nav layui-layout-left">
+
+        <li class="layui-nav-item" lay-unselect>
+            <a href="/"><i class="layui-icon layui-icon-home" style="font-size: 18px;"></i></a>
+        </li>
+
+
+        <li class="layui-nav-item" lay-unselect>
+            <a ew-event="flexible" title="侧边伸缩"><i class="layui-icon layui-icon-shrink-right"></i></a>
+        </li>
+
+        <li class="layui-nav-item" lay-unselect>
+            <a ew-event="refresh" title="刷新"><i class="layui-icon layui-icon-refresh-3"></i></a>
+        </li>
+    </ul>
+    <ul class="layui-nav layui-layout-right">
+
+<!--        <li class="layui-nav-item layui-hide-xs" lay-unselect>-->
+<!--            <a ew-event="fullScreen" title="全屏"><i class="layui-icon layui-icon-screen-full"></i></a>-->
+<!--        </li>-->
+        <!--https://www.layuiweb.com/demo/layer.html-->
+        <!--<li class="layui-nav-item layui-hide-xs" lay-unselect>-->
+            <!--<button id="bongRight" data-method="setTop" data-type="r" class="layui-btn layui-btn-normal">弹出框</button>-->
+        <!--</li>-->
+        <li class="layui-nav-item" lay-unselect>
+            <a>
+                <img src="${ctxPath}/assets/common/images/touxiang.png" style="height: 30px;border-radius: 50%;padding: 0 10px;">
+                <cite>${name!"用户"}</cite>
+            </a>
+            <dl class="layui-nav-child">
+<!--                <dd lay-unselect>-->
+<!--                    <a ew-href="${ctxPath}/system/user_info">个人中心</a>-->
+<!--                </dd>-->
+                <dd lay-unselect>
+                    <a id="setPsw">修改密码</a>
+                </dd>
+                <hr>
+                <dd lay-unselect>
+                    <a id="btnLogout">退出</a>
+                </dd>
+            </dl>
+        </li>
+        <li class="layui-nav-item" lay-unselect>
+            <a ew-event="theme" title="主题"><i class="layui-icon layui-icon-more-vertical"></i></a>
+        </li>
+    </ul>
+</div>

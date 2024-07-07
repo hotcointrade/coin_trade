@@ -1,0 +1,40 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/chain/public/public_add.js"]}){
+
+<form id="publicForm" lay-filter="publicForm" class="layui-form model-form">
+    <input name="publicId" type="hidden"/>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">提币地址<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="toAddress" id="toAddress" placeholder="请输入提币地址" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">币种</label>
+        <div class="layui-input-block">
+            <select  name="coin" id="coin" >
+                <option value="ETH">ETH</option>
+                <option value="ETH_USDT">USDT</option>
+<!--                <option value="MGM">MGM</option>-->
+<!--                <option value="MGE">MGE</option>-->
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">提币数量<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="price" id="price" placeholder="请输入提币数量" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">谷歌验证码<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="code" id="code" placeholder="请输入谷歌验证码" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>提交</button>
+    </div>
+</form>
+@}

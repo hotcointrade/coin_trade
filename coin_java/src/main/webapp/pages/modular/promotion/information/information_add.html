@@ -1,0 +1,39 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/promotion/information/information_add.js"]}){
+<form id="problemForm" lay-filter="problemForm" class="layui-form model-form">
+    <input name="id" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">标题<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="title" id="title" placeholder="请输入标题" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">分类</label>
+        <div class="layui-input-block">
+            <select id ="categoryId" name="categoryId" >
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">图片</label>
+        <div class="layui-upload">
+            <button type="button" class="layui-btn" id="imageUrl">上传图片</button>
+            <div class="layui-upload-list">
+                <img class="layui-upload-img" id="imageSrc" style="width: 30%;height: 10%;margin-left: 100px">
+                <input name="cover" type="hidden" id="carouselImage" >
+                <p id="imageTest"></p>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">内容<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <textarea name="content" id="content" class="layui-textarea" lay-verify="content"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

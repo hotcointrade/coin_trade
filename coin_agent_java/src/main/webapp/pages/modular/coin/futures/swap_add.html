@@ -1,0 +1,55 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/coin/futures/swap_add.js"]}){
+
+<form id="swapForm" lay-filter="swapForm" class="layui-form model-form">
+    <input name="futuresId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">交易对<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="symbol" id="symbol" placeholder="请输入交易对"  autocomplete="off" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item"  style="display:none;">
+        <label class="layui-form-label">币种类型<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <select name="type" id="type" required >
+                <!--<option value="0">平台币</option>-->
+                <option value="1">火币</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">保留小数点位<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="number" id="number" placeholder="请输入保留小数点位" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">每手价值数量<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="handNumber" id="handNumber" placeholder="请输入每手价值数量" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">建仓手续费率(%)<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="openFeePrice" id="openFeePrice" placeholder="请输入建仓手续费率" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">平仓手续费率(%)<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="closeFeePrice" id="closeFeePrice" placeholder="请输入平仓手续费率" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+<!--    <div class="layui-form-item">-->
+<!--        <label class="layui-form-label">点差<span style="color: red;">*</span></label>-->
+<!--        <div class="layui-input-block">-->
+<!--            <input name="spread" id="spread" placeholder="请输入点差"  autocomplete="off" type="text" class="layui-input" lay-verify="required" required/>-->
+<!--        </div>-->
+<!--    </div>-->
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

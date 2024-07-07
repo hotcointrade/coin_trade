@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.e.mapper.LockRecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.e.entity.LockRecord">
+        <id column="lock_record_id" property="lockRecordId"/>
+        <result column="member_id" property="memberId"/>
+        <result column="lock_id" property="lockId"/>
+        <result column="lock_name" property="lockName"/>
+        <result column="days" property="days"/>
+        <result column="rate" property="rate"/>
+        <result column="number" property="number"/>
+        <result column="price" property="price"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="profit_count" property="profitCount"/>
+        <result column="version" property="version"/>
+        <result column="status" property="status"/>
+        <result column="del" property="del"/>
+        <result column="remark" property="remark"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="UPDATE_USER" property="updateUser"/>
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         lock_record_id as lockRecordId,
+         member_id as memberId,
+         lock_id as lockId,
+         lock_name as lockName,
+         days as days,
+         rate as rate,
+         number as number,
+         price as price,
+         start_time as startTime,
+         end_time as endTime,
+         profit_count as profitCount,
+         version as version,
+         status as status,
+         del as del,
+         remark as remark,
+         CREATE_TIME as createTime,
+         CREATE_USER as createUser,
+         UPDATE_TIME as updateTime,
+        UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from e_lock_record tb where del='N'
+        <if test="condition!=null and condition!=''">
+            and member_id=(select member_id from app_member where account=#{condition})
+        </if>
+        <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+            and (CREATE_TIME between CONCAT(#{beginTime},' 00:00:00') and CONCAT(#{endTime},' 23:59:59'))
+        </if>
+        order by tb.create_time desc
+    </select>
+
+    <select id="autoStandardSum" resultType="java.math.BigDecimal">
+        select
+        ifnull(sum(price),0)
+        from e_lock_record tb where
+        del='N'
+        and member_id=#{memberId}
+        and status=#{status}
+        and lock_id in
+        <foreach collection="lockIds" open="(" separator="," close=")" item="lockid">
+            #{lockid}
+        </foreach>
+
+    </select>
+
+</mapper>

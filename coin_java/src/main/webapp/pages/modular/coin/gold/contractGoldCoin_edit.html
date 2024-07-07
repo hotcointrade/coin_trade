@@ -1,0 +1,177 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/coin/gold/contractGoldCoin_edit.js"]}){
+<form id="contractGoldCoinForm" lay-filter="contractGoldCoinForm" class="layui-form model-form">
+    <input name="id" type="hidden"/>
+		<div class="layui-form-item">
+        <label class="layui-form-label">黄金交易对<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="id" placeholder="请输入黄金交易对" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">交易对<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="symbol" placeholder="请输入交易对" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">交易名称 LTC/USDT预测合约<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="name" placeholder="请输入交易名称 LTC/USDT预测合约" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">币种 LTC<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="coinSymbol" placeholder="请输入币种 LTC" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">基础量价币种 USDT<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="baseSymbol" placeholder="请输入基础量价币种 USDT" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">最新期号<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="maxGoldNo" placeholder="请输入最新期号" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">排序<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="sort" placeholder="请输入排序" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">交易币小数精度<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="coinScale" placeholder="请输入交易币小数精度" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">基币小数精度<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="baseCoinScale" placeholder="请输入基币小数精度" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">启用/禁止 0/1<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="enable" placeholder="请输入启用/禁止 0/1" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">显示 是/否 1/0<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="visible" placeholder="请输入显示 是/否 1/0" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">平局处理 退回资金/平台通吃 1/0<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="tiedType" placeholder="请输入平局处理 退回资金/平台通吃 1/0" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">允许看涨 允许/不允许 1/0<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="enableBuy" placeholder="请输入允许看涨 允许/不允许 1/0" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">允许看跌 允许/不允许 1/0<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="enableSell" placeholder="请输入允许看跌 允许/不允许 1/0" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">允许投注金额 10,20,50,100,200,500,1000<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="amount" placeholder="请输入允许投注金额 10,20,50,100,200,500,1000" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">赔率<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="oods" placeholder="请输入赔率" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">开仓手续费(默认0)<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="feePercent" placeholder="请输入开仓手续费(默认0)" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">赢家抽水费 默认千分之一<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="winFeePercent" placeholder="请输入赢家抽水费 默认千分之一" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">如设置为0.005，则涨跌幅度小于0.5%的会被视为平局<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="ngnorePercent" placeholder="请输入如设置为0.005，则涨跌幅度小于0.5%的会被视为平局" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">初始买涨奖池金额<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="initBuyReward" placeholder="请输入初始买涨奖池金额" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">初始买跌奖池金额<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="initSellReward" placeholder="请输入初始买跌奖池金额" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">黄金合约总盈利<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="totalProfit" placeholder="请输入黄金合约总盈利" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">投注时间周期(秒) 开始到开盘时间间隔（单位：秒， 默认5分钟）<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="openTimeGap" placeholder="请输入投注时间周期(秒) 开始到开盘时间间隔（单位：秒， 默认5分钟）" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">开奖时间周期(秒) 开盘到收盘时间间隔（单位：秒， 默认5分钟<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="closeTimeGap" placeholder="请输入开奖时间周期(秒) 开盘到收盘时间间隔（单位：秒， 默认5分钟" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">创建时间<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="createTime" placeholder="请输入创建时间" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">创建人<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="createUser" placeholder="请输入创建人" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">更新时间<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="updateTime" placeholder="请输入更新时间" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">更新人<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="updateUser" placeholder="请输入更新人" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+	    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

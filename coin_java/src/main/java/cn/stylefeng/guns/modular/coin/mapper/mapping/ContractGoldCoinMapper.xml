@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.stylefeng.guns.modular.coin.mapper.ContractGoldCoinMapper">
+	<resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.coin.entity.ContractGoldCoin">
+            <result column="id" property="id" />
+	        <result column="symbol" property="symbol" />
+	        <result column="name" property="name" />
+	        <result column="coin_Symbol" property="coinSymbol" />
+	        <result column="base_Symbol" property="baseSymbol" />
+	        <result column="max_gold_No" property="maxGoldNo" />
+	        <result column="sort" property="sort" />
+	        <result column="coin_Scale" property="coinScale" />
+	        <result column="base_coin_Scale" property="baseCoinScale" />
+	        <result column="enable" property="enable" />
+	        <result column="visible" property="visible" />
+	        <result column="tied_Type" property="tiedType" />
+	        <result column="enable_Buy" property="enableBuy" />
+	        <result column="enable_sell" property="enableSell" />
+	        <result column="amount" property="amount" />
+	        <result column="oods" property="oods" />
+	        <result column="fee_Percent" property="feePercent" />
+	        <result column="win_Fee_Percent" property="winFeePercent" />
+	        <result column="ngnore_Percent" property="ngnorePercent" />
+	        <result column="init_Buy_Reward" property="initBuyReward" />
+	        <result column="init_Sell_Reward" property="initSellReward" />
+	        <result column="total_Profit" property="totalProfit" />
+	        <result column="open_Time_Gap" property="openTimeGap" />
+	        <result column="close_Time_Gap" property="closeTimeGap" />
+	        <result column="CREATE_TIME" property="createTime" />
+	        <result column="CREATE_USER" property="createUser" />
+	        <result column="UPDATE_TIME" property="updateTime" />
+	        <result column="UPDATE_USER" property="updateUser" />
+		</resultMap>  
+    
+    <!-- 表字段 -->
+    <sql id="Base_Column_List">
+         t.id
+        , t.symbol
+        , t.name
+        , t.coin_Symbol
+        , t.base_Symbol
+        , t.max_gold_No
+        , t.sort
+        , t.coin_Scale
+        , t.base_coin_Scale
+        , t.enable
+        , t.visible
+        , t.tied_Type
+        , t.enable_Buy
+        , t.enable_sell
+        , t.amount
+        , t.oods
+        , t.fee_Percent
+        , t.win_Fee_Percent
+        , t.ngnore_Percent
+        , t.init_Buy_Reward
+        , t.init_Sell_Reward
+        , t.total_Profit
+        , t.open_Time_Gap
+        , t.close_Time_Gap
+        , t.CREATE_TIME
+        , t.CREATE_USER
+        , t.UPDATE_TIME
+        , t.UPDATE_USER
+        </sql> 
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from contract_gold_coin t
+       <where>
+            <if test="condition!=null and condition!=''">
+              -- and title  like concat('%',#{condition},'%')
+            </if>
+        </where>
+        order by t.id desc
+    </select>
+
+
+</mapper>

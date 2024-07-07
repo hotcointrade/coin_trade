@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.bulletin.mapper.AppOperationLogMapper">
+  <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.bulletin.entity.AppOperationLog">
+    <id column="operation_log_id" jdbcType="BIGINT" property="operationLogId" />
+    <result column="log_type" jdbcType="VARCHAR" property="logType" />
+    <result column="log_name" jdbcType="VARCHAR" property="logName" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="class_name" jdbcType="VARCHAR" property="className" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="succeed" jdbcType="VARCHAR" property="succeed" />
+    <result column="method" jdbcType="LONGVARCHAR" property="method" />
+    <result column="message" jdbcType="LONGVARCHAR" property="message" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    operation_log_id, log_type, log_name, user_id, class_name, create_time, succeed,method, message
+  </sql>
+
+  <select id="getLog" resultType="cn.stylefeng.guns.modular.bulletin.entity.AppOperationLog">
+    select * from app_operation_log a
+    where a.user_id=#{memberId}
+    order by create_time desc
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
+  <select id="getLogCount" resultType="int">
+    select count(*) from app_operation_log a
+    where a.user_id=#{memberId}
+    order by create_time desc
+  </select>
+
+  <delete id="deleteLog" >
+    DELETE FROM app_operation_log where TO_DAYS(NOW())-TO_DAYS(create_time)>7;
+  </delete>
+
+
+  <select id="selectByCondition" resultType="map">
+    SELECT a.operation_log_id operationLogId ,
+    a.create_time createTime,
+    a.message message,
+    m.account account,
+    m.phone phone,
+    m.`name` name
+    FROM `app_operation_log` a join app_member m on a.user_id=m.member_id
+    <if test="condition!=null and condition!=''">
+      and m.account like concat('%',#{condition},'%')
+    </if>
+    order by a.create_time desc
+  </select>
+</mapper>

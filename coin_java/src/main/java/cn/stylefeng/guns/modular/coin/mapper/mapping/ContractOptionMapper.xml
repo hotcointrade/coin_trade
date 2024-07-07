@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.coin.mapper.ContractOptionMapper">
+
+     <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.coin.entity.ContractOption">
+        <id column="id" property="id"/>
+        <result column="option_no" property="optionNo"/>
+        <result column="symbol" property="symbol"/>
+        <result column="open_price" property="openPrice"/>
+        <result column="open_time" property="openTime"/>
+        <result column="close_price" property="closePrice"/>
+        <result column="close_time" property="closeTime"/>
+        <result column="total_buy" property="totalBuy"/>
+        <result column="init_buy" property="initBuy"/>
+        <result column="total_buy_count" property="totalBuyCount"/>
+        <result column="total_sell" property="totalSell"/>
+        <result column="init_sell" property="initSell"/>
+        <result column="total_sell_Count" property="totalSellCount"/>
+        <result column="status" property="status"/>
+        <result column="result" property="result"/>
+        <result column="total_Pl" property="totalPl"/>
+        <result column="preset_Price" property="presetPrice"/>
+
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="UPDATE_USER" property="updateUser"/>
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id as id,
+  option_no as optionNo,
+  symbol as symbol,
+  open_price as openPrice,
+  open_time as openTime,
+  close_price as closePrice,
+  close_time as closeTime,
+  total_buy as totalBuy ,
+  init_buy as initBuy ,
+  total_Buy_Count as totalBuyCount,
+    total_sell as totalSell,
+    init_sell  as initSell,
+    total_sell_Count as totalSellCount,
+    status as status,
+    result as result,
+    total_Pl as totalPl,
+    preset_Price  as presetPrice,
+
+         CREATE_TIME as createTime,
+         CREATE_USER as createUser,
+         UPDATE_TIME as updateTime,
+        UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from contract_option tb
+       <where>
+            <if test="optionNo!=null and optionNo!=''">
+              and option_No = #{optionNo}
+            </if>
+           <if test="symbol!=null and symbol!=''">
+               and symbol =#{symbol}
+           </if>
+           <if test="totalBuyCount!=null">
+               and total_Buy_Count &gt;=#{totalBuyCount}
+           </if>
+           <if test="totalSellCount!=null">
+               and total_Sell_Count &gt;=#{totalSellCount}
+           </if>
+           <if test="totalPl!=null">
+               and total_Pl &gt;=#{totalPl}
+           </if>
+        </where>
+
+        order by tb.create_Time desc
+    </select>
+    <select id="selectBySymbolCount" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from contract_option tb
+        where symbol=#{symbol}
+
+        order by tb.create_Time asc limit ${count}
+    </select>
+
+</mapper>

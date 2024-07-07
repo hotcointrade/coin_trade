@@ -1,0 +1,37 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/app/member/member_edit.js"]}){
+<form id="memberForm" lay-filter="memberForm" class="layui-form model-form">
+    <input name="memberId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">账号</label>
+        <div class="layui-input-block">
+            <input name="account" id="account" placeholder="请输入账号" type="text" class="layui-input" readonly/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">是否测试账号</label>
+        <div class="layui-input-block">
+            <select id="remark" name="remark">
+                <option value="">否</option>
+                <option value="TEST">是</option>
+            </select>
+
+        </div>
+    </div>
+  <div class="layui-form-item">
+        <label class="layui-form-label">锁仓赎回币种</label>
+        <div class="layui-input-block">
+            <select id="unlockc" name="unlockc">
+                <option value="USDT">USDT</option>
+                <option value="MGE">MGE</option>
+            </select>
+
+        </div>
+    </div>
+
+
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

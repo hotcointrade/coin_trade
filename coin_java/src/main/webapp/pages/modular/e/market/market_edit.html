@@ -1,0 +1,22 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/e/market/market_edit.js"]}){
+<form id="marketForm" lay-filter="marketForm" class="layui-form model-form">
+    <input name="swapId" type="hidden"/>
+    <input name="type" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">交易对<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="symbol" id="symbol" placeholder="请输入交易对" type="text" class="layui-input" lay-verify="required" required readonly/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">价格/比例<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="price" id="number" placeholder="请输入价格/比例(%)" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

@@ -1,0 +1,40 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/fin/finfutures/contract.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">合约账户</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="condition" class="layui-input" type="text" placeholder="用户"/>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+
+                                @if(shiro.hasPermission("/contract/export_bak")){
+                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出</button>
+                                 @}
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="contractTable" lay-filter="contractTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("/contract/edit_bak")){
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
+    @}
+
+</script>
+
+@}

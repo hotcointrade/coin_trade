@@ -1,0 +1,60 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/app/member/member_all_wallet.js"]}){
+<form id="memberForm" lay-filter="memberForm" class="layui-form model-form">
+    <input name="memberId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">账号</label>
+        <div class="layui-input-block">
+            <input name="account" id="account" placeholder="请输入账号" type="text" class="layui-input" readonly/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">钱包资产</label>
+        <div class="layui-input-block">
+            <input name="walletTotal" id="walletTotal" placeholder="请输入账号" type="text" class="layui-input" readonly/>
+
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">币币资产</label>
+        <div class="layui-input-block">
+            <input name="rechargeTotal" id="rechargeTotal" placeholder="请输入账号" type="text" class="layui-input" readonly/>
+
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">合约资产</label>
+        <div class="layui-input-block">
+            <input name="withdrawalTotal" id="withdrawalTotal" placeholder="请输入账号" type="text" class="layui-input" readonly/>
+
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">期权资产</label>
+        <div class="layui-input-block">
+            <input name="withdrawalTotal" id="withdrawalTotal" placeholder="请输入账号" type="text" class="layui-input" readonly/>
+
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">法币资产</label>
+        <div class="layui-input-block">
+            <input name="withdrawalTotal" id="withdrawalTotal" placeholder="请输入账号" type="text" class="layui-input" readonly/>
+
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">矿机资产</label>
+        <div class="layui-input-block">
+            <input name="withdrawalTotal" id="withdrawalTotal" placeholder="请输入账号" type="text" class="layui-input" readonly/>
+
+        </div>
+    </div>
+
+
+    <!--<div class="layui-form-item text-right">-->
+        <!--<button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>-->
+        <!--<button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>-->
+    <!--</div>-->
+</form>
+@}

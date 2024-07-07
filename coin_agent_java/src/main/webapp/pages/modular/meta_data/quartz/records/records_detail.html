@@ -1,0 +1,18 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/meta_data/quartz/records/records_detail.js"]}){
+<form id="recordsForm" lay-filter="recordsForm" class="layui-form model-form">
+    <input name="id" type="hidden"/>
+    <input name="taskexecuterecordid" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">关键字</label>
+        <div class="layui-input-block">
+            <input name="errorkey"  type="text" placeholder="无" class="layui-input" readonly/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">内容</label>
+        <div class="layui-input-block">
+            <textarea id="errorvalue" name="errorvalue" placeholder="无" class="layui-textarea" readonly></textarea>
+        </div>
+    </div>
+</form>
+@}

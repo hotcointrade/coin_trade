@@ -1,0 +1,119 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/otc/bill/appeal.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">申诉订单管理</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="condition" class="layui-input" type="hidden"  placeholder="买方账号"/>
+                            </div>
+                             <div class="layui-inline">
+                                <input id="buyAccount" class="layui-input" type="text" placeholder="买方账号"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="buyName" class="layui-input" type="text" placeholder="买方昵称"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="sellAccount" class="layui-input" type="text" placeholder="卖方账号"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="sellName" class="layui-input" type="text" placeholder="卖方昵称"/>
+                            </div>
+
+                            <div class="layui-inline">
+                                <label class="layui-form-label">交易方式<span style="color: red;">*</span></label>
+                                <div class="layui-input-block">
+                                    <select name="payMethod" id="payMethod">
+                                        <option value=""></option>
+                                        <option value="ALI_PAY">支付宝</option>
+                                        <option value="WE_CHAT">微信</option>
+                                        <option value="BANK">银行卡</option>
+                                        <option value="PAYPAL">PAYPAL</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="orderNo" class="layui-input" type="text" placeholder="订单号"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="markNo" class="layui-input" type="text" placeholder="参考号"/>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">状态<span style="color: red;">*</span></label>
+                                <div class="layui-input-block">
+                                    <select name="appealStatus" id="appealStatus">
+                                        <option value=""></option>
+                                        <option value="CHECK">待处理</option>
+                                        <option value="PASS">已放币</option>
+                                        <option value="CANCEL">已取消</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">责任方<span style="color: red;">*</span></label>
+                                <div class="layui-input-block">
+                                    <select name="duty" id="duty">
+                                        <option value=""></option>
+                                        <option value="BUY">买方责任</option>
+                                        <option value="SELL">卖方责任</option>
+                                        <option value="NO">双方无责</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="layui-inline">
+                                <input id="timeLimit" class="layui-input" type="text" placeholder="时间范围"/>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索
+                                </button>
+
+                                @if(shiro.hasPermission("/bill/export_bak")){
+                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出
+                                </button>
+                                @}
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="billTable" lay-filter="billTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="tableBarDetail">
+    {{#  if(d.img){ }}
+    <a class="layui-btn layui-btn layui-btn-xs layui-icon layui-icon-picture" lay-event="imgDetail">查看图片</a>
+    {{# } }}
+</script>
+<script type="text/html" id="tableBarDetail1">
+    {{#  if(d.img1){ }}
+    <a class="layui-btn layui-btn layui-btn-xs layui-icon layui-icon-picture" lay-event="imgDetail1">查看图片</a>
+    {{# } }}
+</script>
+
+<script type="text/html" id="tableBar">
+    {{# if(d.appealStatus==='CHECK'){ }}
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="pass">放币</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="fail">取消订单</a>
+    {{# } }}
+</script>
+
+
+<script type="text/html" id="tableBarDuty">
+    {{# if(d.duty==null ){ }}
+    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="dutyBuy">买方责任</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="dutySell">卖方责任</a>
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="dutyNull">双方无责</a>
+    {{# } }}
+</script>
+
+
+@}

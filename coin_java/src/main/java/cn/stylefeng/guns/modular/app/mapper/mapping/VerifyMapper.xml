@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.app.mapper.VerifyMapper">
+
+     <!-- 通用查询映射结果 -->
+   <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.app.entity.Verify">
+     <id column="verify_id" property="verifyId"/>
+     <result column="member_id" property="memberId"/>
+     <result column="name" property="name"/>
+     <result column="id_card" property="idCard"/>
+     <result column="type" property="type"/>
+     <result column="front_img" property="frontImg"/>
+     <result column="back_img" property="backImg"/>
+     <result column="status" property="status"/>
+     <result column="del" property="del"/>
+     <result column="remark" property="remark"/>
+     <result column="CREATE_TIME" property="createTime"/>
+     <result column="CREATE_USER" property="createUser"/>
+     <result column="UPDATE_TIME" property="updateTime"/>
+     <result column="UPDATE_USER" property="updateUser"/>
+     </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         tb.verify_id as verifyId,
+         tb.member_id as memberId,
+         tb.fist_name fistName,
+         tb.last_name lastName,
+         tb.name as name,
+         tb.id_card as idCard,
+         tb.type as type,
+         tb.front_img as frontImg,
+         tb.back_img as backImg,
+         tb.status as status,
+         tb.del as del,
+         tb.remark as remark,
+         tb.CREATE_TIME as createTime,
+         tb.CREATE_USER as createUser,
+         tb.UPDATE_TIME as updateTime,
+        tb.UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from app_verify tb
+         inner join  app_member am on am.member_id = tb.member_id
+         where tb.del='N'
+         <if test="condition!=null and condition!=''">
+          and am.account like concat('%',#{condition},'%')
+        </if>
+        order by tb.create_time desc
+    </select>
+
+</mapper>

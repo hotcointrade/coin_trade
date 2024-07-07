@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.otc.mapper.AppealMapper">
+
+     <!-- 通用查询映射结果 -->
+   <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.otc.entity.Appeal">
+     <id column="appeal_id" property="appealId"/>
+     <result column="opid" property="opid"/>
+     <result column="type" property="type"/>
+     <result column="buy_mid" property="buyMid"/>
+     <result column="buy_name" property="buyName"/>
+     <result column="sell_mid" property="sellMid"/>
+     <result column="sell_name" property="sellName"/>
+     <result column="order_no" property="orderNo"/>
+     <result column="mark_no" property="markNo"/>
+     <result column="coin" property="coin"/>
+     <result column="unit_price" property="unitPrice"/>
+     <result column="number" property="number"/>
+     <result column="cny" property="cny"/>
+     <result column="pay_method" property="payMethod"/>
+     <result column="pay_name" property="payName"/>
+     <result column="pay_account" property="payAccount"/>
+     <result column="pay_img" property="payImg"/>
+     <result column="bank" property="bank"/>
+     <result column="branch" property="branch"/>
+     <result column="pay_time" property="payTime"/>
+     <result column="order_time" property="orderTime"/>
+     <result column="appeal_type" property="appealType"/>
+     <result column="content" property="content"/>
+     <result column="img" property="img"/>
+     <result column="duty" property="duty"/>
+     <result column="version" property="version"/>
+     <result column="status" property="status"/>
+     <result column="del" property="del"/>
+     <result column="remark" property="remark"/>
+     <result column="CREATE_TIME" property="createTime"/>
+     <result column="CREATE_USER" property="createUser"/>
+     <result column="UPDATE_TIME" property="updateTime"/>
+     <result column="UPDATE_USER" property="updateUser"/>
+     </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         appeal_id as appealId,
+         opid as opid,
+         type as type,
+         buy_mid as buyMid,
+         buy_name as buyName,
+         sell_mid as sellMid,
+         sell_name as sellName,
+         order_no as orderNo,
+         mark_no as markNo,
+         coin as coin,
+         unit_price as unitPrice,
+         number as number,
+         cny as cny,
+         pay_method as payMethod,
+         pay_name as payName,
+         pay_account as payAccount,
+         pay_img as payImg,
+         bank as bank,
+         branch as branch,
+         pay_time as payTime,
+         order_time as orderTime,
+         appeal_type as appealType,
+         content as content,
+         img as img,
+         duty as duty,
+         version as version,
+         status as status,
+         del as del,
+         remark as remark,
+         CREATE_TIME as createTime,
+         CREATE_USER as createUser,
+         UPDATE_TIME as updateTime,
+        UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from otc_appeal tb where del='N'
+        <if test="condition!=null and condition!=''">
+          and name like concat('%',#{condition},'%')
+        </if>
+        <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+            and (CREATE_TIME between CONCAT(#{beginTime},' 00:00:00') and CONCAT(#{endTime},' 23:59:59'))
+        </if>
+        order by tb.create_time desc
+    </select>
+
+</mapper>

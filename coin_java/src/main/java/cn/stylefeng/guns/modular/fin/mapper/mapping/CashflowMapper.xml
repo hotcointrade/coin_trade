@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.fin.mapper.CashflowMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.fin.entity.Cashflow">
+        <id column="cashflow_id" property="cashflowId"/>
+        <result column="member_id" property="memberId"/>
+        <result column="wallet_type" property="walletType"/>
+        <result column="flow_op" property="flowOp"/>
+        <result column="flow_type" property="flowType"/>
+        <result column="item_code" property="itemCode"/>
+        <result column="item_name" property="itemName"/>
+        <result column="before_price" property="beforePrice"/>
+        <result column="after_price" property="afterPrice"/>
+        <result column="flow_price" property="flowPrice"/>
+        <result column="flow_coin" property="flowCoin"/>
+        <result column="actual_price" property="actualPrice"/>
+        <result column="actual_coin" property="actualCoin"/>
+        <result column="fee" property="fee"/>
+        <result column="fee_coin" property="feeCoin"/>
+        <result column="source" property="source"/>
+        <result column="detail" property="detail"/>
+        <result column="status" property="status"/>
+        <result column="from_id" property="fromId"/>
+        <result column="to_id" property="toId"/>
+        <result column="del" property="del"/>
+        <result column="remark" property="remark"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="UPDATE_USER" property="updateUser"/>
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         tb.cashflow_id as cashflowId,
+         tb.member_id as memberId,
+         tb.wallet_type as walletType,
+         tb.flow_op as flowOp,
+         tb.flow_type as flowType,
+         tb.item_code as itemCode,
+         tb.item_name as itemName,
+         tb.before_price as beforePrice,
+         tb.after_price as afterPrice,
+         tb.flow_price as flowPrice,
+         tb.flow_coin as flowCoin,
+         tb.actual_price as actualPrice,
+         tb.actual_coin as actualCoin,
+         tb.fee as fee,
+         tb.fee_coin as feeCoin,
+         tb.source as source,
+         tb.detail as detail,
+         tb.status as status,
+         tb.from_id as fromId,
+         tb.to_id as toId,
+         tb.del as del,
+         tb.remark as remark,
+         tb.CREATE_TIME as createTime,
+         tb.CREATE_USER as createUser,
+         tb.UPDATE_TIME as updateTime,
+         tb.UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from fin_cashflow tb
+        left  join  app_member am on  tb.member_id = am.member_id
+         where tb.del='N'
+        <if test="condition!=null and condition!=''">
+            and tb.member_id=(select member_id from app_member m where m.account=#{condition})
+        </if>
+        <if test="flowType!=null and flowType!=''">
+            and tb.flow_type=#{flowType}
+        </if>
+         <if test="itemCode!=null and itemCode!=''">
+            and tb.item_code=#{itemCode}
+        </if>
+        <if test="memberId != null and memberId !=''">
+            and (am.member_id = #{memberId}  or am.parent_referee_id like concat('%',#{recommendIds}))
+        </if>
+        order by tb.create_time desc
+    </select>
+
+    <select id="getBtcWithdrawalPrice" resultType="java.math.BigDecimal">
+            select
+     (select IFNULL(sum(c.flow_price),0) from fin_cashflow c where c.flow_type='WITHDRAW' and c.flow_op='0'  and del='N' and c.member_id=#{memberId})
+     -(select IFNULL(sum(c.flow_price),0) from fin_cashflow c where c.flow_type='WITHDRAW_REJECT' and c.flow_op='1'  and del='N' and c.member_id=#{memberId})
+     from dual
+
+    </select>
+
+
+    <select id="getCurrentPerformance" resultType="java.math.BigDecimal">
+        SELECT
+        IFNULL( sum( c.flow_price ), 0 )
+        FROM
+        fin_cashflow c
+        WHERE
+        del = 'N'
+        AND c.flow_type = #{flowType}
+        AND c.flow_coin=#{coin}
+        AND TO_DAYS( NOW( ) ) - TO_DAYS( create_time )  &lt;= 1
+        AND c.member_id IN ( SELECT member_id FROM app_member am WHERE am.parent_referee_id LIKE concat( '%/', #{memberId}, '/%' ) )
+    </select>
+
+    <select id="getCurrentPerformanceCashList" resultType="cn.stylefeng.guns.modular.fin.entity.Cashflow">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        fin_cashflow c
+        WHERE
+        c.wallet_type = 'T'
+        AND c.flow_op = '1'
+        AND c.flow_type = 'BUY_POWER'
+        AND del = 'N'
+        AND TO_DAYS( NOW( ) ) - TO_DAYS( create_time ) &lt;= 1
+        AND c.member_id IN ( SELECT member_id FROM app_member am WHERE am.parent_referee_id LIKE concat( '%/',
+        #{memberId}, '/%' ) )
+    </select>
+
+    <select id="getSumNewBuyPriceByArea" resultType="java.math.BigDecimal">
+        SELECT
+        ifNULL(sum(fc.flow_price),0)
+        FROM
+        fin_cashflow fc
+        INNER JOIN app_member am ON fc.member_id = am.member_id
+        where
+        fc.flow_op='1' and fc.flow_type='BUY_POWER' and fc.del='N' and fc.wallet_type='T'
+        and TO_DAYS(now())-TO_DAYS(fc.CREATE_TIME) &lt;= 1
+        <if test="member.areaIdProxyId!=null and member.areaIdProxyId!=''">
+            and am.area_id=#{member.areaIdProxyId}
+        </if>
+        <if test="member.cityProxyId!=null and member.cityProxyId!=''">
+            and am.city_id=#{member.cityProxyId}
+        </if>
+        <if test="member.provinceProxyId!=null and member.provinceProxyId!=''">
+            and am.province_id=#{member.provinceProxyId}
+        </if>
+    </select>
+    <select id="getBuyPowerForDirectNumber" resultType="java.math.BigDecimal">
+        SELECT
+        ifNULL(sum(fc.flow_price),0)
+        FROM
+        fin_cashflow fc
+        INNER JOIN app_member am ON fc.member_id = am.member_id
+        where
+        fc.flow_op='1' and fc.flow_type='BUY_POWER' and fc.del='N' and fc.wallet_type='T'
+        and fc.status='Y' and am.referee_id=#{memberId}
+    </select>
+    <!-- 今日新增 算力 -->
+    <select id="getTodayNewPower" resultType="java.math.BigDecimal">
+        select IFNULL(sum(flow_price),0) from fin_cashflow c where del='N' and  TO_DAYS( NOW( ) ) - TO_DAYS(create_time) &lt;= 1 and c.wallet_type='T' and c.flow_op='1' and `status` = 'Y'
+    </select>
+    <select id="getTodayBtc" resultType="java.math.BigDecimal">
+        select IFNULL(sum(flow_price),0) from fin_cashflow where del='N' and  TO_DAYS( NOW( ) ) - TO_DAYS(create_time) &lt;= 1 and flow_type='MINING'
+    </select>
+    <select id="totalTodayPerformance" resultType="java.math.BigDecimal">
+        select IFNULL(sum(flow_price),0)
+        from fin_cashflow c
+        where del='N' and TO_DAYS( NOW( ) ) - TO_DAYS(create_time) &lt;= 1
+        <if test="flowType!=null">
+            and flow_type=#{flowType}
+        </if>
+        <if test="coin!=null">
+            and flow_coin=#{coin}
+        </if>
+        <if test="memberId!=null">
+            AND c.member_id IN ( SELECT member_id FROM app_member am WHERE am.parent_referee_id LIKE concat( '%/',
+            #{memberId}, '/%' ) )
+        </if>
+    </select>
+
+    <select id="getCurrentBuyPowerCashflow" resultType="cn.stylefeng.guns.modular.fin.entity.Cashflow">
+        select
+        <include refid="Base_Column_List"/>
+        from fin_cashflow c where c.wallet_type='T' and c.flow_op='1' and c.flow_type='BUY_POWER' and del='N' and
+        TO_DAYS( NOW( ) ) - TO_DAYS(create_time) &lt;= 1
+    </select>
+
+    <select id="getTotalPrice" parameterType="list" resultType="java.math.BigDecimal">
+        SELECT
+        IFNULL(sum(fc.flow_price),0)
+        FROM
+        fin_cashflow fc
+        WHERE
+        fc.`status` = 'Y'
+        AND fc.flow_type = 'BUY_POWER'
+        AND fc.flow_op =1
+        and member_id in
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item.memberId}
+        </foreach>
+    </select>
+
+    <select id="getWillExpire" resultType="cn.stylefeng.guns.modular.fin.entity.Cashflow">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        fin_cashflow fc
+        WHERE
+        fc.del='N'
+        AND fc.`status` = 'Y'
+        AND fc.wallet_type = = 'T'
+        AND fc.flow_op =1
+        AND TO_DAYS(now())-TO_DAYS(fc.create_time)=#{powerDay}
+    </select>
+    <select id="getSumPrice" resultType="java.math.BigDecimal">
+        select IFNULL(sum(flow_price),0)
+        from fin_cashflow c
+        where del='N'
+        <if test="flowType!=null">
+            and flow_type=#{flowType}
+        </if>
+        <if test="memberId!=null">
+            and c.member_id =#{memberId}
+        </if>
+    </select>
+
+    <select id="bossTotal" resultType="java.math.BigDecimal">
+    SELECT
+        ifNULL( sum( flow_price ), 0 )
+    FROM
+        fin_cashflow c
+    WHERE
+        del = 'N'
+        <if test="i!=null">
+            AND TO_DAYS( NOW( ) ) = TO_DAYS( create_time )
+        </if>
+        AND flow_type = 'ARRANGE'
+    </select>
+    <select id="teamToday" resultType="java.math.BigDecimal">
+        SELECT
+        ifNULL( sum( flow_price ), 0 )
+        FROM
+        fin_cashflow c
+        WHERE
+        del = 'N'
+        <if test="i!=null">
+            AND TO_DAYS( NOW( ) ) = TO_DAYS( create_time )
+        </if>
+        AND flow_type = 'COMMON_PROFIT'
+        and flow_op='1'
+        and wallet_type='RCC_FROZEN'
+        AND c.member_id IN ( SELECT member_id FROM app_member am WHERE am.parent_referee_id LIKE concat( '%/',
+        #{memberId}, '/%' ) )
+    </select>
+
+    <select id="teamAwardList" resultType="map">
+       SELECT
+        sum( flow_price ) sum,
+        from_days( TO_DAYS( CREATE_TIME ) ) date
+    FROM
+        fin_cashflow c
+    WHERE
+        del = 'N'
+        AND flow_op = '1'
+        AND flow_type = 'COMMON_PROFIT'
+        AND wallet_type = 'RCC_FROZEN'
+        AND c.member_id =#{memberId}
+    GROUP BY
+        from_days( TO_DAYS( CREATE_TIME ) )
+    </select>
+    <select id="teamAwardSum" resultType="java.math.BigDecimal">
+       SELECT
+        sum( flow_price ) sum
+    FROM
+        fin_cashflow c
+    WHERE
+        del = 'N'
+        AND flow_op = '1'
+        AND flow_type = 'COMMON_PROFIT'
+        AND wallet_type = 'RCC_FROZEN'
+        AND c.member_id =#{memberId}
+
+    </select>
+
+    <select id="getBalance" resultType="java.math.BigDecimal">
+      SELECT IFNULL(sum(flow_price),0) FROM `fin_cashflow` c
+       where del='N'
+       and wallet_type='CONTRACT'
+       and item_code='USED'
+       and status is null
+       and flow_type=#{flowType}
+        AND c.member_id =#{memberId}
+        and item_name=#{coin}
+    </select>
+    <update id="updateConvert">
+        update fin_cashflow set status='N'
+        where member_id=#{memberId}
+        and status is null
+        and item_name=#{coin}
+        and to_days(create_time) &lt;=to_days(now())
+    </update>
+</mapper>

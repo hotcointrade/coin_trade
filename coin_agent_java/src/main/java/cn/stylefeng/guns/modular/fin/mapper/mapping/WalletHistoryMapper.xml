@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.fin.mapper.WalletHistoryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.fin.entity.WalletHistory">
+        <id column="wallet_history_id" property="walletHistoryId"/>
+        <result column="member_id" property="memberId"/>
+        <result column="total_price" property="totalPrice"/>
+        <result column="return_price" property="returnPrice"/>
+        <result column="ticket_price" property="ticketPrice"/>
+        <result column="type" property="type"/>
+        <result column="version" property="version"/>
+        <result column="status" property="status"/>
+        <result column="del" property="del"/>
+        <result column="remark" property="remark"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="UPDATE_USER" property="updateUser"/>
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         wallet_history_id as walletHistoryId,
+         member_id as memberId,
+         total_price as totalPrice,
+         return_price as returnPrice,
+         ticket_price as ticketPrice,
+         type as type,
+         version as version,
+         status as status,
+         del as del,
+         remark as remark,
+         CREATE_TIME as createTime,
+         CREATE_USER as createUser,
+         UPDATE_TIME as updateTime,
+        UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from fin_wallet_history tb where del='N'
+        <if test="condition!=null and condition!=''">
+            and name like concat('%',#{condition},'%')
+        </if>
+        order by tb.create_time desc
+    </select>
+
+    <select id="getLastDateHistory" resultType="cn.stylefeng.guns.modular.app.dto.WalletDtoLine" parameterType="cn.stylefeng.guns.modular.fin.entity.WalletHistory">
+        select
+        total_price as price,
+        CREATE_TIME as time,
+        UNIX_TIMESTAMP(CREATE_TIME) stamp
+        from fin_wallet_history tb where del='N'
+        <if test="memberId!=null and memberId!=''">
+            and member_id=#{memberId}
+        </if>
+        <if test="type!=null and type!=''">
+            and type=#{type}
+        </if>
+        order by tb.create_time desc
+        limit 19
+    </select>
+
+</mapper>

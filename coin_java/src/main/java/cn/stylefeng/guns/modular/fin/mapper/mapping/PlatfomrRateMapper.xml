@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.fin.mapper.PlatfomrRateMapper">
+
+     <!-- 通用查询映射结果 -->
+   <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.fin.entity.PlatfomrRate">
+     <id column="platform_rate_id" property="platformRateId"/>
+     <result column="rate_name" property="rateName"/>
+     <result column="rate_code" property="rateCode"/>
+     <result column="number" property="number"/>
+     <result column="sign" property="sign"/>
+     <result column="sort" property="sort"/>
+     <result column="del" property="del"/>
+     <result column="remark" property="remark"/>
+     <result column="CREATE_TIME" property="createTime"/>
+     <result column="CREATE_USER" property="createUser"/>
+     <result column="UPDATE_TIME" property="updateTime"/>
+     <result column="UPDATE_USER" property="updateUser"/>
+     </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         platform_rate_id as platformRateId,
+         rate_name as rateName,
+         rate_code as rateCode,
+         number as number,
+         sign as sign,
+         sort as sort,
+         del as del,
+         remark as remark,
+         CREATE_TIME as createTime,
+         CREATE_USER as createUser,
+         UPDATE_TIME as updateTime,
+        UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from fin_platform_rate tb where del='N'
+        <if test="condition!=null and condition!=''">
+          and name like concat('%',#{condition},'%')
+        </if>
+        <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+            and (CREATE_TIME between CONCAT(#{beginTime},' 00:00:00') and CONCAT(#{endTime},' 23:59:59'))
+        </if>
+        <!--order by tb.create_time desc-->
+    </select>
+
+</mapper>

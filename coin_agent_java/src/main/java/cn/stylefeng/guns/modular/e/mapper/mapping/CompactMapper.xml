@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.e.mapper.CompactMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.e.entity.Compact">
+        <id column="compact_id" property="compactId"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="member_id" property="memberId"/>
+        <result column="deal_way" property="dealWay"/>
+        <result column="compact_type" property="compactType"/>
+        <result column="symbols" property="symbols"/>
+        <result column="unit" property="unit"/>
+        <result column="numbers" property="numbers"/>
+        <result column="exit_price" property="exitPrice"/>
+        <result column="stop_loss" property="stopLoss"/>
+        <result column="stop_profit" property="stopProfit"/>
+        <result column="pl" property="pl"/>
+        <result column="give_pl" property="givePl"/>
+        <result column="tpl" property="tpl"/>
+        <result column="exit_type" property="exitType"/>
+        <result column="exit_time" property="exitTime"/>
+        <result column="trade_price" property="tradePrice"/>
+        <result column="lever_name" property="leverName"/>
+        <result column="lever_rate" property="leverRate"/>
+        <result column="coin" property="coin"/>
+        <result column="fee" property="fee"/>
+        <result column="total_price" property="totalPrice"/>
+        <result column="position_price" property="positionPrice"/>
+        <result column="give_price" property="givePrice"/>
+        <result column="version" property="version"/>
+        <result column="status" property="status"/>
+        <result column="del" property="del"/>
+        <result column="remark" property="remark"/>
+
+        <result column="enabled" property="enabled"/>
+        <result column="crossed" property="crossed"/>
+        <result column="csnumber" property="csnumber"/>
+
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="UPDATE_USER" property="updateUser"/>
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         tb.compact_id as compactId,
+         tb.order_no as orderNo,
+         tb.member_id as memberId,
+         tb.deal_way as dealWay,
+         tb.compact_type as compactType,
+         tb.symbols as symbols,
+         tb.unit as unit,
+         tb.numbers as numbers,
+         tb.exit_price as exitPrice,
+        tb.stop_loss as stopLoss,
+         tb.stop_profit as stopProfit,
+         tb.pl as pl,
+         tb.give_pl as givePl,
+         tb.tpl as tpl,
+         tb.exit_type as exitType,
+         tb.exit_time as exitTime,
+         tb.trade_price as tradePrice,
+         tb.lever_name as leverName,
+         tb.lever_rate as leverRate,
+         tb.fee as fee,
+         tb.total_price as totalPrice,
+         tb.position_price as positionPrice,
+         tb.give_price as givePrice,
+         tb.version as version,
+         tb.status as status,
+         tb.coin as coin,
+         tb.del as del,
+         tb.remark as remark,
+         tb.enabled,crossed,csnumber,
+         tb.CREATE_TIME as createTime,
+         tb.CREATE_USER as createUser,
+         tb.UPDATE_TIME as updateTime,
+        tb.UPDATE_USER as updateUser,
+        tb.hand_number handNumber,
+        tb.close_number closeNumber,
+        tb.hand_price handPrice,
+        tb.close_fee_price closeFeePrice,
+        tb.exit_position_price exitPositionPrice
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+        select
+             tb.compact_id as compactId,
+             am.phone,
+             am.email,
+         tb.order_no as orderNo,
+         tb.member_id as memberId,
+         tb.deal_way as dealWay,
+         tb.compact_type as compactType,
+         tb.symbols as symbols,
+         tb.unit as unit,
+         tb.numbers as numbers,
+         tb.exit_price as exitPrice,
+        tb.stop_loss as stopLoss,
+         tb.stop_profit as stopProfit,
+         tb.pl as pl,
+         tb.give_pl as givePl,
+         tb.tpl as tpl,
+         tb.exit_type as exitType,
+         tb.exit_time as exitTime,
+         tb.trade_price as tradePrice,
+         tb.lever_name as leverName,
+         tb.lever_rate as leverRate,
+         tb.fee as fee,
+         tb.total_price as totalPrice,
+         tb.position_price as positionPrice,
+         tb.give_price as givePrice,
+         tb.version as version,
+         tb.status as status,
+         tb.coin as coin,
+         tb.del as del,
+         tb.remark as remark,
+         tb.enabled,crossed,csnumber,
+         tb.CREATE_TIME as createTime,
+         tb.CREATE_USER as createUser,
+         tb.UPDATE_TIME as updateTime,
+        tb.UPDATE_USER as updateUser,
+        tb.hand_number handNumber,
+        tb.close_number closeNumber,
+        tb.hand_price handPrice,
+        tb.close_fee_price closeFeePrice,
+        tb.exit_position_price exitPositionPrice
+        from e_compact tb
+        inner  join  app_member am on  tb.member_id = am.member_id
+        where tb.del='N' and am.del = 'N'
+        <if test="map.condition!=null and map.condition!=''">
+            and tb.member_id=(select member_id from app_member where account=#{map.condition})
+        </if>
+          <if test="map.memberId != null and map.memberId != ''">
+             and (am.member_id = #{map.memberId}  or am.parent_referee_id like concat('%',#{map.recommendIds}))
+        </if>
+         <if test="map.phone != null and map.phone != ''">
+             and am.phone = #{map.phone}
+        </if>
+        <if test="map.email != null and map.email != ''">
+             and am.email = #{map.email}
+        </if>
+         <if test="map.symbols != null and map.symbols != ''">
+             and tb.symbols = #{map.symbols}
+        </if>
+        <if test="map.dealWay != null and map.dealWay != ''">
+             and tb.deal_way = #{map.dealWay}
+        </if>
+        <if test="map.compactType != null and map.compactType != ''">
+             and tb.compact_type = #{map.compactType}
+        </if>
+         <if test="map.exitType != null and map.exitType != ''">
+             and tb.exit_type = #{map.exitType}
+        </if>
+        <if test="map.status != null and map.status != ''">
+             and tb.status = #{map.status}
+        </if>
+        <if test="map.exitBeginTime != null and map.exitBeginTime != '' and map.exitEndTime != null and map.exitEndTime != ''">
+          		 and (tb.exit_time between #{map.exitBeginTime} and #{map.exitEndTime}) and tb.status = "Y"
+      	</if>
+        order by tb.create_time desc
+    </select>
+
+    <select id="getTotalMap" resultType="map">
+        select
+            IFNULL(SUM(tb.fee),0) fee,
+            IFNULL(SUM(tb.close_fee_price),0) closeFeePrice,
+            IFNULL(SUM(tb.tpl),0) tpl,
+            IFNULL(SUM(tb.position_price),0) positionPrice
+        from e_compact tb
+        inner  join  app_member am on  tb.member_id = am.member_id
+        where tb.del='N'
+          <if test="condition!=null and condition!=''">
+            and tb.member_id=(select member_id from app_member where account=#{condition})
+        </if>
+          <if test="memberId != null and memberId != ''">
+             and (am.member_id = #{memberId}  or am.parent_referee_id like concat('%',#{recommendIds}))
+        </if>
+         <if test="phone != null and phone != ''">
+             and am.phone = #{phone}
+        </if>
+        <if test="email != null and email != ''">
+             and am.email = #{email}
+        </if>
+         <if test="symbols != null and symbols != ''">
+             and tb.symbols = #{symbols}
+        </if>
+        <if test="dealWay != null and dealWay != ''">
+             and tb.deal_way = #{dealWay}
+        </if>
+        <if test="compactType != null and compactType != ''">
+             and tb.compact_type = #{compactType}
+        </if>
+         <if test="exitType != null and exitType != ''">
+             and tb.exit_type = #{exitType}
+        </if>
+        <if test="status != null and status != ''">
+             and tb.status = #{status}
+        </if>
+        <if test="exitBeginTime != null and exitBeginTime != '' and exitEndTime != null and exitEndTime != ''">
+          		 and (tb.exit_time between #{exitBeginTime} and #{exitEndTime}) and tb.status = "Y"
+      	</if>
+    </select>
+
+    <select id="getMemberIdList" resultType="java.lang.Long">
+      SELECT ec.member_id FROM `e_compact` ec
+      inner  join app_member am on am.member_id = ec.member_id
+      where ec.`status`='N' GROUP BY ec.member_id
+    </select>
+
+    <select id="getMidsByInAndN" resultType="java.lang.Long">
+      SELECT member_id FROM `e_compact`
+      where status in('N','IN') GROUP BY member_id
+    </select>
+
+    <select id="getEntrust" resultType="cn.stylefeng.guns.modular.e.entity.Compact">
+        select
+        <include refid="Base_Column_List"/>
+        from e_compact tb where del='N'
+        and status='IN'
+    </select>
+
+    <update id="updateEntrust" parameterType="cn.stylefeng.guns.modular.e.entity.Compact">
+        update e_compact set status=#{status} ,version=#{version}+1
+        where compact_id=#{compactId} and version=#{version}
+    </update>
+
+    <select id="handleTotal" resultType="java.math.BigDecimal">
+        SELECT ifNULL(sum(tpl),0)-ifNULL(sum(fee),0) FROM e_compact where del='N' and status='Y' and enabled='N'
+        and member_id=#{memberId}  and coin=#{coin}
+    </select>
+
+    <select id="getPositionTotal" resultType="java.math.BigDecimal">
+        SELECT ifNULL(sum(position_price),0)
+        FROM e_compact
+        where
+        del='N'
+        and status='N'
+        and enabled='N'
+        and member_id=#{memberId}
+        and coin=#{coin}
+    </select>
+
+    <select id="getPositionTotalFix" resultType="java.math.BigDecimal">
+        SELECT ifnull(sum(tpl),0)-ifNULL(sum(fee),0)
+        FROM e_compact
+        where
+        del='N'
+        and status='Y'
+        and member_id=#{memberId}
+         and enabled='N'
+        and coin=#{coin}
+    </select>
+
+
+    <select id="getIn" resultType="java.math.BigDecimal">
+         SELECT ifNULL(sum(numbers),0)
+        FROM e_compact
+        where
+        del='N'
+        and status='IN'
+         and enabled='N'
+        and member_id=#{memberId}
+        and coin=#{coin}
+    </select>
+
+
+    <select id="getPositionTotalStatus" resultType="java.math.BigDecimal">
+         SELECT
+             <if test='status != null and status =="N"'>
+                 ifNULL(sum(position_price),0)
+             </if>
+            <if test="status == null">
+                ifNULL(sum(position_price),0)
+            </if>
+            <if test='status != null and status =="IN"'>
+                ifNULL(sum(position_price+fee),0)
+            </if>
+        FROM e_compact
+        where
+        del='N'
+         and enabled='N'
+        and status=#{status}
+        and member_id=#{memberId}
+         and coin=#{coin}
+    </select>
+
+    <update id="updateBoomBeforeOrder">
+        update e_compact set enabled='Y'
+        where member_id=#{memberId}
+        and enabled='N'
+        and coin=#{coin}
+        and to_days(create_time) &lt;= to_days(now())
+    </update>
+
+    <update id="updateCross">
+         update e_compact set crossed='Y',csnumber=#{partPrice}
+         where compact_id=#{compactId}
+    </update>
+    <select id="getHold" resultType="int">
+        select
+        count(1)
+        from e_compact tb where del='N'
+        and member_id=#{memberId}
+        and coin=#{coin}
+        and status in('N','IN')
+    </select>
+
+</mapper>

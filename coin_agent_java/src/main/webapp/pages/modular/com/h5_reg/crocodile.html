@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>ImBuy</title>
+		<link rel="stylesheet" href="${ctxPath}/assets/common/css/weui.css" />
+		<link rel="stylesheet" href="${ctxPath}/assets/common/css/weui-jquery.css" />
+		<link rel="stylesheet" href="${ctxPath}/assets/common/css/crocodile.css" />
+	</head>
+	<body>
+		<div class="weui-cells weui-cells_form">
+			<div class="formInput">
+				<div class="weui-cell">
+					<div class="weui-cell__bd">
+						<input class="weui-input" id="registerTel" type="number" placeholder="请输入手机号码" />
+					</div>
+				</div>
+				<div class="weui-cell">
+					<div class="weui-cell__bd">
+						<input class="weui-input" id="registerPwd" type="password" placeholder="请设置登录密码" />
+					</div>
+				</div>
+				<div class="weui-cell">
+					<div class="weui-cell__bd">
+						<input class="weui-input" id="registerrePwd" type="password" placeholder="请确认登录密码" />
+					</div>
+				</div>
+				<div class="weui-cell">
+					<div class="weui-cell__bd">
+						<input class="weui-input" id="registervite" type="text" value="${invite}" attr="${url}" placeholder="请输入邀请码" />
+					</div>
+				</div>
+				<div class="weui-cell weui-cell_vcode">
+				    <div class="weui-cell__bd">
+				      <input class="weui-input" id="getCode"  type="number" placeholder="请输入验证码" />
+				    </div>
+				    <div class="weui-cell__ft">
+				      <input id="getBtn" type="button" value="获取验证码" />
+				    </div>
+				</div>
+				<p class="registerB">
+					注册即阅读并同意<a>《用户协议》</a>
+				</p>
+			</div>
+			<button class="weui-btn mybgBtn" id="registerBtn">注册</button>
+		</div>
+		<script type="text/javascript" src="${ctxPath}/assets/common/js/jquery.min.js" ></script>
+		<script type="text/javascript" src="${ctxPath}/assets/common/js/jquery-weui.js" ></script>
+		<script type="text/javascript" src="${ctxPath}/assets/common/js/weui.min.js" ></script>
+		<script type="text/javascript" src="${ctxPath}/assets/common/js/crocodile.js" ></script>
+	</body>
+</html>

@@ -1,0 +1,104 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/fin/te/teManagement_edit.js"]}){
+<form id="teManagementForm" lay-filter="teManagementForm" class="layui-form model-form">
+    <input name="id" type="hidden"/>
+		<div class="layui-form-item">
+        <label class="layui-form-label">标题<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="title" placeholder="请输入标题" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-inline" style="padding: 14px 110px 24px;">
+        <button type="button" class="layui-btn" id="test1">上传图标</button>
+    </div>
+    <div class="layui-inline">
+        <div class="layui-upload-list">
+            <img class="layui-upload-img" name="mainImg" id="demo1" style="width: 40px;height: 40px;" >
+            <p id="demoText"></p>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">描述<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="describes" placeholder="请输入描述" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">发行总量<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="issuanceCount" placeholder="请输入发行总量" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+<!--		<div class="layui-form-item">-->
+<!--        <label class="layui-form-label">发行价格<span style="color: red;">*</span></label>-->
+<!--        <div class="layui-input-block">-->
+<!--            <input name="issuancePrice" placeholder="请输入发行价格" type="text" class="layui-input" lay-verify="required" required/>-->
+<!--        </div>-->
+<!--    </div>-->
+		<div class="layui-form-item">
+        <label class="layui-form-label">支付币种<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="currency" placeholder="请输入支付币种" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+		<div class="layui-form-item">
+        <label class="layui-form-label">最低认购金额<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="minPrice" placeholder="请输入最低认购金额" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">抽签总数<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="drawsTotal" placeholder="请输入抽签总数" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">中签率(%)<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="oddsWinning" placeholder="请输入中签率" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">开始时间<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="startTime" id="startTime" placeholder="请输入开始时间" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">结束时间<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="endTime" id="endTime" placeholder="请输入结束时间" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">官方链接<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="comLink" placeholder="请输入官方链接" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">白皮书链接<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="whiteBookLink" placeholder="请输入白皮书链接" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+		<div class="layui-form-item">
+        <label class="layui-form-label">介绍<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="introduce" placeholder="请输入介绍" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+		<div class="layui-form-item">
+        <label class="layui-form-label">条件<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="conditions" placeholder="请输入条件" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+	    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

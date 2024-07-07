@@ -1,0 +1,33 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/bulletin/company/company_edit.js"]}){
+<form id="companyForm" lay-filter="companyForm" class="layui-form model-form">
+    <input name="companyId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">公司名称<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="companyName" placeholder="请输入公司名称" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">账号<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="account" placeholder="请输入账号" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">开户行<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="bankName" placeholder="请输入开户行" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">支行<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="branchName" placeholder="请输入支行" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

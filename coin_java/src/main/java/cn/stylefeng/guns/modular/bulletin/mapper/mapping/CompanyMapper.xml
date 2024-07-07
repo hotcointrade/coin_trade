@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.bulletin.mapper.CompanyMapper">
+  <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.bulletin.entity.Company">
+    <id column="company_id" jdbcType="BIGINT" property="companyId" />
+    <result column="company_code" jdbcType="VARCHAR" property="companyCode" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="short_name" jdbcType="VARCHAR" property="shortName" />
+    <result column="en_name" jdbcType="VARCHAR" property="enName" />
+    <result column="en_short" jdbcType="VARCHAR" property="enShort" />
+    <result column="company_type" jdbcType="VARCHAR" property="companyType" />
+    <result column="ranges" jdbcType="VARCHAR" property="ranges" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="account_name" jdbcType="VARCHAR" property="accountName" />
+    <result column="bank_name" jdbcType="VARCHAR" property="bankName" />
+    <result column="branch_name" jdbcType="VARCHAR" property="branchName" />
+    <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
+    <result column="legal" jdbcType="VARCHAR" property="legal" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="detail_address" jdbcType="VARCHAR" property="detailAddress" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="del" jdbcType="VARCHAR" property="del" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CREATE_USER" jdbcType="BIGINT" property="createUser" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="UPDATE_USER" jdbcType="BIGINT" property="updateUser" />
+    <result column="license" jdbcType="LONGVARCHAR" property="license" />
+    <result column="engraved" jdbcType="LONGVARCHAR" property="engraved" />
+    <result column="logo" jdbcType="LONGVARCHAR" property="logo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    company_id companyId, company_code companyCode, company_name companyName, short_name shortName, en_name enName, en_short enShort, company_type companyType,
+    ranges, account, account_name accountName, bank_name bankName, branch_name branchName, register_time registerTime, legal, phone,
+    address, detail_address detailAddress, email, status, del, remark, CREATE_TIME createTime, CREATE_USER createUser, UPDATE_TIME updateTime,
+    UPDATE_USER updateUser, license, engraved, logo
+  </sql>
+  <select id="selectByCondition" resultType="map">
+    select
+    <include refid="Base_Column_List"/>
+    from com_company where del='N'
+    <if test="condition!=null and condition!=''">
+      and name like concat('%',#{condition},'%')
+    </if>
+  </select>
+</mapper>

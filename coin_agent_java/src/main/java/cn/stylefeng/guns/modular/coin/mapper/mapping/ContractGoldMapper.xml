@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.stylefeng.guns.modular.coin.mapper.ContractGoldMapper">
+	<resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.coin.entity.ContractGold">
+            <result column="id" property="id" />
+	        <result column="gold_no" property="goldNo" />
+	        <result column="symbol" property="symbol" />
+	        <result column="open_price" property="openPrice" />
+	        <result column="open_time" property="openTime" />
+	        <result column="close_price" property="closePrice" />
+	        <result column="close_time" property="closeTime" />
+	        <result column="total_buy" property="totalBuy" />
+	        <result column="init_buy" property="initBuy" />
+	        <result column="total_Buy_Count" property="totalBuyCount" />
+	        <result column="total_sell" property="totalSell" />
+	        <result column="init_sell" property="initSell" />
+	        <result column="total_sell_Count" property="totalSellCount" />
+	        <result column="status" property="status" />
+	        <result column="result" property="result" />
+	        <result column="total_Pl" property="totalPl" />
+	        <result column="preset_Price" property="presetPrice" />
+	        <result column="CREATE_TIME" property="createTime" />
+	        <result column="CREATE_USER" property="createUser" />
+	        <result column="UPDATE_TIME" property="updateTime" />
+	        <result column="UPDATE_USER" property="updateUser" />
+		</resultMap>  
+    
+    <!-- 表字段 -->
+    <sql id="Base_Column_List">
+         t.id
+        , t.gold_no
+        , t.symbol
+        , t.open_price
+        , t.open_time
+        , t.close_price
+        , t.close_time
+        , t.total_buy
+        , t.init_buy
+        , t.total_Buy_Count
+        , t.total_sell
+        , t.init_sell
+        , t.total_sell_Count
+        , t.status
+        , t.result
+        , t.total_Pl
+        , t.preset_Price
+        , t.CREATE_TIME
+        , t.CREATE_USER
+        , t.UPDATE_TIME
+        , t.UPDATE_USER
+        </sql> 
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from contract_gold t
+       <where>
+            <if test="condition!=null and condition!=''">
+              -- and title  like concat('%',#{condition},'%')
+            </if>
+        </where>
+        order by t.id desc
+    </select>
+
+
+</mapper>

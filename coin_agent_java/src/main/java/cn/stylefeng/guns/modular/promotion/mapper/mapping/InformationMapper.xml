@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.promotion.mapper.InformationMapper">
+
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         id as id,
+         title as title,
+         content,
+         cover,
+         category_id categoryId,
+         status as status,
+         del as del,
+         remark as remark,
+         CREATE_TIME as createTime,
+         CREATE_USER as createUser,
+         UPDATE_TIME as updateTime,
+        UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from com_information tb where tb.del='N'
+        <if test="condition!=null and condition!=''">
+          and tb.title like concat('%',#{condition},'%')
+        </if>
+        order by tb.CREATE_TIME desc
+    </select>
+
+</mapper>

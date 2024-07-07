@@ -1,0 +1,75 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/chain/convert/convert_edit.js"]}){
+<form id="convertForm" lay-filter="convertForm" class="layui-form model-form">
+    <input name="convertId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">单号<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="orderNo" id="orderNo" placeholder="请输入单号" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="memberId" id="memberId" placeholder="请输入用户" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">兑换数量<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="price" id="price" placeholder="请输入兑换数量" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">实际金额<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="actualPrice" id="actualPrice" placeholder="请输入实际金额" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">手续费<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="fee" id="fee" placeholder="请输入手续费" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">币种<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="type" id="type" placeholder="请输入币种" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">到账数量<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="toPrice" id="toPrice" placeholder="请输入到账数量" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">到账币种<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="toCoin" id="toCoin" placeholder="请输入到账币种" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">地址<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="toAddress" id="toAddress" placeholder="请输入地址" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">哈希值<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="txHash" id="txHash" placeholder="请输入哈希值" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">返回信息<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="response" id="response" placeholder="请输入返回信息" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

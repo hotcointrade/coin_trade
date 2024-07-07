@@ -1,0 +1,102 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/coin/symbolsSetting/symbols_setting_add.js"]}){
+
+<form id="spotForm" lay-filter="spotForm" class="layui-form model-form">
+    <input name="id" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">交易名称<span style="color: red;"> *</span></label>
+        <div class="layui-input-block">
+            <input name="symbol" id="symbol" placeholder="请输入平台币交易对" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">交易模式<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <select name="p8LossRatio" id="p8LossRatio" required>
+                <option value="1">永续合约</option>
+                <option value="0">币币交易</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">生成历史数据<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <select name="p7LossRatio" id="p7LossRatio" required>
+                <option value="10">是</option>
+                <option value="0">否</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">行情模式<span style="color: red;"> *</span></label>
+        <div class="layui-input-block">
+            <select name="p1LossRatio" id="p1LossRatio" required>
+                <option value="1">自由浮动</option>
+                <option value="2">要控制涨</option>
+                <option value="3">要控制跌</option>
+
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">初始价格<span style="color: red;"> *</span></label>
+        <div class="layui-input-block">
+            <input name="fistOpenPrice" id="fistOpenPrice" placeholder="初始价格，设置任意值 例如 1000 ，即平台币价格初始化从 1000 开始为行情基准价格" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">设置高价<span style="color: red;"> *</span></label>
+        <div class="layui-input-block">
+            <input name="p2LossRatio" id="p2LossRatio" placeholder="设置初始化的市场行情 高价" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">设置开价<span style="color: red;"> *</span></label>
+        <div class="layui-input-block">
+            <input name="p3LossRatio" id="p3LossRatio" placeholder="设置初始化的市场行情 开价" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">设置低价<span style="color: red;"> *</span></label>
+        <div class="layui-input-block">
+            <input name="p4LossRatio" id="p4LossRatio" placeholder="设置初始化的市场行情 低价" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">设置收价<span style="color: red;"> *</span></label>
+        <div class="layui-input-block">
+            <input name="p5LossRatio" id="p5LossRatio" placeholder="设置初始化的市场行情 收价" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">模式为跌<span style="color: red;"> *</span></label>
+        <div class="layui-input-block">
+            <input name="minValue" id="minValue" placeholder="模式为跌，输入一个值，例如 900 即初始化价格 1000 会往下跌至 900 之后在这个基准价自由浮动" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">模式为涨<span style="color: red;"> *</span></label>
+        <div class="layui-input-block">
+            <input name="maxValue" id="maxValue" placeholder="模式为涨，设置一个值，例如 1100 即初始化价格 1000 会往上涨至 1100 之后在这个基准价自由浮动" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">涨跌浮动<span style="color: #ff0000;"> *</span></label>
+        <div class="layui-input-block">
+            <input name="p6LossRatio" id="p6LossRatio" placeholder="涨跌浮动 控制涨跌自由浮动的速度 数值越大，涨跌浮动跨度速度越快，建议设置1到10之间" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">自由浮动<span style="color: red;"> *</span></label>
+        <div class="layui-input-block">
+            <input name="lossRatio" id="lossRatio" placeholder="自由浮动 控制自由浮动涨跌的速度 数值越大，自由涨跌浮动跨度速度越快，建议设置1到10之间" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取 消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>创 建</button>
+    </div>
+</form>
+@}

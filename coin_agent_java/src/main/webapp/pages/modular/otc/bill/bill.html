@@ -1,0 +1,104 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/otc/bill/bill.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">交易结算订单</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+
+                            <div class="layui-inline">
+                                <input id="condition" class="layui-input" type="hidden"  placeholder="test"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="buyAccount" class="layui-input" type="text" placeholder="买方账号"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="buyName" class="layui-input" type="text" placeholder="买方昵称"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="sellAccount" class="layui-input" type="text" placeholder="卖方账号"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="sellName" class="layui-input" type="text" placeholder="卖方昵称"/>
+                            </div>
+
+                            <div class="layui-inline">
+                                <label class="layui-form-label">交易方式<span style="color: red;">*</span></label>
+                                <div class="layui-input-block">
+                                    <select name="payMethod" id="payMethod">
+                                        <option value=""></option>
+                                        <option value="ALI_PAY">支付宝</option>
+                                        <option value="WE_CHAT">微信</option>
+                                        <option value="BANK">银行卡</option>
+                                        <option value="PAYPAL">PAYPAL</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="orderNo" class="layui-input" type="text" placeholder="订单号"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="markNo" class="layui-input" type="text" placeholder="参考号"/>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">状态<span style="color: red;">*</span></label>
+                                <div class="layui-input-block">
+                                    <select name="status" id="status">
+                                        <option value=""></option>
+                                        <option value="WAIT">买家待付款</option>
+                                        <option value="WAIT_COIN">卖家待放币</option>
+                                        <option value="CANCEL">已取消</option>
+                                        <option value="FINISH">已完成</option>
+                                        <option value="APPEAL">申述中</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="timeLimit" class="layui-input" type="text" placeholder="时间范围"/>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索
+                                </button>
+
+                                @if(shiro.hasPermission("/bill/export_bak")){
+                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出
+                                </button>
+                                @}
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="billTable" lay-filter="billTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("/bill/appealOrChannel")){
+    {{# if(status==='APPEAL'){ }}
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="pass">放币</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="fail">取消订单</a>
+    {{# } }}
+    @}
+</script>
+
+
+<script type="text/html" id="tableBarDuty">
+    @if(shiro.hasPermission("/bill/dutyStatus")){
+    {{# if(appealStatus!=null && duty==null ){ }}
+    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="dutyBuy">买方责任</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="dutySell">卖方责任</a>
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="dutyNull">双方无责</a>
+    {{# } }}
+    @}
+</script>
+
+
+@}

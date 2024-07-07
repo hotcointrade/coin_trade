@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.fin.mapper.TeamEarningMapper">
+
+     <!-- 通用查询映射结果 -->
+   <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.fin.entity.TeamEarning">
+     <id column="wallet_id" property="walletId"/>
+     <result column="member_id" property="memberId"/>
+     <result column="account" property="account"/>
+     <result column="used_price" property="usedPrice"/>
+     <result column="withdraw_price" property="withdrawPrice"/>
+     <result column="blocked_price" property="blockedPrice"/>
+     <result column="del" property="del"/>
+     <result column="CREATE_TIME" property="createTime"/>
+     <result column="CREATE_USER" property="createUser"/>
+     <result column="UPDATE_TIME" property="updateTime"/>
+     <result column="UPDATE_USER" property="updateUser"/>
+     </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         wallet_id as walletId,
+         member_id as memberId,
+         account as account,
+         used_price as usedPrice,
+         withdraw_price as withdrawPrice,
+         blocked_price as blockedPrice,
+         del as del,
+         CREATE_TIME as createTime,
+         CREATE_USER as createUser,
+         UPDATE_TIME as updateTime,
+        UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from fin_invite_wallet tb where del='N'
+        <if test="condition!=null and condition!=''">
+          and account like concat('%',#{condition},'%')
+        </if>
+        <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+            and (CREATE_TIME between CONCAT(#{beginTime},' 00:00:00') and CONCAT(#{endTime},' 23:59:59'))
+        </if>
+        and tb.member_id in
+        <foreach collection="members" open="(" close=")" item="member" separator=",">
+            #{member.memberId}
+        </foreach>
+        order by tb.create_time desc
+    </select>
+
+</mapper>

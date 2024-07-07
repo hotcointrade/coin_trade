@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.coin.mapper.OptionMapper">
+
+     <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.coin.entity.Option">
+        <id column="spot_id" property="spotId"/>
+        <result column="symbol" property="symbol"/>
+        <result column="sym_name" property="symName"/>
+        <result column="type" property="type"/>
+        <result column="base_type" property="baseType"/>
+        <result column="sort" property="sort"/>
+        <result column="symbol_jd" property="symbolJd"/>
+        <result column="base_jd" property="baseJd"/>
+        <result column="startt" property="startt"/>
+        <result column="showw" property="showw"/>
+        <result column="processing" property="processing"/>
+        <result column="allow_show_rise" property="allowShowRise"/>
+        <result column="allow_show_fall" property="allowShowFall"/>
+        <result column="allow_bet_price" property="allowBetPrice"/>
+        <result column="opening_charge" property="openingCharge"/>
+        <result column="pumping_fee" property="pumpingFee"/>
+        <result column="buy_up_bonus_amount" property="buyUpBonusAmount"/>
+        <result column="buy_down_bonus_amount" property="buyDownBonusAmount"/>
+        <result column="Betting_time_cycle" property="bettingTimeCycle"/>
+        <result column="Drawing_time_cycle" property="drawingTimeCycle"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="UPDATE_USER" property="updateUser"/>
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        spot_id as spotId,
+         symbol as symbol,
+         sym_name as symName,
+         type as type,
+         base_type as baseType,
+         sort as sort,
+         symbol_jd as symbolJd,
+         base_jd as baseJd,
+		 startt,
+		 showw,
+		 processing,
+         allow_show_rise as allowShowRise,
+         allow_show_fall as allowShowFall,
+         allow_bet_price as allowBetPrice,
+         opening_charge as openingCharge,
+         pumping_fee as pumpingFee,
+         buy_up_bonus_amount as buyUpBonusAmount,
+         buy_down_bonus_amount as buyDownBonusAmount,
+         Betting_time_cycle as bettingTimeCycle,
+         Drawing_time_cycle as drawingTimeCycle,
+         CREATE_TIME as createTime,
+         CREATE_USER as createUser,
+         UPDATE_TIME as updateTime,
+        UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from coin_Option tb
+       <where>
+            <if test="condition!=null and condition!=''">
+              and symbol like concat('%',#{condition},'%')
+            </if>
+        </where>
+        <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+            and (CREATE_TIME between CONCAT(#{beginTime},' 00:00:00') and CONCAT(#{endTime},' 23:59:59'))
+        </if>
+        order by tb.create_time asc
+    </select>
+
+</mapper>

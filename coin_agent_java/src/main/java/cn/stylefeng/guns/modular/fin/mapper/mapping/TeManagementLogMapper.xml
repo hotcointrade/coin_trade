@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.stylefeng.guns.modular.fin.mapper.TeManagementLogMapper">
+	<resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.fin.entity.TeManagementLog">
+            <result column="id" property="id" />
+            <result column="uid" property="uid" />
+        <result column="img" property="img" />
+
+        <result column="username" property="username" />
+	        <result column="sum" property="sum" />
+	        <result column="instrument" property="instrument" />
+	        <result column="earnings_sum" property="earningsSum" />
+	        <result column="management_currency" property="managementCurrency" />
+	        <result column="management_sum" property="managementSum" />
+	        <result column="salesman_id" property="salesmanId" />
+	        <result column="status" property="status" />
+	        <result column="period_time" property="periodTime" />
+	        <result column="createtime" property="createtime" />
+	        <result column="updatetime" property="updatetime" />
+		</resultMap>
+
+    <!-- 表字段 -->
+    <sql id="Base_Column_List">
+         t.id
+        , t.uid
+        , t.img
+        ,t.username
+        , t.sum
+        , t.instrument
+        , t.earnings_sum as earningsSum
+        , t.management_currency as managementCurrency
+        , t.management_sum as managementSum
+        , t.salesman_id as salesmanId
+        , t.status
+        , t.period_time as periodTime
+        , t.createtime
+        , t.updatetime
+        </sql>
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from te_management_log t inner  join  app_member am on  t.uid = am.member_id
+       <where>
+            <if test="condition!=null and condition!=''">
+              -- and title  like concat('%',#{condition},'%')
+            </if>
+           <if test="memberId != null and memberId != ''">
+               and (am.member_id = #{memberId}  or am.parent_referee_id like concat('%',#{recommendIds},'%'))
+           </if>
+        </where>
+        order by t.id desc
+    </select>
+
+
+</mapper>

@@ -1,0 +1,16 @@
+package ${mapper.packageName};
+<% for(import in mapper.mapperImports!){ %>
+import ${import};
+<% } %>
+import cn.stylefeng.guns.modular.${context.tableNamePrefix}.entity.${context.bizEnBigName};
+/**
+ * ${context.bizChName}Mapper 接口
+ *
+ * @author yaying.liu
+ * @since ${tool.currentTime()}
+ */
+public interface ${context.bizEnBigName}Mapper extends BaseMapper<${context.bizEnBigName}> {
+
+    Page<Map<String,Object>> selectByCondition(@Param("page") Page page, @Param("condition") String condition, @Param("beginTime") String beginTime, @Param("endTime") String endTime);
+
+}

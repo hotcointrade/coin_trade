@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.chain.mapper.PublicMapper">
+
+     <!-- 通用查询映射结果 -->
+   <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.chain.entity.Public">
+     <id column="public_id" property="publicId"/>
+     <result column="order_no" property="orderNo"/>
+     <result column="to_address" property="toAddress"/>
+     <result column="coin" property="coin"/>
+     <result column="type" property="type"/>
+     <result column="price" property="price"/>
+     <result column="tx_hash" property="txHash"/>
+     <result column="status" property="status"/>
+     <result column="del" property="del"/>
+     <result column="remark" property="remark"/>
+     <result column="CREATE_TIME" property="createTime"/>
+     <result column="CREATE_USER" property="createUser"/>
+     <result column="UPDATE_TIME" property="updateTime"/>
+     <result column="UPDATE_USER" property="updateUser"/>
+     </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         public_id as publicId,
+         order_no as orderNo,
+         to_address as toAddress,
+         coin as coin,
+         type as type,
+         price as price,
+         tx_hash as txHash,
+         status as status,
+         del as del,
+         remark as remark,
+         CREATE_TIME as createTime,
+         CREATE_USER as createUser,
+         UPDATE_TIME as updateTime,
+        UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from chain_public tb where del='N'
+        <if test="param.condition!=null and param.condition!=''">
+            and member_id = (select member_id from app_member m where m.account=#{param.condition})
+        </if>
+        <if test="param.txHash != null and param.txHash !=''">
+            and tb.tx_hash = #{param.txHash}
+        </if>
+        <if test="param.type != null and param.type !=''">
+            and tb.type = #{param.type}
+        </if>
+
+        <if test="param.toAddress != null and param.toAddress !=''">
+            and tb.to_address = #{param.toAddress}
+        </if>
+
+        <if test="param.status != null and param.status !=''">
+            and tb.status = #{param.status}
+        </if>
+
+
+        <if test="param.beginTime != null and param.beginTime != '' and param.endTime != null and param.endTime != ''">
+            and (tb.CREATE_TIME between CONCAT(#{param.beginTime},' 00:00:00') and CONCAT(#{param.endTime},' 23:59:59'))
+        </if>
+
+        order by tb.create_time desc
+    </select>
+
+
+    <select id="total" resultType="map">
+        select
+        IFNULL(sum(price),0) totalWithdraw
+        ,IFNULL(sum(remark),0) totalGas
+
+        from chain_public tb where del='N'
+        <if test="param.condition!=null and param.condition!=''">
+            and member_id = (select member_id from app_member m where m.account=#{param.condition})
+        </if>
+        <if test="param.txHash != null and param.txHash !=''">
+            and tb.tx_hash = #{param.txHash}
+        </if>
+        <if test="param.type != null and param.type !=''">
+            and tb.type = #{param.type}
+        </if>
+
+        <if test="param.toAddress != null and param.toAddress !=''">
+            and tb.to_address = #{param.toAddress}
+        </if>
+
+        <if test="param.status != null and param.status !=''">
+            and tb.status = #{param.status}
+        </if>
+
+        <if test="param.beginTime != null and param.beginTime != '' and param.endTime != null and param.endTime != ''">
+            and (tb.CREATE_TIME between CONCAT(#{param.beginTime},' 00:00:00') and CONCAT(#{param.endTime},' 23:59:59'))
+        </if>
+    </select>
+
+
+</mapper>

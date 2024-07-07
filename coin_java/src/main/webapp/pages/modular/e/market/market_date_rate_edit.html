@@ -1,0 +1,262 @@
+@layout("/common/_container.html",{bg:"bg-white",js:[]}){
+<form id="marketForm" lay-filter="marketForm" class="layui-form model-form">
+    <input name="swapId" type="hidden"/>
+    <div style="height: 600px;width:100%">
+        <div id="dateChart" style="height: 600px;width: 1600px;margin: auto"></div>
+
+    </div>
+</form>
+@}
+
+<script type="text/javascript" src="${ctxPath}/assets/common/libs/echarts/echarts.min.js"></script>
+<script type="text/javascript" src="${ctxPath}/assets/common/libs/echarts/china.js"></script>
+<script type="text/javascript" src="${ctxPath}/assets/common/libs/echarts/echarts-wordcloud.min.js"></script>
+<script>
+
+    layui.use(['layer', 'form', 'admin', 'ax'], function () {
+
+    });
+
+    layui.use(['layer', 'ax'], function () {
+        var $ = layui.jquery;
+        var $ax = layui.ax;
+        var form = layui.form;
+        var admin = layui.admin;
+        var layer = layui.layer;
+        // 让当前iframe弹层高度适应
+        admin.iframeAuto();
+
+        //获取参数信息
+        var ajax = new $ax(Feng.ctxPath + "/market/detail/" + Feng.getUrlParam("swapId"));
+        var result = ajax.start();
+
+        form.val('marketForm', result);
+        // 表单提交事件
+        form.on('submit(btnSubmit)', function (data) {
+            var ajax = new $ax(Feng.ctxPath + "/market/edit", function (data) {
+                Feng.success("修改成功！");
+                //传给上个页面，刷新table用
+                admin.putTempData('formOk', true);
+                //关掉对话框
+                admin.closeThisDialog();
+            }, function (data) {
+                Feng.error("添加失败！" + data.responseJSON.message)
+            });
+            var a = data.field;
+            // data.field.content=htmlEncode(a.content);
+            a.img = $("#demo1").attr("url_link");
+            ajax.set(a);
+            ajax.start();
+        });
+
+        $(".USDT").text("币种改写成功")
+        var mem = 0;
+        var memcount = 0;
+        //请求后台页面数据
+        var ajax = new $ax(Feng.ctxPath + "/welcome/info", function (data) {
+            $(".walletConvert").text(data.walletConvert)
+            $(".contractConvert").text(data.contractConvert)
+
+            $("#buyCompact").text(data.buyCompact)
+            $("#buyMatch").text(data.buyMatch)
+            $("#currencyConvert").text(data.currencyConvert)
+            $("#emailCount").text(data.emailCount == "" ? '0' : data.emailCount)
+            $("#legalConvert").text(data.legalConvert)
+            $("#memberN").text(data.memberN == "" ? "0" : data.memberN)
+            $("#memberY").text(data.memberY)
+            $("#optionConvert").text(data.optionConvert)
+            $("#otcBuy").text(data.otcBuy)
+            $("#otcSell").text(data.otcSell)
+            $("#rechargeSum").text(data.rechargeSum)
+            $("#sellCompact").text(data.sellCompact)
+            $("#sellMatch").text(data.sellMatch)
+            $("#smsCount").text(data.smsCount == "" ? "0" : data.smsCount)
+            $("#weekRechargeSum").text(data.weekRechargeSum)
+            $("#weekWithdrawSum").text(data.weekWithdrawSum)
+            $("#withdrawSum").text(data.withdrawSum)
+            $("#otcCount").text(data.otcCount)
+            $("#memcount2").text(data.memcount2)
+
+            mem = data.memberY;
+            memcount = data.memcount;
+
+
+        }, function (data) {
+            Feng.error("删除失败!" + data.responseJSON.message + "!");
+        });
+        ajax.set("type", "USDT");
+        ajax.start();
+
+        /** 渲染图表 */
+        var myChart = echarts.init(document.getElementById('dateChart'));
+
+        let data = [
+            ["00:00",0],["01:00",0],["02:00",0],["03:00",0],["04:00",0],["05:00",0],["06:00",0],
+            ["07:00",0],["08:00",0],["09:00",0],["10:00",0],["11:00",0],["12:00",0],["13:00",0],
+            ["14:00",0],["15:00",0],["16:00",0],["17:00",0],["18:00",0],["19:00",0],["20:00",0],
+            ["21:00",0],["22:00",0],["23:00",0],["24:00",0]
+        ];
+        // console.log(data.map(item=>{
+        //     return item[0]
+        // }))
+        // console.log(data.map(item=>{
+        //     return item[1]
+        // }))
+        const symbolSize = 22;
+
+        var data1;
+        let option = {
+            title: {
+                text: "区间",
+            },
+            // tooltip: {
+            //     // triggerOn: "none",
+            //     formatter: function (params) {
+            //         console.log(params.value);
+            //         return (
+            //             params.value.toFixed(2)
+            //         );
+            //     },
+            // },
+            grid: {},
+            legend: {},
+            xAxis: {
+                type: "category",
+                data: data.map(item=>{
+                    return item[0]
+                }),
+            },
+            yAxis: {
+                type: "value",
+                min:-5,
+                max:5
+            },
+            series: [
+                {
+                    id: "xxxxxx",
+                    name: "xxxxxx",
+                    type: "line",
+                    smooth: true,
+                    symbolSize: symbolSize,
+                    data: data.map(item=>{
+                        return item[1]
+                    }),
+                    label: {
+                        normal: {
+                            show: true,
+                            position: "right",
+                            formatter: function (params) {
+                                return params.value
+                            },
+                        },
+                    },
+                },
+            ],
+        };
+        myChart.setOption(option);
+
+            setTimeout(function () {
+                // Add shadow circles (which is not visible) to enable drag.
+                myChart.setOption({
+                    graphic: echarts.util.map(data, function (item, dataIndex) {
+                        return {
+                            type: "circle",
+                            position: myChart.convertToPixel("grid", item),
+                            shape: {
+                                cx: 0,
+                                cy: 0,
+                                r: symbolSize / 2,
+                            },
+                            invisible: true,
+                            draggable: true,
+                            ondrag: echarts.util.curry(onPointDragging, dataIndex),
+                            onmousemove: echarts.util.curry(showTooltip, dataIndex),
+                            onmouseout: echarts.util.curry(hideTooltip, dataIndex),
+                            z: 100,
+                        };
+                    }),
+                });
+            }, 0);
+
+            window.addEventListener("resize", updatePosition);
+
+        function updatePosition() {
+            myChart.setOption({
+                graphic: echarts.util.map(data, function (item, dataIndex) {
+                    return {
+                        position: myChart.convertToPixel("grid", item),
+                    };
+                }),
+            });
+        }
+
+        function showTooltip(dataIndex) {
+            // 更新提示框内容
+            var seriesIndex = dataIndex < 3 ? 0 : 1; // 根据dataIndex确定系列索引
+            var dataIndexInSeries = dataIndex < 3 ? dataIndex : dataIndex - 3; // 调整dataIndex以匹配系列内的位置
+            myChart.dispatchAction({
+                type: "showTip",
+                seriesIndex,
+                dataIndex: dataIndexInSeries,
+            });
+        }
+
+        function hideTooltip(dataIndex) {
+            myChart.dispatchAction({
+                type: "hideTip",
+            });
+        }
+
+        function onPointDragging(dataIndex, dx, dy) {
+            data[dataIndex][1] = myChart.convertFromPixel("grid", this.position)[1].toFixed(2);
+
+            // var temp = [[], []];
+            // for (var i = 0; i < 3; i++) {
+            //     temp[0].push(data[i][1]);
+            // }
+            // for (var i = 3; i < 6; i++) {
+            //     temp[1].push(data[i][1]);
+            // }
+            //
+            // // Update data
+            myChart.setOption({
+                series: [
+                    // {
+                    //     id: "xxxxxx",
+                    //     data: temp[0],
+                    // },
+                    {
+                        id: "xxxxxx",
+                        name: "xxxxxx",
+                        type: "line",
+                        smooth: true,
+                        symbolSize: symbolSize,
+                        data: data,
+                        label: {
+                            normal: {
+                                show: true,
+                                position: "right",
+                                formatter: function (params) {
+                                    return params.value
+                                },
+                            },
+                        },
+                    },
+                ],
+            });
+            updatePosition();
+        }
+
+        // 赋值
+        // myCharts.setOption({
+        //     title: {subtext: memcount+'/'+mem}, series: [{data: [{name: '代理', value: memcount}, {name: '其他', value: mem-memcount}]}]
+        // });
+
+
+        /** 窗口大小改变事件 */
+        /*   window.onresize = function () {
+               myCharts.resize();
+           };*/
+
+    });
+</script>

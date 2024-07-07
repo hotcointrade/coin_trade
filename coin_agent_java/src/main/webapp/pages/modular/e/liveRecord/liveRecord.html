@@ -1,0 +1,56 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/e/liveRecord/liveRecord.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">生活支付打款</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="condition" class="layui-input" type="text" placeholder="账号"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="orderNo" class="layui-input" type="text" placeholder="订单号"/>
+                            </div>
+                            <div class="layui-inline">
+                                <select id="status" >
+                                    <option value=""></option>
+                                    <option value="Y">已打款</option>
+                                    <option value="N">待打款</option>
+                                </select>
+                            </div>
+
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+
+                                @if(shiro.hasPermission("/liveRecord/export_bak")){
+                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出</button>
+                                 @}
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="liveRecordTable" lay-filter="liveRecordTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="tableBarDetail">
+    <a class="layui-btn layui-btn layui-btn-xs layui-icon layui-icon-picture" lay-event="imgDetail"> 查看二维码</a>
+</script>
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("/liveRecord/edit")){
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">添加打款备注</a>
+    {{# if(d.status==='N'){ }}
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="finish">打款完成</a>
+    {{# } }}
+    @}
+</script>
+
+
+@}

@@ -1,0 +1,51 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/app/payment/payment_edit.js"]}){
+<form id="paymentForm" lay-filter="paymentForm" class="layui-form model-form">
+    <input name="paymentId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="memberId" id="memberId" placeholder="请输入用户" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">姓名<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="name" id="name" placeholder="请输入姓名" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">账号<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="idcard" id="idcard" placeholder="请输入账号" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">类型<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="type" id="type" placeholder="请输入类型" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">收款码<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="img" id="img" placeholder="请输入收款码" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">银行<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="bank" id="bank" placeholder="请输入银行" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">支行<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="branch" id="branch" placeholder="请输入支行" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

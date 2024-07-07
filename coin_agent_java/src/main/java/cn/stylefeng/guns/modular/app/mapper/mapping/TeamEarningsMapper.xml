@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.app.mapper.TeamEarningsMapper">
+
+     <!-- 通用查询映射结果 -->
+   <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.app.entity.TeamEarnings">
+     <id column="team_earnings_id" property="teamEarningsId"/>
+     <result column="earnings_id" property="earningsId"/>
+     <result column="earnings_account" property="earningsAccount"/>
+       <result column="price" property="price"/>
+       <result column="type" property="type"/>
+     <result column="direct" property="direct"/>
+     <result column="regist_id" property="registId"/>
+     <result column="regist_account" property="registAccount"/>
+     <result column="del" property="del"/>
+     <result column="CREATE_TIME" property="createTime"/>
+     <result column="CREATE_USER" property="createUser"/>
+     <result column="UPDATE_TIME" property="updateTime"/>
+     <result column="UPDATE_USER" property="updateUser"/>
+     </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         team_earnings_id as teamEarningsId,
+         earnings_id as earningsId,
+         earnings_account as earningsAccount,
+         price as price,
+         type as type,
+         direct as direct,
+         regist_id as registId,
+         regist_account as registAccount,
+         del as del,
+         CREATE_TIME as createTime,
+         CREATE_USER as createUser,
+         UPDATE_TIME as updateTime,
+        UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from app_team_earnings tb where del='N'
+        <if test="condition!=null and condition!=''">
+          and earnings_account like concat('%',#{condition},'%')
+        </if>
+        <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+            and (CREATE_TIME between CONCAT(#{beginTime},' 00:00:00') and CONCAT(#{endTime},' 23:59:59'))
+        </if>
+        and tb.earnings_id in
+        <foreach collection="members" open="(" close=")" item="member" separator=",">
+            #{member.memberId}
+        </foreach>
+        order by tb.create_time desc
+    </select>
+
+</mapper>

@@ -1,0 +1,128 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/coin/option/option_add.js"]}){
+
+<form id="spotForm" lay-filter="spotForm" class="layui-form model-form">
+    <input name="id" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">交易对<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="symbol" id="symbol" placeholder="请输入交易对" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">合约名称<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="symName" id="symName" placeholder="请输入合约名称" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">币种<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="type" id="type" placeholder="请输入币种" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">基础量价币种<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="baseType" id="baseType" placeholder="请输入基础量价币种" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">排序<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="sort" id="sort" placeholder="请输入排序" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">交易币小数精度<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="symbolJd" id="symbolJd" placeholder="请输入交易币小数精度" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">基币小数精度<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="baseJd" id="baseJd" placeholder="请输入基币小数精度" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">启用<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="startt" id="startt" placeholder="请输入币种" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">显示<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="showw" id="showw" placeholder="请输入币种" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">平局处理<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="processing" id="processing" placeholder="请输入币种" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">允许看涨<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="allowShowRise" id="allowShowRise" placeholder="请输入币种" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">允许看跌<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="allowShowFall" id="allowShowFall" placeholder="请输入币种" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">允许投注金额<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="allowBetPrice" id="allowBetPrice" placeholder="请输入允许投注金额" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">开仓手续费<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="openingCharge" id="openingCharge" placeholder="请输入开仓手续费" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">赢家抽水费<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="pumpingFee" id="pumpingFee" placeholder="请输入赢家抽水费" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">初始买涨奖池金额<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="buyUpBonusAmount" id="buyUpBonusAmount" placeholder="请输入初始买涨奖池金额" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">初始买跌奖池金额<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="buyDownBonusAmount" id="buyDownBonusAmount" placeholder="请输入初始买跌奖池金额" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">投注时间周期(秒)<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="bettingTimeCycle" id="bettingTimeCycle" placeholder="请输入投注时间周期" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">开奖时间周期(秒)<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="drawingTimeCycle" id="drawingTimeCycle" placeholder="请输入开奖时间周期" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

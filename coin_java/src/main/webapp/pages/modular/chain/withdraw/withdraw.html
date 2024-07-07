@@ -1,0 +1,90 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/chain/withdraw/withdraw.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">提币信息</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="condition" class="layui-input" type="text" placeholder="用户"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="toAddress" class="layui-input" type="text" placeholder="提币地址"/>
+                            </div>
+                          <div class="layui-inline">
+                                <input id="txHash" class="layui-input" type="text" placeholder="交易hash"/>
+                            </div>
+
+                       <!--     <div class="layui-inline">
+                                <label class="layui-form-label">提币币种</label>
+                                <div class="layui-input-block">
+                                    <select name="type" id="type">
+                                        <option value=""></option>
+                                        <option value="ETH">ETH</option>
+                                        <option value="USDT">USDT</option>
+                                        <option value="MGE">MGE</option>
+                                        <option value="MGM">MGM</option>
+                                    </select>
+                                </div>
+                            </div>-->
+                            <div class="layui-inline">
+                                <label class="layui-form-label">状态</label>
+                                <div class="layui-input-block">
+                                    <select name="status" id="status">
+                                        <option value=""></option>
+                                        <option value="CHECK">审核中</option>
+                                        <option value="COIN">等待上块</option>
+                                        <option value="PASS">已通过</option>
+                                        <option value="REJECT">已驳回</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="layui-inline">
+                                <input id="timeLimit" class="layui-input" type="text" autocomplete="off" placeholder="时间范围" readonly/>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出</button>
+                            </div>
+<!--                            <div class="layui-inline">-->
+<!--                                USDT:<a id="usdt"></a>-->
+<!--                                ETH:<a id="eth"></a>-->
+<!--                                MGE:<a id="mge"></a>-->
+<!--                                MGM:<a id="mgm"></a>-->
+<!--                            </div>-->
+                            <div class="layui-inline">
+                                总提币数量:<a id="totalWithdraw"></a>
+                                总提币手续费:<a id="totalFee"></a>
+                                总实际提币数量:<a id="totalActual"></a>
+                                <!--总提币旷工费:<a id="totalGas"></a>-->
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <table class="layui-table" id="withdrawTable" lay-filter="withdrawTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("/withdraw/updateStatus")){
+        {{# if(d.status==='CHECK'){ }}
+        <a class="layui-btn layui-btn layui-btn-xs" lay-event="checkPass">审核通过</a>
+        {{# } }}
+        {{# if(d.status==='CHECK'){ }}
+        <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="checkFail">审核失败</a>
+        {{# } }}
+    @}
+</script>
+
+@}

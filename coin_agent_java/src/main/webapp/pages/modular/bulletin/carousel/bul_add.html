@@ -1,0 +1,46 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/bulletin/carousel/bulletin_add.js"]}){
+<form id="bulletinForm" lay-filter="bulletinForm" class="layui-form model-form">
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">标题<span style="color: red;">*</span></label>-->
+        <!--<div class="layui-input-block">-->
+            <!--<input name="title" placeholder="请输入标题" type="text" class="layui-input" lay-verify="required" required/>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">链接</label>
+        <div class="layui-input-block">
+            <input name="link" placeholder="" type="text" class="layui-input" />
+        </div>
+    </div>
+    <div class="layui-inline">
+        <button type="button" class="layui-btn" id="test1">上传轮播图</button>
+    </div>
+    <div class="layui-inline">
+        <div class="layui-upload-list">
+            <img class="layui-upload-img" name="mainImg" id="demo1" style="width: 200px;height: 150px;" >
+            <p id="demoText"></p>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">轮播图展示端</label>
+        <div class="layui-input-block">
+            <select name="showType" id="showType">
+                <option value="PC" selected>pc端</option>
+                <option value="PHONE">移动端</option>
+            </select>
+        </div>
+    </div>
+
+    <!---->
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">内容</label>-->
+        <!--<div class="layui-input-block">-->
+            <!--<textarea class="layui-textarea" name="content" id="content" style="display: none;" lay-verify="content_desc" ></textarea>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

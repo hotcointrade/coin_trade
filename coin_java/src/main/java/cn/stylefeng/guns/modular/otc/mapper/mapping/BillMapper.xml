@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.otc.mapper.BillMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.otc.entity.Bill">
+        <id column="bill_id" property="billId"/>
+        <result column="opid" property="opid"/>
+        <result column="type" property="type"/>
+        <result column="buy_mid" property="buyMid"/>
+        <result column="buy_name" property="buyName"/>
+        <result column="sell_mid" property="sellMid"/>
+        <result column="sell_name" property="sellName"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="mark_no" property="markNo"/>
+        <result column="coin" property="coin"/>
+        <result column="unit_price" property="unitPrice"/>
+        <result column="number" property="number"/>
+        <result column="cny" property="cny"/>
+        <result column="pay_method" property="payMethod"/>
+
+        <result column="pay_account" property="payAccount"/>
+
+        <result column="pay_name" property="payName"/>
+        <result column="pay_img" property="payImg"/>
+        <result column="bank" property="bank"/>
+        <result column="branch" property="branch"/>
+
+        <result column="pay_time" property="payTime"/>
+        <result column="cancel_time" property="cancelTime"/>
+
+        <result column="finish_time" property="finishTime"/>
+        <result column="appeal_type" property="appealType"/>
+        <result column="content" property="content"/>
+        <result column="img" property="img"/>
+        <result column="content1" property="content1"/>
+        <result column="img1" property="img1"/>
+
+        <result column="duty" property="duty"/>
+        <result column="appeal_status" property="appealStatus"/>
+        <result column="atime" property="atime"/>
+        <result column="atime1" property="atime1"/>
+        <result column="upload_status" property="uploadStatus"/>
+        <result column="upload_img" property="uploadImg"/>
+
+        <result column="version" property="version"/>
+        <result column="status" property="status"/>
+        <result column="del" property="del"/>
+        <result column="remark" property="remark"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="UPDATE_USER" property="updateUser"/>
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         tb.bill_id as billId,
+         tb.opid as opid,
+         tb.type as type,
+         tb.buy_mid as buyMid,
+         tb.buy_name as buyName,
+         tb.sell_mid as sellMid,
+         tb.sell_name as sellName,
+         tb.order_no as orderNo,
+         tb.mark_no as markNo,
+         tb.coin as coin,
+         tb.unit_price as unitPrice,
+         tb.number as number,
+         tb.cny as cny,
+         tb.pay_method as payMethod,
+
+         tb.finish_time as finishTime,
+         tb.appeal_type as appealType,
+         tb.content as content,
+         tb.img as img,
+         tb.content1 as content1,
+         tb.img1 as img1,
+
+         tb.duty as duty,
+         tb.appeal_status as appealStatus,
+         tb.atime as atime,
+         tb.atime1 as atime1,
+         tb.upload_status as uploadStatus,
+         tb.upload_img as uploadImg,
+
+         tb.pay_account as payAccount,
+         tb.pay_name as payName,
+         tb.pay_img as payImg,
+         tb.bank as bank,
+         tb.branch as branch,
+
+         tb.pay_time as payTime,
+         tb.cancel_time as cancelTime,
+         tb.version as version,
+         tb.status as status,
+         tb.del as del,
+         tb.remark as remark,
+         tb.CREATE_TIME as createTime,
+         tb.CREATE_USER as createUser,
+         tb.UPDATE_TIME as updateTime,
+        tb.UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from otc_bill tb
+         left  join  app_member am on  tb.buy_mid = am.member_id and am.del = 'N'
+         left  join  app_member am1 on  tb.sell_mid = am1.member_id and am1.del = 'N'
+        where tb.del='N'
+        <if test="condition!=null and condition!=''">
+            and (tb.buy_name like concat('%',#{condition},'%') or tb.sell_name like concat('%',#{condition},'%') )
+        </if>
+
+        <if test="buyAccount!=null and buyAccount!=''">
+            and tb.buy_mid=(select member_id from app_member where account=#{buyAccount})
+        </if>
+
+        <if test="buyName!=null and buyName!=''">
+            and tb.buy_name=#{buyName}
+        </if>
+
+        <if test="sellAccount!=null and sellAccount!=''">
+            and tb.sell_mid=(select member_id from app_member where account=#{sellAccount})
+        </if>
+
+        <if test="sellName!=null and sellName!=''">
+            and tb.sell_name=#{sellName}
+        </if>
+
+        <if test="payMethod!=null and payMethod!=''">
+            and tb.pay_method=#{payMethod}
+        </if>
+
+        <if test="orderNo!=null and orderNo!=''">
+            and tb.order_no=#{orderNo}
+        </if>
+
+        <if test="markNo!=null and markNo!=''">
+            and tb.mark_no=#{markNo}
+        </if>
+       <if test="status!=null and status!=''">
+           and tb.status=#{status}
+        </if>
+
+        <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+            and (tb.CREATE_TIME between CONCAT(#{beginTime},' 00:00:00') and CONCAT(#{endTime},' 23:59:59'))
+        </if>
+        <if test="memberId != null and memberId != ''">
+             and (am.member_id = #{memberId}  or am.parent_referee_id like concat('%',#{recommendIds})
+                or am1.member_id = #{memberId}  or am1.parent_referee_id like concat('%',#{recommendIds})
+                )
+        </if>
+        order by tb.create_time desc
+    </select>
+
+    <select id="selectAppeal" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from otc_bill tb
+         left  join  app_member am on  tb.buy_mid = am.member_id
+         left  join  app_member am1 on  tb.sell_mid = am1.member_id
+        where tb.del='N'
+        and tb.appeal_status is not null
+        <if test="condition!=null and condition!=''">
+            and (tb.buy_name like concat('%',#{condition},'%') or sell_name like concat('%',#{condition},'%') )
+        </if>
+
+
+        <if test="buyAccount!=null and buyAccount!=''">
+            and tb.buy_mid=(select member_id from app_member where account=#{buyAccount})
+        </if>
+
+        <if test="buyName!=null and buyName!=''">
+            and tb.buy_name=#{buyName}
+        </if>
+
+        <if test="sellAccount!=null and sellAccount!=''">
+            and tb.sell_mid=(select member_id from app_member where account=#{sellAccount})
+        </if>
+
+        <if test="sellName!=null and sellName!=''">
+            and tb.sell_name=#{sellName}
+        </if>
+
+        <if test="payMethod!=null and payMethod!=''">
+            and tb.pay_method=#{payMethod}
+        </if>
+
+        <if test="orderNo!=null and orderNo!=''">
+            and tb.order_no=#{orderNo}
+        </if>
+
+        <if test="markNo!=null and markNo!=''">
+            and tb.mark_no=#{markNo}
+        </if>
+
+        <if test="appealStatus!=null and appealStatus!=''">
+            and tb.appeal_status=#{appealStatus}
+        </if>
+
+        <if test="duty!=null and duty!=''">
+            and tb.duty=#{duty}
+        </if>
+
+        <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+            and (tb.CREATE_TIME between CONCAT(#{beginTime},' 00:00:00') and CONCAT(#{endTime},' 23:59:59'))
+        </if>
+        <if test="memberId != null and memberId != ''">
+             and (am.member_id = #{memberId}  or am.parent_referee_id like concat('%',#{recommendIds})
+                or am1.member_id = #{memberId}  or am1.parent_referee_id like concat('%',#{recommendIds})
+                )
+        </if>
+        order by tb.create_time desc
+    </select>
+
+
+    <select id="inOrder" resultType="int">
+        select count(1)
+        from otc_bill tb
+        where tb.del='N'
+        	AND (
+	        ( tb.type = 'BUY' AND sell_mid = #{memberId} )
+	        OR ( tb.type = 'SELL' AND buy_mid = #{memberId} )
+	         )
+        and tb.status in('WAIT','WAIT_COIN','APPEAL')
+    </select>
+</mapper>

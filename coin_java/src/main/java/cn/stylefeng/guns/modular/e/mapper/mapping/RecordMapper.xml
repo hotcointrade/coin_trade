@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.e.mapper.RecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.e.entity.Record">
+        <id column="match_id" property="matchId"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="member_id" property="memberId"/>
+        <result column="match_type" property="matchType"/>
+        <result column="trade" property="trade"/>
+        <result column="number" property="number"/>
+        <result column="unit" property="unit"/>
+        <result column="total_price" property="totalPrice"/>
+        <result column="deal_way" property="dealWay"/>
+        <result column="finish_number" property="finishNumber"/>
+        <result column="un_finish_numebr" property="unFinishNumebr"/>
+        <result column="will" property="will"/>
+        <result column="ok" property="ok"/>
+        <result column="fee_number" property="feeNumber"/>
+        <result column="actual" property="actual"/>
+        <result column="rest_frozen" property="restFrozen"/>
+        <result column="fee" property="fee"/>
+        <result column="rate" property="rate"/>
+        <result column="convert_number" property="convertNumber"/>
+        <result column="priority" property="priority"/>
+        <result column="symbols" property="symbols"/>
+        <result column="status" property="status"/>
+        <result column="del" property="del"/>
+        <result column="remark" property="remark"/>
+        <result column="version" property="version"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="UPDATE_USER" property="updateUser"/>
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         match_id as matchId,
+         order_no as orderNo,
+         member_id as memberId,
+         match_type as matchType,
+         trade as trade,
+         number as number,
+         unit as unit,
+         total_price as totalPrice,
+         deal_way as dealWay,
+         finish_number as finishNumber,
+         un_finish_numebr as unFinishNumebr,
+         will as will,
+         ok as ok,
+         actual as actual,
+         fee_number as feeNumber,
+         rest_frozen as restFrozen,
+         fee as fee,
+         rate as rate,
+         convert_number as convertNumber,
+         priority as priority,
+         symbols as symbols,
+         status as status,
+         del as del,
+         remark as remark,
+         version as version,
+         CREATE_TIME as createTime,
+         CREATE_USER as createUser,
+         UPDATE_TIME as updateTime,
+        UPDATE_USER as updateUser
+    </sql>
+    <sql id="Base_Column_List2">
+         tb.match_id as matchId,
+         tb.order_no as orderNo,
+         tb.member_id as memberId,
+         tb.match_type as matchType,
+         tb.trade as trade,
+         tb.number as number,
+         tb.unit as unit,
+         tb.total_price as totalPrice,
+         tb.deal_way as dealWay,
+         finish_number as finishNumber,
+         un_finish_numebr as unFinishNumebr,
+         will as will,
+         ok as ok,
+         actual as actual,
+         fee_number as feeNumber,
+         tb.rest_frozen as restFrozen,
+         fee as fee,
+         tb.rate as rate,
+         convert_number as convertNumber,
+         tb.priority as priority,
+         tb.symbols as symbols,
+         tb.status as status,
+         tb.del as del,
+         tb.remark as remark,
+         tb.version as version,
+         tb.CREATE_TIME as createTime,
+         tb.CREATE_USER as createUser,
+         tb.UPDATE_TIME as updateTime,
+        tb.UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+        select
+        <include refid="Base_Column_List2"/>
+        from e_record tb
+       inner join app_member m on tb.member_id=m.member_id and m.remark is null
+        where tb.del='N' and m.del ='N'
+        <if test="param.condition!=null and param.condition!=''">
+            and tb.member_id=(select member_id from app_member where remark is null and account=#{param.condition})
+        </if>
+        <if test="param.status!=null and param.status!=''">
+            and tb.status=#{param.status}
+        </if>
+        <if test="param.beginTime != null and param.beginTime != '' and param.endTime != null and param.endTime != ''">
+            and (tb.CREATE_TIME between CONCAT(#{param.beginTime},' 00:00:00') and CONCAT(#{param.endTime},' 23:59:59'))
+        </if>
+          <if test="param.memberId != null and param.memberId != ''">
+             and (m.member_id = #{param.memberId}  or m.parent_referee_id like concat('%',#{param.recommendIds}))
+        </if>
+        order by tb.create_time desc
+    </select>
+
+    <select id="getMatch" resultType="cn.stylefeng.guns.modular.e.entity.Record">
+        select
+        <include refid="Base_Column_List"/>
+        from e_record tb where order_no=#{orderNo}
+    </select>
+
+    <update id="updateMatch" parameterType="cn.stylefeng.guns.modular.e.entity.Record">
+      update e_record m
+      set m.finish_number=#{finishNumber},m.un_finish_numebr=#{unFinishNumebr},convert_number=#{convertNumber},
+      m.status=#{status},m.version=#{version},UPDATE_TIME=now(),update_user=#{updateUser}
+      where version=#{version}-1 and order_no=#{orderNo}
+    </update>
+    <!--1-当前委托 2-买入  3-卖出 4-撤销-->
+    <select id="getPages" resultType="cn.stylefeng.guns.modular.app.dto.e.MatchDto">
+        select
+        match_id as matchId,
+        match_type as matchType,
+        case #{type} when '1' then un_finish_numebr
+        when '4' then un_finish_numebr
+        else
+        finish_number
+        end as numbers ,
+        unit,
+        symbols,
+        status,
+        case #{type} when '1' then create_time
+        when '4' then create_time
+        else
+        update_time
+        end as time
+
+        from e_record tb where del='N'
+        and member_id=#{memberId}
+        <if test="type!=null and type==1">
+            and status in ('PAID','PART_MATCH')
+        </if>
+        <if test="type!=null and type==2">
+            and match_type='BUY' and status in ('FINISH')
+        </if>
+        <if test="type!=null and type==3">
+            and match_type='SELL' and status in ('FINISH')
+        </if>
+        <if test="type!=null and type==4">
+            and status in ('CANCEL','CANCEL_FINISH')
+        </if>
+        order by tb.create_time desc
+    </select>
+
+    <!--1-当前委托 2-买入  3-卖出 4-撤销-->
+    <select id="getPagesList" resultType="cn.stylefeng.guns.modular.e.entity.Record">
+        select
+        <include refid="Base_Column_List"/>
+        from e_record tb where del='N'
+        and member_id=#{memberId}
+        <if test="type!=null and type==1">
+            and status in ('PAID','PART_MATCH')
+        </if>
+        <if test="type!=null and type==2">
+            and match_type='BUY' and status in ('FINISH','CANCEL_FINISH')
+        </if>
+        <if test="type!=null and type==3">
+            and match_type='SELL' and status in ('FINISH','CANCEL_FINISH')
+        </if>
+        <if test="type!=null and type==4">
+            and status in ('CANCEL','CANCEL_FINISH')
+        </if>
+        <if test="type!=null and type==5">
+             and status in ('FINISH','CANCEL_FINISH')
+        </if>
+        <if test="symbols != null and symbols != ''">
+            and symbols = #{symbols}
+        </if>
+        order by tb.create_time desc
+    </select>
+
+
+    <select id="getLastUnit" resultType="cn.stylefeng.guns.modular.e.entity.Record">
+        select
+        <include refid="Base_Column_List"/>
+        from e_record tb where del="N" and status='FINISH'
+        order by tb.create_time desc
+        limit 1
+    </select>
+
+    <select id="getMatchList" resultType="cn.stylefeng.guns.modular.e.entity.Record">
+        select
+        <include refid="Base_Column_List"/>
+        from e_record tb where del="N" and status='FINISH'
+        and to_days(create_time) = to_days(now())
+        order by tb.create_time asc
+
+    </select>
+
+    <select id="getMatchRangeTime" resultType="cn.stylefeng.guns.modular.e.entity.Match">
+        select
+        <include refid="Base_Column_List"/>
+        from e_record tb where del="N" and status='FINISH'
+        and match_type='SELL'
+        and UNIX_TIMESTAMP(CREATE_TIME) &gt;=#{now}
+        and UNIX_TIMESTAMP(CREATE_TIME) &lt;=#{nextMin}
+        order by tb.create_time asc
+    </select>
+
+    <select id="getBestOrderList" resultType="cn.stylefeng.guns.modular.e.entity.Match"
+            parameterType="cn.stylefeng.guns.modular.e.entity.Match">
+        select
+        <include refid="Base_Column_List"/>
+        from e_record tb where del="N"
+        and symbols=#{symbols}
+        <if test='matchType=="BUY"'>
+            and match_type='SELL'
+            and unit &lt;=#{unit}
+        </if>
+        <if test='matchType=="SELL"'>
+            and match_type='BUY'
+            and unit &gt;=#{unit}
+        </if>
+        and status in ('PART_MATCH','PAID')
+
+        <if test='matchType=="BUY"'>
+            order by tb.unit asc
+        </if>
+        <if test='matchType=="SELL"'>
+            order by tb.unit desc
+        </if>
+    </select>
+
+
+</mapper>

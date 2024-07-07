@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.coin.mapper.ContractOptionCoinMapper">
+
+     <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.coin.entity.ContractOptionCoin">
+        <id column="id" property="id"/>
+        <result column="symbol" property="symbol"/>
+        <result column="name" property="name"/>
+        <result column="coin_symbol" property="coinSymbol"/>
+        <result column="base_symbol" property="baseSymbol"/>
+        <result column="max_option_no" property="maxOptinNo"/>
+        <result column="sort" property="sort"/>
+        <result column="coin_scale" property="coinScale"/>
+        <result column="base_coin_scale" property="baseCoinScale"/>
+        <result column="enable" property="enable"/>
+        <result column="visible" property="visiable"/>
+        <result column="tied_type" property="tiedType"/>
+        <result column="enable_buy" property="enableBuy"/>
+        <result column="enable_sell" property="enableSell"/>
+        <result column="amount" property="amount"/>
+        <result column="oods" property="oods"/>
+        <result column="fee_percent " property="feePercent"/>
+
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="UPDATE_USER" property="updateUser"/>
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id as id,
+  symbol as symbol ,
+  name as name,
+  coin_Symbol as coinSymbol ,
+  base_Symbol as baseSymbol ,
+  max_Option_No as maxOptionNo,
+  sort as sort,
+  coin_Scale as coinScale,
+  base_coin_Scale as baseCoinScale,
+  enable  as enable,
+  visible as visible,
+  tied_Type as tiedType ,
+  enable_Buy as enableBuy  ,
+  enable_sell as enableSell ,
+  amount as amount ,
+  oods as oods,
+  fee_Percent as feePercent ,
+  win_Fee_Percent as winFeePercent,
+  ngnore_Percent as ngnorePercent,
+  init_Buy_Reward as initBuyReward,
+  init_Sell_Reward as initSellReward,
+  total_Profit as totalProfit,
+  open_Time_Gap as openTimeGap,
+  close_Time_Gap as closeTimeGap,
+         CREATE_TIME as createTime,
+         CREATE_USER as createUser,
+         UPDATE_TIME as updateTime,
+        UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+       select
+        <include refid="Base_Column_List"/>
+       from contract_option_coin tb
+       <where>
+            <if test="condition!=null and condition!=''">
+              and symbol like concat('%',#{condition},'%')
+            </if>
+        </where>
+        <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+            and (CREATE_TIME between CONCAT(#{beginTime},' 00:00:00') and CONCAT(#{endTime},' 23:59:59'))
+        </if>
+        order by tb.sort asc
+    </select>
+    <!--<select id="selectBySymbol" resultType="baseResultMap">
+       select
+        <include refid="Base_Column_List"/>
+       from contract_option_coin tb
+       where
+        tb.symbol=#{symbol}
+    </select>-->
+
+</mapper>

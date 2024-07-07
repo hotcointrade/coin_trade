@@ -1,0 +1,52 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/com/media/media_add.js"]}){
+
+<form id="mediaForm" lay-filter="mediaForm" class="layui-form model-form">
+    <input name="mediaId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">标题<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="title" id="title" placeholder="请输入标题" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">内容<span style="color: red;">*</span></label>-->
+        <!--<div class="layui-input-block">-->
+            <!--<input name="content" id="content" placeholder="请输入内容" type="text" class="layui-input" lay-verify="required" required/>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">链接地址<span style="color: red;">*</span></label>-->
+        <!--<div class="layui-input-block">-->
+            <input name="address" id="address" type="hidden" placeholder="请输入链接地址"  type="text" class="layui-input" />
+        <!--</div>-->
+    <!--</div>-->
+    <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>上传文件</button>
+
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">图片<span style="color: red;">*</span></label>-->
+        <!--<div class="layui-input-block">-->
+            <!--<input name="img" id="img" placeholder="请输入图片" type="text" class="layui-input" lay-verify="required" required/>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">类型</label>
+        <div class="layui-input-block">
+            <select name="type" id="type">
+                <option value="VIDEO">视频</option>
+                <option value="AUDIO">语音</option>
+            </select>
+        </div>
+    </div>
+
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">排序<span style="color: red;">*</span></label>-->
+        <!--<div class="layui-input-block">-->
+            <!--<input name="sort" id="sort" placeholder="请输入排序" type="text" class="layui-input" lay-verify="required" required/>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

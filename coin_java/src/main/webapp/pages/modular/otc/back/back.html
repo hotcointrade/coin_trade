@@ -1,0 +1,44 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/otc/back/back.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">退还押金</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="condition" class="layui-input" type="text" placeholder="用户"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="timeLimit" class="layui-input" type="text" placeholder="时间范围"/>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+
+                                @if(shiro.hasPermission("/back/export_bak")){
+                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出</button>
+                                 @}
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="backTable" lay-filter="backTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("/back/check")){
+    {{# if(d.status==='CHECK'){ }}
+    <a class="layui-btn layui-btn layui-btn-xs" lay-event="checkPass">同意退还</a>
+    {{# } }}
+    @}
+</script>
+
+@}

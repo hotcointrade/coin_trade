@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.e.mapper.MatchDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.e.entity.MatchDetail">
+        <id column="match_detail_id" property="matchDetailId"/>
+        <result column="buy_id" property="buyId"/>
+        <result column="buy_order" property="buyOrder"/>
+        <result column="sell_id" property="sellId"/>
+        <result column="sell_order" property="sellOrder"/>
+        <result column="number" property="number"/>
+        <result column="unit" property="unit"/>
+        <result column="symbols" property="symbols"/>
+        <result column="status" property="status"/>
+        <result column="version" property="version"/>
+        <result column="del" property="del"/>
+        <result column="remark" property="remark"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="UPDATE_USER" property="updateUser"/>
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         match_detail_id as matchDetailId,
+         buy_id as buyId,
+         buy_order as buyOrder,
+         sell_id as sellId,
+         sell_order as sellOrder,
+         number as number,
+         unit as unit,
+         symbols as symbols,
+         status as status,
+         version as version,
+         del as del,
+         remark as remark,
+         CREATE_TIME as createTime,
+         CREATE_USER as createUser,
+         UPDATE_TIME as updateTime,
+        UPDATE_USER as updateUser
+    </sql>
+
+    <select id="selectByCondition" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from e_match_detail tb where del='N'
+        <if test="condition!=null and condition!=''">
+            and name like concat('%',#{condition},'%')
+        </if>
+        order by tb.create_time desc
+    </select>
+
+    <select id="getMatchList" resultType="cn.stylefeng.guns.modular.e.entity.MatchDetail">
+        select
+        <include refid="Base_Column_List"/>
+        from e_match_detail tb where del="N"
+        and symbols=#{token}
+        and to_days(create_time) = to_days(now())
+        order by tb.create_time asc
+
+    </select>
+
+    <select id="getMatchRangeTime" resultType="cn.stylefeng.guns.modular.e.entity.MatchDetail">
+        select
+        <include refid="Base_Column_List"/>
+        from e_match_detail tb where del="N"
+        and symbols=#{token}
+        and UNIX_TIMESTAMP(create_time) &gt;=#{now}
+        and UNIX_TIMESTAMP(create_time) &lt;=#{nextMin}
+        order by tb.create_time asc
+    </select>
+
+    <select id="getMatchListByOrderNo" resultType="cn.stylefeng.guns.modular.e.entity.MatchDetail">
+        select
+        <include refid="Base_Column_List"/>
+        from e_match_detail tb where del="N"
+        and (buy_order=#{order} or sell_order=#{order})
+        order by tb.create_time asc
+    </select>
+
+</mapper>

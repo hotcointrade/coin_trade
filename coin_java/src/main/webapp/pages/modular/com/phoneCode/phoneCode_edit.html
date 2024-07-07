@@ -1,0 +1,33 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/com/phoneCode/phoneCode_edit.js"]}){
+<form id="phoneCodeForm" lay-filter="phoneCodeForm" class="layui-form model-form">
+    <input name="phoneCodeId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">国家<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="country" id="country" placeholder="请输入国家" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">区号<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="code" id="code" placeholder="请输入区号" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">类型 0：国内 1：国外<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="type" id="type" placeholder="请输入类型 0：国内 1：国外" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">所在区域<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="area" id="area" placeholder="请输入所在区域" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

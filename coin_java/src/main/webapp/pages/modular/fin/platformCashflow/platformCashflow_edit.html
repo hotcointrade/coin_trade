@@ -1,0 +1,117 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/fin/platformCashflow/platformCashflow_edit.js"]}){
+<form id="platformCashflowForm" lay-filter="platformCashflowForm" class="layui-form model-form">
+    <input name="platformCashflowId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户id<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="memberId" id="memberId" placeholder="请输入用户id" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">账户类型（BTC、  T:算力、POINT:积分）<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="walletType" id="walletType" placeholder="请输入账户类型（BTC、  T:算力、POINT:积分）" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">流水方向（1：流入(+)      0 :流出(-) ）<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="flowOp" id="flowOp" placeholder="请输入流水方向（1：流入(+)      0 :流出(-) ）" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">流水类型<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="flowType" id="flowType" placeholder="请输入流水类型" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">流水记录编码(备用）<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="itemCode" id="itemCode" placeholder="请输入流水记录编码(备用）" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">名称（备用）<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="itemName" id="itemName" placeholder="请输入名称（备用）" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">变更前额度<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="beforePrice" id="beforePrice" placeholder="请输入变更前额度" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">变更后额度<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="afterPrice" id="afterPrice" placeholder="请输入变更后额度" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">流水金额<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="flowPrice" id="flowPrice" placeholder="请输入流水金额" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">流水币种（BTC、  T:算力、POINT:积分）<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="flowCoin" id="flowCoin" placeholder="请输入流水币种（BTC、  T:算力、POINT:积分）" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">实际金额<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="actualPrice" id="actualPrice" placeholder="请输入实际金额" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">实际币种BTC、T:算力、POINT:积分）<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="actualCoin" id="actualCoin" placeholder="请输入实际币种BTC、T:算力、POINT:积分）" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">手续费<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="fee" id="fee" placeholder="请输入手续费" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">手续费币种<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="feeCoin" id="feeCoin" placeholder="请输入手续费币种" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">流水来源<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="source" id="source" placeholder="请输入流水来源" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">来处<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="fromId" id="fromId" placeholder="请输入来处" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">去向<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="toId" id="toId" placeholder="请输入去向" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">明细（备用）<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="detail" id="detail" placeholder="请输入明细（备用）" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}
